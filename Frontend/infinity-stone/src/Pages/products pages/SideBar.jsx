@@ -318,7 +318,7 @@ Gemstone */}
 
 <Box style={{alignItems:"center"}}>
  <Text fontSize={["12px","13px","15px","16px"]} textAlign="left" paddingLeft={["5px","7px","9px","15px"]} paddingTop="20px" color="#4E5163" onClick={handelClick7}> <Link to="#"><b>Gemstone</b> {status7?"⬆":"⬇"}</Link></Text>
-<br />
+
 {status7?
 <CheckboxGroup>
 <Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"10%"} onChange={handelChange2} checked={name.includes("10%")} ><Text fontSize={["9px","12px","14px","15px"]} >18 KT Yellow(725)</Text></Checkbox><br />
