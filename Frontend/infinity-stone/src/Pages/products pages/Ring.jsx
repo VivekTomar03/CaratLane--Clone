@@ -69,7 +69,7 @@ const Ring = () => {
 {/* Products Detail */}
 {/* <ProductsCard/> */}
   </Flex>
-</div>
+</div>      
     </div>
   )
 }
