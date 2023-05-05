@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import Cart from './Pages/Cartpage/Cart';
 // import EmptyCart from './Components/EmptyCart/EmptyCard';
 // import Cartmap from './Components/CartMap/Cartmap';
 
@@ -8,6 +9,7 @@ function App() {
     <div className="App">
       {/* <EmptyCart/> */}
       {/* <Cartmap/> */}
+      <Cart/>
     </div>
   );
 }

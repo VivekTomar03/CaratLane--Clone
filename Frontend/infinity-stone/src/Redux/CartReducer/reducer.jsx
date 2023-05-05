@@ -12,7 +12,7 @@ const initialState = {
     carts: [],
 };
 
-export const reducer = (state = initialState, { type, payload }) => {
+export const cartReducer = (state = initialState, { type, payload }) => {
     switch (type) {
         case GET_CART_REQUEST: {
             return { ...state, isLoading: true };
