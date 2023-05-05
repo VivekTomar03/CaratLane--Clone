@@ -30,7 +30,7 @@ const AllUsers = ({ setsuspendacc, suspendacc }) => {
 
   const getUsers = () => {
     axios
-      .get("https://mock-server-json-x067.onrender.com/users")
+      .get("https://red-worried-dove.cyclic.app/users")
       .then((res) => {
         // console.log(res.data);
         setdata(res.data);
@@ -44,7 +44,7 @@ const AllUsers = ({ setsuspendacc, suspendacc }) => {
   };
   const handlesubmit = (e) => {
     e.preventDefault();
-    axios(`https://mock-server-json-x067.onrender.com/users/${singeluser.id}`, {
+    axios(`https://red-worried-dove.cyclic.app/users/update/${singeluser._id}`, {
       method: "patch",
       data: singeluser,
       headers: {
@@ -62,7 +62,7 @@ const AllUsers = ({ setsuspendacc, suspendacc }) => {
 
   const handleDelete = (id, el) => [
     axios
-      .delete(`https://mock-server-json-x067.onrender.com/users/${id}`)
+      .delete(`https://red-worried-dove.cyclic.app/users/delete/${id}`)
       .then((res) => {
         console.log(res);
         getUsers();
@@ -140,7 +140,7 @@ const AllUsers = ({ setsuspendacc, suspendacc }) => {
                         _focus={{
                           bg: "red.200",
                         }}
-                        onClick={() => handleDelete(el.id, el)}
+                        onClick={() => handleDelete(el._id, el)}
                       >
                         Delete
                       </Button>

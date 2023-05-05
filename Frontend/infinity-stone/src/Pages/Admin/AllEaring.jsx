@@ -32,18 +32,19 @@ const initstate = {
   title: "",
   size: 0,
 };
-const AllRings = ({ setsuspendacc, suspendacc }) => {
+const AllEaring = ({ setsuspendacc, suspendacc }) => {
+  const [data, setdata] = useState([]);
   const [singeluser, setsingeluser] = useState({});
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [formdata, setformdata] = useState(initstate);
-  const [data, setdata] = useState([]);
   const [showform, setshowform] = useState(false);
+  const [formdata, setformdata] = useState(initstate);
   const [page, setpage] = useState(1);
+
   const getRingsdata = () => {
     axios
-      .get(`https://red-worried-dove.cyclic.app/rings?limit=10&page=${page}`)
+      .get(`https://red-worried-dove.cyclic.app/earrings?limit=10&page=${page}`)
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         setdata(res.data);
       })
       .catch((err) => console.log(err));
@@ -56,9 +57,8 @@ const AllRings = ({ setsuspendacc, suspendacc }) => {
   };
   const handlesubmit = (e) => {
     e.preventDefault();
-    console.log(singeluser);
     axios(
-      `https://red-worried-dove.cyclic.app/rings/update/${singeluser._id}`,
+      `https://red-worried-dove.cyclic.app/earrings/update/${singeluser._id}`,
       {
         method: "patch",
         data: singeluser,
@@ -78,7 +78,7 @@ const AllRings = ({ setsuspendacc, suspendacc }) => {
 
   const handleDelete = (id, el) => [
     axios
-      .delete(`https://red-worried-dove.cyclic.app/rings/delete/${id}`)
+      .delete(`https://red-worried-dove.cyclic.app/earrings/delete/${id}`)
       .then((res) => {
         console.log(res);
         getRingsdata();
@@ -90,7 +90,7 @@ const AllRings = ({ setsuspendacc, suspendacc }) => {
   const handlesubmit1 = (e) => {
     e.preventDefault();
     axios
-      .post("https://red-worried-dove.cyclic.app/rings/add", formdata)
+      .post("https://red-worried-dove.cyclic.app/earrings/add", formdata)
       .then((res) => {
         console.log(res);
         getRingsdata();
@@ -130,6 +130,7 @@ const AllRings = ({ setsuspendacc, suspendacc }) => {
       >
         ADD
       </Button>
+
       {showform ? (
         <Box p={10} w={"70%"} m={"auto"} bg={"#088395"}>
           <form onSubmit={handlesubmit1}>
@@ -207,7 +208,7 @@ const AllRings = ({ setsuspendacc, suspendacc }) => {
       ) : (
         <TableContainer>
           <Table colorScheme={"#205E61"} variant="simple">
-            <TableCaption>All Rings Products Data</TableCaption>
+            <TableCaption>All Earings Products Data</TableCaption>
             <Thead>
               <Tr flexDirection={"column"}>
                 <Th>S.No</Th>
@@ -224,17 +225,13 @@ const AllRings = ({ setsuspendacc, suspendacc }) => {
               {data &&
                 data.reverse().map((el, i) => {
                   return (
-                    <Tr key={el._id}>
+                    <Tr key={el._d}>
                       <Td>{i + 1}</Td>
                       <Td>{el.title}</Td>
                       <Td>{el.price}</Td>
                       <Td>{el.originalprice}</Td>
                       <Td w={"8%"}>
-                        <Image
-                          w={"fit-content"}
-                          src={el.imageurl}
-                          alt={el.id}
-                        />
+                        <Image w={"fit-content"} src={el.imageurl} alt={el._id} />
                       </Td>
                       <Td>{el.size}</Td>
                       <Td>
@@ -289,7 +286,8 @@ const AllRings = ({ setsuspendacc, suspendacc }) => {
           </Table>
         </TableContainer>
       )}
-      <Box display={showform ? "none" : "block"}>
+        
+        <Box display={showform ? "none" : "block"}>
         <Button
           bg="red.500"
           py={2}
@@ -321,6 +319,7 @@ const AllRings = ({ setsuspendacc, suspendacc }) => {
           Next
         </Button>
       </Box>
+        
       <Box className="usereditdata Modal">
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
@@ -404,4 +403,4 @@ const AllRings = ({ setsuspendacc, suspendacc }) => {
   );
 };
 
-export default AllRings;
+export default AllEaring;
