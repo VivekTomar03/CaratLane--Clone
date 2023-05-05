@@ -1,14 +1,41 @@
 import React from 'react'
-import { Image,Box,Button,Text,Heading,Stack,Card,CardBody,ButtonGroup,Divider,CardFooter } from '@chakra-ui/react'
-import { Flex, Spacer,Select } from '@chakra-ui/react'
+import { Image,Box,Button,Text } from '@chakra-ui/react'
+import { Flex, Spacer,Select,SimpleGrid,Spinner } from '@chakra-ui/react'
 import { Link } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useState ,useEffect} from 'react'
 import Sidebar from './SideBar'
-// import ProductsCard from './ProductCard'
+import ProductsCard from './ProductCard'
+import { useSelector,useDispatch } from 'react-redux'
+import { useLocation, useSearchParams } from "react-router-dom";
+
+import { getProductsornaments } from '../../Redux/ProductReducer/action'
 
 
 const Ring = () => {
+  const dispatch =useDispatch()
+  const {products,isLoading}=useSelector((store)=>store.productsReducer)
+  let [searchParams] = useSearchParams();
+    const location=useLocation()
+    const [page,setPage]=useState(1)
 
+
+    let obj={
+      params:{
+          title:searchParams.getAll("title"),
+          size:searchParams.getAll("size"),
+          category:searchParams.getAll("category"),
+          type:searchParams.get("order") && "price",
+          sort:searchParams.get("order"),
+          page:page,
+        limit:8,
+      }
+  }
+
+
+  useEffect(()=>{
+  
+dispatch(getProductsornaments())
+  },[location.search,page])
 
    
     
@@ -17,8 +44,8 @@ const Ring = () => {
     <div>
 
      {/* <Box boxSize='sm'> */}
-  <Image src='https://cdn.caratlane.com/media/static/images/V4/2023/CL/04-APR/AppBanner/Earring/01/Desktop_1920x560_toplisting.jpg' alt='Dan Abramov' width={["100%"]} />
-
+  <Image src='https://banner.caratlane.com/live-images/10c2cf82f2ad425b960f2587933652a7.jpg' alt='Dan Abramov' width={["100%"]} />
+ 
 <Box boxSize='sm' bg="pink" h={["110px"]} w={"100%"}>
  <Box w={"95%"}  margin={"auto"} >
  <Flex>
@@ -60,14 +87,27 @@ const Ring = () => {
 </Box>
 <div>
   <Flex>
-  <Box boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px" m="30px"  bg="white" w={{  sm:"130px", md: "250px", lg: "280px" ,xl:"300px"}} borderRadius={"20px"}>
+  <Box boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px" m="30px"  bg="white" w={["15%","20%","28%","32%"]} borderRadius={"20px"}>
     <Sidebar/>
   </Box>
 
 
 
 {/* Products Detail */}
-{/* <ProductsCard/> */}
+
+<br />
+ 
+ {/* <div className="mediaquery"> */}
+ <Box  m="30px"  bg="white" w={["60%","70%","80%","90%"]} borderRadius={"20px"}>
+    {isLoading?<Spinner/>:<SimpleGrid columns={{base:1,md:2,lg:3,xl:3}} spacing={7}>
+        {products.map((el)=>
+      <ProductsCard key={el._id} data={el} />)}
+        </SimpleGrid>}
+        </Box>
+{/* </div> */}
+
+<br />
+
   </Flex>
 </div>      
     </div>

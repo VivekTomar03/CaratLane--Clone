@@ -5,6 +5,10 @@ import {
     Image,
     Button,
     useColorModeValue,
+    Stack,
+    Text,
+    Link,
+    Spacer
   
   
   } from '@chakra-ui/react';
@@ -55,51 +59,61 @@ import {
    localStorage.setItem('items1', JSON.stringify(arr1));
     }
   
-    // useEffect(()=>{
-    //   console.log(arr1.length)
-    // },[data])
+
     return (
   
         <Box
-          bg={useColorModeValue('white', 'gray.800')}
-          maxW="sm"
+        bg={useColorModeValue('white', 'gray.800')}
+    //  padding={"5px"}
+          w={["90%","90%","95%","105%"]}
+
           fontSize={"20px"}
           textAlign={"center"}
-  
-          // borderWidth="1px"
-          // rounded="lg"
+          borderRadius={"5px"}
+
           shadow="lg"
           position="relative">
-          {/* (
-            <Circle
-              size="10px"
-              position="absolute"
-              top={2}
-              right={2}
-              bg="red.200"
-            />
-           ) */}
+        
   <NavLink to={`/SingleProduct/${data.id}`} >
           <Image
-            src={data.image1}
-            alt={`Picture of ${data.name}`}
-            // roundedTop="lg"
-            // width="110%"
-            
+            src={data.imageurl}
+            alt={`Picture of ${data.title}`}
+            borderRadius={"10px"}
+       border={"solid 1px violet"}
           /></NavLink>
-  <h2>{data.category}</h2>
-  <h2>{data.brand}</h2>
+
   
-  <h2 style={{fontSize:"20px"}}>Men Solid Polo Neck Black  </h2>
   
-  {/* <img style={{width:"70%",marginTop:"17px",marginLeft:"25px"}} src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/fa_62673a.png" alt="gh" /> */}
+  <Stack direction={'row'} align={'center'}>
+            <Text fontWeight={700} fontSize={["10px","13px","15px","18px"]} color={"purple.500"} marginLeft={"5px"}>
+            ₹{data.price}
+            </Text>
+            <Text textDecoration={'line-through'} color={'gray.600'} fontSize={["7px","9px","12px","14px"]} >
+            ₹{data.originalprice}
+            </Text>
+            <Spacer/>
+            <Link fontSize={["6px","9px","12px","14px"]} color={"blue"} marginLeft={"-70px"} >
+            view similar
+            </Link>
+          </Stack>
   
-  <h3>₹{data.price}  <h3 style={{color:"green"}}>{data.name} off</h3></h3>  
-  {/* <h3 style={{color:"brown",fontSize:"20px"}}>Hot Deal</h3>  
+  <Text fontWeight={700} fontSize={["10px","13px","15px","18px"]} color={"purple.500"}  marginLeft={["-40px","-50px","-60px", "-66px"]}>Check delivery date ↬</Text>
+  
+<Text fontSize={["6px","9px","12px","14px"]} color={"gray.500"} marginLeft={"-65px"}>{data.title}</Text>
+  
+  
+<Stack direction={'row'} align={'center'}>
+  <Button fontSize={["6px","8px","10px","12px"]} border={"solid 1px purple"} color={"purple"}>
+  🏠 Book Try at Home
+  </Button>
+
+  <Button fontSize={["6px","8px","10px","12px"]} border={"solid 1px lightgreen"} color={"lightgreen"}>
+  ☎ Live Video Call
+  </Button>
+</Stack>
     
-  <h3 style={{fontSize:"17px"}}>Free Delivery</h3>
-  <h3 style={{color:"green",fontSize:"20px"}}>SIZE :- Sm,M,X,XL</h3> */}
-  <Button colorScheme='red' onClick={handelChangeClick}>Cart</Button>
+   
+ 
         </Box>
     
     

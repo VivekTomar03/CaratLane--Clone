@@ -26,25 +26,25 @@ const [status8,setStatus8]=useState(false)
 const [status9,setStatus9]=useState(false)
 
 const [searchParams, setSearchParams] = useSearchParams();
-const initialparam=searchParams.getAll("brand")
+const initialparam=searchParams.getAll("title")
 const initialcategory=searchParams.getAll("category")
-const initialname=searchParams.getAll("name")
+const initialsize=searchParams.getAll("size")
 const initialOrder=searchParams.get("order")
-const [brand,setBrand]=useState(initialparam||[])
+const [title,setTitle]=useState(initialparam||[])
 const [category,setCategory]=useState(initialcategory||[])
-const [name,setName]=useState(initialname||[])
+const [name,setName]=useState(initialsize||[])
 const [order,setOrder]=useState(initialOrder||"")
 
 
 const handelChange1=(e)=>{
-let newarr=[...brand]
+let newarr=[...title]
 const value=e.target.value
 if(newarr.includes(value)){
     newarr=newarr.filter((el)=>el!==value)
 }else{
     newarr.push(value)
 }
-setBrand(newarr)
+setTitle(newarr)
 
 }
 
@@ -75,13 +75,13 @@ setCategory(e.target.value)
 
 useEffect(()=>{
 let obj={
-    brand,category,name
+    title,category,name
 }
 order && (obj.order=order)
 setSearchParams(obj)
-}, [brand,order,category,name])
+}, [title,order,category,name])
 
-   
+    
   const handelClick1=()=>{
 setStatus1(!status1)
 }
