@@ -1,16 +1,15 @@
-
-
-#cartimg>img{
+#cartimg>img {
     height: 100px;
     width: 100%;
     border: 0px solid yellow;
 }
+
 /* .total{
     display: flex;
 } */
-.details{
+.details {
     /* border: 1px solid grey; */
-   
+
     display: flex;
     justify-content: space-around;
     padding: 10px;
@@ -18,59 +17,67 @@
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
-.imgDiv{
+.imgDiv {
     width: 15%;
     border: 0px solid red;
 }
-.imgDiv>img{
+
+.imgDiv>img {
     /* border: 1px solid grey; */
     height: 150px;
     width: 100%;
     margin-top: 20px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
-.detailsDiv{
+
+.detailsDiv {
     width: 45%;
     border: 0px solid pink;
 }
-.detailsDiv>p{
+
+.detailsDiv>p {
     font-size: 15px;
     margin-top: -5px;
-    
+
 }
-.sizeQue{
+
+.sizeQue {
     display: flex;
     width: 50%;
     border: 0px solid pink;
     justify-content: space-between;
     margin-top: -25px;
 }
-.btnDiv{
+
+.btnDiv {
     width: 25%;
     border: 0px solid grey;
     display: flex;
     flex-direction: column;
-    margin-top:80px ;
+    margin-top: 80px;
 }
-.btnDiv>button{
+
+.btnDiv>button {
     width: 100%;
     display: flex;
     flex-direction: column;
-   margin: 10px;
-   padding: 10px;
-   border-radius: 7px;
-   border: none;
-   border: 1px solid grey;
-   align-items: center;
-   
+    margin: 10px;
+    padding: 10px;
+    border-radius: 7px;
+    border: none;
+    border: 1px solid grey;
+    align-items: center;
+
 }
-#delivery{
+
+#delivery {
     font-size: 15px;
     width: 40%;
     color: #eaa2f4;
     border-bottom: 1px solid #eaa2f4;
 }
-.pricedetails{
+
+.pricedetails {
     width: 70%;
     border: 0px solid #eaa2f4;
     display: flex;

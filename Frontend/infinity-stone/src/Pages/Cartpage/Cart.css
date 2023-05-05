@@ -1,40 +1,47 @@
-#cart{
+#cart {
     border: 0px solid red;
     width: 65%;
-    
+
 }
-#mainCart{
+
+#mainCart {
     width: 80%;
     margin: auto;
     border: 0px solid rgb(88, 31, 231);
     display: flex;
     justify-content: space-between;
 }
-.total{
+
+.total {
     display: flex;
 }
 
-#bill{
+#bill {
     width: 30%;
     margin: 10px;
 }
-.billDetails{
+
+.billDetails {
     padding: 10px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
-.subtotalBill{
+
+.subtotalBill {
     display: flex;
     justify-content: space-between;
 }
-.savedBill{
+
+.savedBill {
     display: flex;
     justify-content: space-between;
 }
-.deliveryBill{
+
+.deliveryBill {
     display: flex;
     justify-content: space-between;
 }
-.totalBill{
+
+.totalBill {
     display: flex;
     justify-content: space-between;
 }

@@ -12,8 +12,8 @@ import {
 import Cartmap from "../../Components/CartMap/Cartmap";
 import cart from "../../ImageData/cart.png";
 const Cart = () => {
+  const [quantity1, setquantity] = useState(1);
   const navigate = useNavigate();
-
   const { carts, isLoading, isError } = useSelector((store) => {
     return {
       carts: store.cartReducer.carts,
@@ -21,10 +21,35 @@ const Cart = () => {
       isError: store.cartReducer.isError,
     };
   }, shallowEqual);
+  console.log(carts);
   let dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCartProducts());
   }, []);
+
+  let totalprice = 0;
+  for (var i = 0; i < carts.length; i++) {
+    if (quantity1[i] === undefined) {
+      totalprice = totalprice + Number(carts[i].price);
+    } else {
+      totalprice += +carts[i].price * Number(quantity1[i]);
+      console.log(quantity1[i]);
+    }
+    console.log(carts[i].price, quantity1[i]);
+  }
+
+  let totalOriginPrice = 0;
+  for (var i = 0; i < carts.length; i++) {
+    if (quantity1[i] === undefined) {
+      totalOriginPrice = totalOriginPrice + Number(carts[i].originalprice);
+    } else {
+      totalOriginPrice += +carts[i].originalprice * Number(quantity1[i]);
+      console.log(quantity1[i]);
+    }
+    console.log(carts[i].originalprice, quantity1[i]);
+  }
+
+  let totalSavePrice = totalOriginPrice - totalprice;
 
   function HandleCartDelete(id) {
     dispatch(deleteCartdata(id)).then(() => {
@@ -44,13 +69,15 @@ const Cart = () => {
             </div>
             <div className="total">
               <h4>
-                Totol <span>(1 Item)</span> : <span>38,000</span>
+                Totol <span>{carts.length} Item</span> :{" "}
+                <span>₹ {totalprice}</span>
               </h4>
             </div>
             {carts.length > 0 &&
               carts.map((el) => {
                 return (
                   <Cartmap
+                    setquantity={setquantity}
                     key={el.id}
                     {...el}
                     HandleCartDelete={HandleCartDelete}
@@ -68,11 +95,11 @@ const Cart = () => {
             <div className="billDetails">
               <div className="subtotalBill">
                 <p>Subtotal</p>
-                <p>41,089</p>
+                <p>₹ {totalOriginPrice}</p>
               </div>
               <div className="savedBill">
                 <p>You Saved</p>
-                <p style={{ color: "#c9b8fc" }}>-4,283</p>
+                <p style={{ color: "#c9b8fc" }}>- ₹ {totalSavePrice}</p>
               </div>
               <div className="deliveryBill">
                 <p>Delivery Charge (Standard)</p>
@@ -80,7 +107,7 @@ const Cart = () => {
               </div>
               <div className="totalBill">
                 <h3>TOTAL COST</h3>
-                <h3>36,806</h3>
+                <h3>₹ {totalprice}</h3>
               </div>
             </div>
             <div>
