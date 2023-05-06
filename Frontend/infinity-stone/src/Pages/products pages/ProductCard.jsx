@@ -65,7 +65,7 @@ import {
         <Box
         bg={useColorModeValue('white', 'gray.800')}
     //  padding={"5px"}
-          w={["90%","90%","95%","105%"]}
+          w={["90%","90%","95%","100%"]}
 
           fontSize={"20px"}
           textAlign={"center"}

@@ -14,31 +14,40 @@ import { getProductsornaments } from '../../Redux/ProductReducer/action'
 const Ring = () => {
   const dispatch =useDispatch()
   const {products,isLoading}=useSelector((store)=>store.productsReducer)
-  let [searchParams] = useSearchParams();
+  let [searchParams,setSearchParams] = useSearchParams();
+  const initialSort=searchParams.get("sort")
+  const [sort,setSort]=useState(initialSort||"")
     const location=useLocation()
     const [page,setPage]=useState(1)
 
 
     let obj={
       params:{
-          title:searchParams.getAll("title"),
+       
+          price:searchParams.getAll("price"),
           size:searchParams.getAll("size"),
-          category:searchParams.getAll("category"),
-          type:searchParams.get("order") && "price",
-          sort:searchParams.get("order"),
+          type:searchParams.get("sort") && "price",
+          sort:searchParams.get("sort"),
           page:page,
-        limit:8,
+          limit:9,
       }
   }
+ 
 
-
-  useEffect(()=>{
+  useEffect(()=>{ 
+ 
   
-dispatch(getProductsornaments())
-  },[location.search,page])
+dispatch(getProductsornaments(obj))
+  },[location.search,page,sort])
 
    
-    
+  const handelCh=(e)=>{
+    let obj1={
+      sort
+  }
+    setSearchParams(obj1)
+    setSort(e.target.value)
+  }
 
   return (
     <div>
@@ -68,10 +77,10 @@ dispatch(getProductsornaments())
  <Spacer /> */}
      <Button w='75px' h='40px' bg="white"  _hover={{bg:"blue",color:"white"}} fontSize={["7px","9px","11px","13px"]}  marginLeft={["7px","10px","15px","20px"]} borderRadius={"10px"} > <Link>New In</Link></Button>
      <Spacer />
-     <Select placeholder='Select the type' w={{  sm:"7%", md: "20%", lg: "20%" ,xl:"20%"}} fontSize={["7px","9px","11px","13px"]} bg="white" ml="10px" >
+     <Select placeholder='Select the type' w={{  sm:"7%", md: "20%", lg: "20%" ,xl:"20%"}} fontSize={["7px","9px","11px","13px"]} bg="white" ml="10px" onChange={handelCh} >
   <option value='Discount'>Discount</option>
-  <option value='asc'>Price:High to Low</option>
-  <option value='dsc'>Price:Low to High</option>
+  <option value='desc'>Price:High to Low</option>
+  <option value='asc'>Price:Low to High</option>
   <option value='Latest'>Latest</option>
   <option value='Featured'>Featured</option>
 </Select>
@@ -109,6 +118,14 @@ dispatch(getProductsornaments())
 <br />
 
   </Flex>
+  <br />
+  <div>
+<Button disabled={page===1} bg='violet' mr="10px" w={["10px","20px","30px","80px"]} fontSize={["5px","6px","8px","12px"]} h={["25px","27px","30px","40px"]} onClick={()=>setPage(page-1)} >Previous</Button>
+<Button  w={["10px","20px","30px","80px"]} fontSize={["5px","6px","8px","12px"]} h={["25px","27px","30px","40px"]}>{page}</Button>
+<Button  bg="violet" ml="10px" w={["10px","20px","30px","80px"]} fontSize={["5px","6px","8px","12px"]} h={["25px","27px","30px","40px"]} onClick={()=>setPage(page+1)}>Next</Button> 
+</div>
+<br />
+<br />
 </div>      
     </div>
   )
