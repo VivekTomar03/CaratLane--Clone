@@ -1,5 +1,6 @@
 const express = require("express");
 const RingModel = require("../models/ring.model");
+const { adminAuth } = require("../middlewares/authorization");
 const ringRouter = express.Router();
 
 ringRouter.get("/", async (req, res) => {
@@ -11,15 +12,14 @@ ringRouter.get("/", async (req, res) => {
       sort=-1;
     }
 
-    let sortType=req.query.type
+    let type=req.query.type
     let sortObj={};
-    sortObj[sortType]=sort;
+    sortObj[type]=sort;
 
     page= +req.query.page;
     limit= +req.query.limit;
 
     delete req.query.sort;
-    
     delete req.query.type;
     delete req.query.page;
     delete req.query.limit;
@@ -51,6 +51,8 @@ ringRouter.get("/:id", async (req, res) => {
         res.status(400).send({"err":err.message});
     }
 });
+
+ringRouter.use(adminAuth);
 
 ringRouter.post("/add", async (req, res) => {
   try {

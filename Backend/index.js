@@ -5,6 +5,7 @@ const userRouter = require("./routes/user.routes");
 const ringRouter = require("./routes/ring.routes");
 const earringRouter = require("./routes/earring.routes");
 const cartRouter = require("./routes/cart.routes");
+const {userAuth} = require("./middlewares/authorization");
 require("dotenv").config();
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use("/users", userRouter);
 app.use("/rings", ringRouter);
 app.use("/earrings", earringRouter);
+app.use(userAuth);
 app.use("/cart", cartRouter);
 
 app.listen(process.env.port, async () => {

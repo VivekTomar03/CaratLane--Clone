@@ -1,5 +1,6 @@
 const express = require("express");
 const EarringModel = require("../models/earring.model");
+const { adminAuth } = require("../middlewares/authorization");
 const earringRouter = express.Router();
 
 earringRouter.get("/", async (req, res) => {
@@ -11,15 +12,14 @@ earringRouter.get("/", async (req, res) => {
     sort=-1;
   }
 
-  let sortType=req.query.type
+  let type=req.query.type
   let sortObj={};
-  sortObj[sortType]=sort;
+  sortObj[type]=sort;
 
   page= +req.query.page;
   limit= +req.query.limit;
 
   delete req.query.sort;
-  
   delete req.query.type;
   delete req.query.page;
   delete req.query.limit;
@@ -52,6 +52,8 @@ earringRouter.get("/:id", async (req, res) => {
         res.status(400).send({"err":err.message});
     }
 });
+
+earringRouter.use(adminAuth);
 
 earringRouter.post("/add", async (req, res) => {
   try {
