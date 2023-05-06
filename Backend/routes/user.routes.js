@@ -5,6 +5,24 @@ const UserModel = require("../models/user.model");
 
 const userRouter = express.Router();
 
+userRouter.get("/", async (req, res) => {
+  try {
+    const users=await UserModel.find(req.query);
+    res.status(200).send(users);
+  } catch (err) {
+    res.status(400).send({"err":err.message});
+  }
+});
+
+userRouter.get("/:id", async (req, res) => {
+  try {
+      const user=await UserModel.findOne({_id:req.params.id})
+      res.status(200).send(user);
+  } catch (err) {
+      res.status(400).send({"err":err.message});
+  }
+});
+
 userRouter.post("/register", async (req, res) => {
   const { name, email, gender, password} = req.body;
 
@@ -55,6 +73,36 @@ userRouter.post("/login", async (req, res) => {
     }
   } catch (err) {
     res.status(400).send({ "err": err.message });
+  }
+});
+
+userRouter.patch("/update/:id", async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    if(req.body.password){
+      bcrypt.hash(req.body.password, 5, async (err, hash) => {
+        req.body.password=hash;
+        await UserModel.findByIdAndUpdate({_id:id}, req.body);
+        res.status(200).send({ "msg": "User updated successfully"});
+      });
+    }else{
+      await UserModel.findByIdAndUpdate({_id:id}, req.body);
+      res.status(200).send({ "msg": "User updated successfully"});
+    }
+
+  } catch (err) {
+    res.status(400).send({ "msg": err.message });
+  }
+});
+
+userRouter.delete("/delete/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    await UserModel.findByIdAndDelete({_id:id});
+    res.status(200).send({ "msg": "User deleted successfully" });
+  } catch (err) {
+    res.status(400).send({ "msg": err.message });
   }
 });
 
