@@ -6,16 +6,16 @@ const Checkout = ({imageurl,title,Size,price,originalprice}) => {
         <h2>Order Summary</h2>
         <div>
             <div>
-                <img src={imageurl}/>
+                <img src="https://cdn1.caratlane.com/media/catalog/product/cache/6/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/J/R/JR07228-1YP900_1_lar.jpg"/>
             </div>
             <div>
-                <p>{title} | Size: {Size}</p>
+                <p>Graceful Twines Diamond Ring| Size: 12</p>
                 <p>SKU: JR07228-1YP900</p>
-                <p>{Date.now()}</p>
+                <p>Expected Delivery - 23rd May{Date.now()}</p>
             </div>
             <div>
-                <p>₹ {price}</p>
-                <p>₹ {originalprice}</p>
+                <p>₹ 37968</p>
+                <p>₹ 42251</p>
             </div>
         </div>
         
