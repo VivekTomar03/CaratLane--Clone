@@ -41,11 +41,12 @@ import { MdShoppingBasket } from "react-icons/md";
 import { BiHomeCircle } from "react-icons/bi";
 import { IoStorefrontSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import Navbar2 from "../../Navbar2/Navbar2";
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const logoutUser=()=>{}
-  const Name="Ritik"
+  const logoutUser = () => {};
+  const Name = "Ritik";
   return (
     <div>
       <Box
@@ -54,7 +55,13 @@ const Navbar = () => {
         h={"20px"}
         position="fixed"
       ></Box>
+
       <Box w={"100%"} position="fixed" top={0} zIndex={"10"}>
+        <Box bg="#4f3267" py="3px" w="100%" color="white">
+          <p className="blink-text" f>
+            Introducing Infinite Stone PoP! Plan your purchase here
+          </p>
+        </Box>
         <Flex
           boxShadow="lg"
           p="2"
@@ -220,7 +227,7 @@ const Navbar = () => {
               />
 
               <Popover>
-              <PopoverTrigger>
+                <PopoverTrigger>
                   <IconButton
                     fontSize={{ base: "5px", sm: "13px", md: "15px" }}
                     bg={"#F6F4ff"}
@@ -246,7 +253,17 @@ const Navbar = () => {
                     >
                       Access acount & manage your orders
                     </PopoverBody>
-                    <Button bgGradient="linear(to-l, rgb(222, 87, 229), rgb(136, 99, 251))" _hover={{bgGradient:"linear(to-l, rgb(222, 87, 229), rgb(136, 99, 251))"}} onClick={logoutUser}>Logout</Button><PopoverBody
+                    <Button
+                      bgGradient="linear(to-l, rgb(222, 87, 229), rgb(136, 99, 251))"
+                      _hover={{
+                        bgGradient:
+                          "linear(to-l, rgb(222, 87, 229), rgb(136, 99, 251))",
+                      }}
+                      onClick={logoutUser}
+                    >
+                      Logout
+                    </Button>
+                    <PopoverBody
                       border="0"
                       display="flex"
                       alignItems="center"
@@ -254,17 +271,15 @@ const Navbar = () => {
                       pb={4}
                     >
                       <Link to="/signup">
-                      {" "}
-                      <Button bg="#DE57E5">Signup</Button>
-                    </Link>
-                    <Link to="/login">
-                      <Button borderColor="#DE57E5" variant="outline">
-                        Login
-                      </Button>
-                    </Link>
-                      
+                        {" "}
+                        <Button bg="#DE57E5">Signup</Button>
+                      </Link>
+                      <Link to="/login">
+                        <Button borderColor="#DE57E5" variant="outline">
+                          Login
+                        </Button>
+                      </Link>
                     </PopoverBody>
-                    
                   </PopoverContent>
                 </Portal>
               </Popover>
@@ -285,7 +300,7 @@ const Navbar = () => {
             </HStack>
           </HStack>
         </Flex>
-        
+        <Navbar2 />k
       </Box>
     </div>
   );
