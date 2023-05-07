@@ -1,5 +1,6 @@
 const express = require("express");
 const RingModel = require("../models/ring.model");
+const { adminAuth } = require("../middlewares/authorization");
 const ringRouter = express.Router();
 
 ringRouter.get("/", async (req, res) => {
@@ -11,15 +12,14 @@ ringRouter.get("/", async (req, res) => {
       sort=-1;
     }
 
-    let sortType=req.query.type
+    let type=req.query.type
     let sortObj={};
-    sortObj[sortType]=sort;
+    sortObj[type]=sort;
 
     page= +req.query.page;
     limit= +req.query.limit;
 
     delete req.query.sort;
-    
     delete req.query.type;
     delete req.query.page;
     delete req.query.limit;
@@ -44,14 +44,15 @@ ringRouter.get("/", async (req, res) => {
 });
 
 ringRouter.get("/:id", async (req, res) => {
-    const id = req.params.id;
     try {
-        const ring=await RingModel.findOne({_id:id})
+        const ring=await RingModel.findOne({_id:req.params.id})
         res.status(200).send(ring);
     } catch (err) {
         res.status(400).send({"err":err.message});
     }
 });
+
+ringRouter.use(adminAuth);
 
 ringRouter.post("/add", async (req, res) => {
   try {
@@ -77,7 +78,7 @@ ringRouter.delete("/delete/:id", async (req, res) => {
   const id = req.params.id;
   try {
     await RingModel.findByIdAndDelete({_id:id});
-    res.status(200).send({ "msg": "Product updated successfully" });
+    res.status(200).send({ "msg": "Product deleted successfully" });
   } catch (err) {
     res.status(400).send({ "msg": err.message });
   }
