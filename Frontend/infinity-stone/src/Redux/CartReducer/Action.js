@@ -37,7 +37,7 @@ export const getCartProducts = () => (dispatch) => {
 export const deleteCartdata = (id) => (dispatch) => {
   dispatch(getCartProductsRequestAction());
   return axios
-    .delete(`https://red-worried-dove.cyclic.app/cart/${id}`)
+    .delete(`https://red-worried-dove.cyclic.app/cart/delete/id`)
     .then((res) => {
       dispatch(DeleteCartSuccess());
     })

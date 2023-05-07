@@ -29,21 +29,25 @@
 .subtotalBill {
     display: flex;
     justify-content: space-between;
+    margin: 5px 0px 5px 0px;
 }
 
 .savedBill {
     display: flex;
     justify-content: space-between;
+    margin: 5px 0px 5px 0px;
 }
 
 .deliveryBill {
     display: flex;
     justify-content: space-between;
+    margin: 5px 0px 5px 0px;
 }
 
 .totalBill {
     display: flex;
     justify-content: space-between;
+    margin: 5px 0px 5px 0px;
 }
 
 /* #bill{

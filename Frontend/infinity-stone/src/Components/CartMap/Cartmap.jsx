@@ -18,8 +18,8 @@ const Cartmap = ({
         <img src={imageurl} alt="" />
       </div>
       <div className="detailsDiv">
-        <p>{title}</p>
-        <p>JR07228-1YP900</p>
+        <h3 style={{fontWeight:"bold"}}>{title}</h3>
+        <p >JR07228-1YP900</p>
         <div className="sizeQue">
           <h5>Size: {size}</h5>
           <h5>Quantity : {quantity}</h5>
