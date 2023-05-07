@@ -1,4 +1,4 @@
-import { Box, Center } from '@chakra-ui/react';
+import { Box, Button, Center } from '@chakra-ui/react';
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 
 import React from 'react';
@@ -31,6 +31,8 @@ const Order = () => {
       </Center>
       
       <Box  mt={"20px"}>
+      <Button m={2}  colorScheme='teal' variant='solid' _hover={{ variant:"outline", colorScheme:'yellow'}} ml={"80%"}>Admin</Button>
+
         <Tabs position="relative" variant="solid-rounded">
           <Center>
             <TabList w={"100%"}>

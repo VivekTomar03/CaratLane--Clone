@@ -24,6 +24,7 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
+
 const initstate = {
   imageurl: "",
   image: "",
@@ -231,7 +232,11 @@ const AllEaring = ({ setsuspendacc, suspendacc }) => {
                       <Td>{el.price}</Td>
                       <Td>{el.originalprice}</Td>
                       <Td w={"8%"}>
-                        <Image w={"fit-content"} src={el.imageurl} alt={el._id} />
+                        <Image
+                          w={"fit-content"}
+                          src={el.imageurl}
+                          alt={el._id}
+                        />
                       </Td>
                       <Td>{el.size}</Td>
                       <Td>
@@ -254,6 +259,9 @@ const AllEaring = ({ setsuspendacc, suspendacc }) => {
                           _focus={{
                             bg: "blue.500",
                           }}
+                          data-aos="fade-right"
+                          data-aos-offset="300"
+                          data-aos-easing="ease-in-sine"
                         >
                           Edit
                         </Button>
@@ -275,6 +283,9 @@ const AllEaring = ({ setsuspendacc, suspendacc }) => {
                             bg: "red.200",
                           }}
                           onClick={() => handleDelete(el._id, el)}
+                          data-aos="fade-left"
+                          data-aos-offset="300"
+                          data-aos-easing="ease-in-sine"
                         >
                           Delete
                         </Button>
@@ -286,8 +297,8 @@ const AllEaring = ({ setsuspendacc, suspendacc }) => {
           </Table>
         </TableContainer>
       )}
-        
-        <Box display={showform ? "none" : "block"}>
+
+      <Box display={showform ? "none" : "block"}>
         <Button
           bg="red.500"
           py={2}
@@ -300,10 +311,14 @@ const AllEaring = ({ setsuspendacc, suspendacc }) => {
           _focus={{ boxShadow: "outline" }}
           isDisabled={page == 1}
           onClick={() => setpage(page - 1)}
+          data-aos="fade-up"
+          data-aos-anchor-placement="top-bottom"
         >
           Previos
         </Button>
-        <Button color={"black"} fontWeight={"bold"} isDisabled={true}>{page}</Button>
+        <Button color={"black"} fontWeight={"bold"} isDisabled={true}>
+          {page}
+        </Button>
         <Button
           bg="red.500"
           py={2}
@@ -315,11 +330,13 @@ const AllEaring = ({ setsuspendacc, suspendacc }) => {
           _hover={{ bg: "teal.600" }}
           _focus={{ boxShadow: "outline" }}
           onClick={() => setpage(page + 1)}
+          data-aos="fade-up"
+          data-aos-anchor-placement="top-bottom"
         >
           Next
         </Button>
       </Box>
-        
+
       <Box className="usereditdata Modal">
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />

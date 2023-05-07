@@ -127,6 +127,10 @@ const AllRings = ({ setsuspendacc, suspendacc }) => {
         }}
         marginLeft={"80%"}
         onClick={() => setshowform(!showform)}
+        data-aos="fade-left"
+        data-aos-anchor="#example-anchor"
+        data-aos-offset="500"
+        data-aos-duration="2000"
       >
         ADD
       </Button>
@@ -257,6 +261,9 @@ const AllRings = ({ setsuspendacc, suspendacc }) => {
                           _focus={{
                             bg: "blue.500",
                           }}
+                          data-aos="fade-right"
+                          data-aos-offset="300"
+                          data-aos-easing="ease-in-sine"
                         >
                           Edit
                         </Button>
@@ -278,6 +285,9 @@ const AllRings = ({ setsuspendacc, suspendacc }) => {
                             bg: "red.200",
                           }}
                           onClick={() => handleDelete(el._id, el)}
+                          data-aos="fade-left"
+                          data-aos-offset="300"
+                          data-aos-easing="ease-in-sine"
                         >
                           Delete
                         </Button>
@@ -305,7 +315,9 @@ const AllRings = ({ setsuspendacc, suspendacc }) => {
         >
           Previos
         </Button>
-        <Button color={"black"} fontWeight={"bold"} isDisabled={true}>{page}</Button>
+        <Button color={"black"} fontWeight={"bold"} isDisabled={true}>
+          {page}
+        </Button>
         <Button
           bg="red.500"
           py={2}

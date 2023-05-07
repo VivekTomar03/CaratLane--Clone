@@ -44,14 +44,17 @@ const AllUsers = ({ setsuspendacc, suspendacc }) => {
   };
   const handlesubmit = (e) => {
     e.preventDefault();
-    axios(`https://red-worried-dove.cyclic.app/users/update/${singeluser._id}`, {
-      method: "patch",
-      data: singeluser,
-      headers: {
-        "Content-Type": "application/json",
-        // token will come here
-      },
-    })
+    axios(
+      `https://red-worried-dove.cyclic.app/users/update/${singeluser._id}`,
+      {
+        method: "patch",
+        data: singeluser,
+        headers: {
+          "Content-Type": "application/json",
+          // token will come here
+        },
+      }
+    )
       .then((res) => {
         console.log(res);
         getUsers();
@@ -98,8 +101,8 @@ const AllUsers = ({ setsuspendacc, suspendacc }) => {
                     <Td>{i + 1}</Td>
                     <Td>{el.name}</Td>
                     <Td>{el.email}</Td>
-                    <Td>{el.password}</Td>
-                    <Td>{"MAle"}</Td>
+                    <Td>{"12345"}</Td>
+                    <Td>{el.gender}</Td>
                     <Td>
                       <Button
                         onClick={() => {
@@ -120,6 +123,9 @@ const AllUsers = ({ setsuspendacc, suspendacc }) => {
                         _focus={{
                           bg: "blue.500",
                         }}
+                        data-aos="fade-right"
+                        data-aos-easing="linear"
+                        data-aos-duration="1500"
                       >
                         Edit
                       </Button>
@@ -141,6 +147,9 @@ const AllUsers = ({ setsuspendacc, suspendacc }) => {
                           bg: "red.200",
                         }}
                         onClick={() => handleDelete(el._id, el)}
+                        data-aos="fade-left"
+                        data-aos-easing="linear"
+                        data-aos-duration="1500"
                       >
                         Delete
                       </Button>
