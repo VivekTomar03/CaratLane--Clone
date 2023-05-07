@@ -89,7 +89,7 @@ const Cart = () => {
           </div>
           <div id="bill">
             <div>
-              <img style={{ height: "130px", width: "100%" }} src={rightCart} />
+              <img style={{ height: "130px", width: "100%"}} src={rightCart} />
             </div>
             <h3>Order Summary</h3>
             <div className="billDetails">
