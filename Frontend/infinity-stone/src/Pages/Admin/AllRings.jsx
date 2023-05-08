@@ -41,12 +41,15 @@ const AllRings = ({ setsuspendacc, suspendacc }) => {
   const [showform, setshowform] = useState(false);
   const [page, setpage] = useState(1);
   const {token} = useSelector((state) => state.authReducer)
+  const [allpage , setallpage] = useState(1)
+  let array = new Array(allpage).fill(0)
   const getRingsdata = () => {
     axios
       .get(`https://red-worried-dove.cyclic.app/rings?limit=10&page=${page}`)
       .then((res) => {
-        // console.log(res.data);
-        setdata(res.data.reverse());
+        console.log(res);
+        setallpage(res.data[1])
+        setdata(res.data[0].reverse());
       })
       .catch((err) => console.log(err));
   };
@@ -313,7 +316,20 @@ const AllRings = ({ setsuspendacc, suspendacc }) => {
         </TableContainer>
       )}
       <Box  ml={"38%"} display={showform ? "none" : "block"}>
-        <Button
+         {
+             array && array.map((el,i) => (
+              <Button  bg="red.500"
+              py={2}
+              px={4}
+              ml={3}
+              rounded="md"
+              fontWeight="semibold"
+              color="white"
+              _hover={{ bg: "teal.600" }}
+              _focus={{ boxShadow: "outline" }} onClick={() => setpage(i+1)}>{i+1}</Button>
+             ))
+         }
+        {/* <Button
           bg="red.500"
           py={2}
           px={4}
@@ -344,7 +360,9 @@ const AllRings = ({ setsuspendacc, suspendacc }) => {
           onClick={() => setpage(page + 1)}
         >
           Next
-        </Button>
+        </Button> */}
+
+         
       </Box>
       <Box className="usereditdata Modal">
         <Modal isOpen={isOpen} onClose={onClose}>

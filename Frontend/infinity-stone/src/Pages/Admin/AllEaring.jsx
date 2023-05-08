@@ -42,13 +42,15 @@ const AllEaring = ({ setsuspendacc, suspendacc }) => {
   const [formdata, setformdata] = useState(initstate);
   const [page, setpage] = useState(1);
   const {token} = useSelector((state) => state.authReducer)
- 
+  const [allpage , setallpage] = useState(1)
+  let array = new Array(allpage).fill(0)
   const getRingsdata = () => {
     axios
       .get(`https://red-worried-dove.cyclic.app/earrings?limit=10&page=${page}`)
       .then((res) => {
-        console.log(res.data);
-        setdata(res.data);
+        console.log(res);
+        setallpage(res.data[1])
+        setdata(res.data[0]);
       })
       .catch((err) => console.log(err));
   };
@@ -311,8 +313,21 @@ const AllEaring = ({ setsuspendacc, suspendacc }) => {
         </TableContainer>
       )}
 
-      <Box ml={"38%"} display={showform ? "none" : "block"}>
-        <Button
+      <Box ml={"18%"} display={showform ? "none" : "block"}>
+      {
+             array && array.map((el,i) => (
+              <Button  bg="red.500"
+              py={2}
+              px={4}
+              ml={3}
+              rounded="md"
+              fontWeight="semibold"
+              color="white"
+              _hover={{ bg: "teal.600" }}
+              _focus={{ boxShadow: "outline" }} onClick={() => setpage(i+1)}>{i+1}</Button>
+             ))
+         }
+        {/* <Button
           bg="red.500"
           py={2}
           px={4}
@@ -347,7 +362,7 @@ const AllEaring = ({ setsuspendacc, suspendacc }) => {
           data-aos-anchor-placement="top-bottom"
         >
           Next
-        </Button>
+        </Button> */}
       </Box>
 
       <Box className="usereditdata Modal">
