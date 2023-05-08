@@ -1,4 +1,4 @@
-import { Box, Button, Image, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, Center, Image, useDisclosure } from "@chakra-ui/react";
 import axios from "axios";
 import React from "react";
 import { useState } from "react";
@@ -24,6 +24,7 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const initstate = {
   imageurl: "",
@@ -40,13 +41,16 @@ const AllEaring = ({ setsuspendacc, suspendacc }) => {
   const [showform, setshowform] = useState(false);
   const [formdata, setformdata] = useState(initstate);
   const [page, setpage] = useState(1);
-
+  const {token} = useSelector((state) => state.authReducer)
+  const [allpage , setallpage] = useState(1)
+  let array = new Array(allpage).fill(0)
   const getRingsdata = () => {
     axios
       .get(`https://red-worried-dove.cyclic.app/earrings?limit=10&page=${page}`)
       .then((res) => {
-        console.log(res.data);
-        setdata(res.data);
+        console.log(res);
+        setallpage(res.data[1])
+        setdata(res.data[0]);
       })
       .catch((err) => console.log(err));
   };
@@ -65,7 +69,7 @@ const AllEaring = ({ setsuspendacc, suspendacc }) => {
         data: singeluser,
         headers: {
           "Content-Type": "application/json",
-          // token will come here
+          Authorization:`Bearer ${token}`
         },
       }
     )
@@ -79,7 +83,12 @@ const AllEaring = ({ setsuspendacc, suspendacc }) => {
 
   const handleDelete = (id, el) => [
     axios
-      .delete(`https://red-worried-dove.cyclic.app/earrings/delete/${id}`)
+      .delete(`https://red-worried-dove.cyclic.app/earrings/delete/${id}`,{
+        headers: {
+          "Content-Type": "application/json",
+          Authorization:`Bearer ${token}`
+        },
+      })
       .then((res) => {
         console.log(res);
         getRingsdata();
@@ -90,8 +99,14 @@ const AllEaring = ({ setsuspendacc, suspendacc }) => {
 
   const handlesubmit1 = (e) => {
     e.preventDefault();
-    axios
-      .post("https://red-worried-dove.cyclic.app/earrings/add", formdata)
+    axios("https://red-worried-dove.cyclic.app/earrings/add",  {
+        method: "post",
+        data: formdata,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization:`Bearer ${token}`
+        },
+      })
       .then((res) => {
         console.log(res);
         getRingsdata();
@@ -108,7 +123,7 @@ const AllEaring = ({ setsuspendacc, suspendacc }) => {
 
   useEffect(() => {
     getRingsdata();
-  }, []);
+  }, [page]);
   return (
     <Box>
       <Button
@@ -212,14 +227,14 @@ const AllEaring = ({ setsuspendacc, suspendacc }) => {
             <TableCaption>All Earings Products Data</TableCaption>
             <Thead>
               <Tr flexDirection={"column"}>
-                <Th>S.No</Th>
-                <Th>Title</Th>
-                <Th>Price</Th>
-                <Th>Discount Price</Th>
-                <Th>Image</Th>
-                <Th>Size</Th>
-                <Th>Edit User</Th>
-                <Th>Delete User</Th>
+                <Th  color={"white"}>S.No</Th>
+                <Th  color={"white"}>Title</Th>
+                <Th  color={"white"}>Price</Th>
+                <Th  color={"white"}>Discount Price</Th>
+                <Th  color={"white"}>Image</Th>
+                <Th  color={"white"}>Size</Th>
+                <Th  color={"white"}>Edit User</Th>
+                <Th  color={"white"}>Delete User</Th>
               </Tr>
             </Thead>
             <Tbody>
@@ -298,8 +313,21 @@ const AllEaring = ({ setsuspendacc, suspendacc }) => {
         </TableContainer>
       )}
 
-      <Box display={showform ? "none" : "block"}>
-        <Button
+      <Box ml={"18%"} display={showform ? "none" : "block"}>
+      {
+             array && array.map((el,i) => (
+              <Button  bg="red.500"
+              py={2}
+              px={4}
+              ml={3}
+              rounded="md"
+              fontWeight="semibold"
+              color="white"
+              _hover={{ bg: "teal.600" }}
+              _focus={{ boxShadow: "outline" }} onClick={() => setpage(i+1)}>{i+1}</Button>
+             ))
+         }
+        {/* <Button
           bg="red.500"
           py={2}
           px={4}
@@ -334,7 +362,7 @@ const AllEaring = ({ setsuspendacc, suspendacc }) => {
           data-aos-anchor-placement="top-bottom"
         >
           Next
-        </Button>
+        </Button> */}
       </Box>
 
       <Box className="usereditdata Modal">

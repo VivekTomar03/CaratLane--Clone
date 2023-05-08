@@ -6,6 +6,7 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import OutOfStock from "./OutOfStock";
 import AllEaring from "./AllEaring";
 import EaringDelete from "./EaringDelete";
+import { Link } from "react-router-dom";
 const data = {
   labels: [
     "All Oders",
@@ -53,7 +54,7 @@ const EaringManage = () => {
           _hover={{ variant: "outline", colorScheme: "yellow" }}
           ml={"80%"}
         >
-          Admin
+         <Link to={"/admin"}>Admin</Link>
         </Button>
 
         <Tabs position="relative" variant="solid-rounded">

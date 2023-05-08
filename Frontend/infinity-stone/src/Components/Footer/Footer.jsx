@@ -6,7 +6,7 @@ import {
   SimpleGrid,
   Text,
   Link,
-  chakra,
+  chakra,    
   VisuallyHidden,
   useColorModeValue,
   Image,

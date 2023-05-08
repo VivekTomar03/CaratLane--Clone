@@ -6,6 +6,7 @@ import AllRings from "./AllRings";
 import { useEffect } from "react";
 import RingDeleted from "./RingDeleted";
 import OutOfStock from "./OutOfStock";
+import { Link } from "react-router-dom";
 
 const data = {
   labels: [
@@ -55,7 +56,7 @@ const RingsMange = () => {
           data-aos-duration="1500"
           ml={"80%"}
         >
-          Admin
+         <Link to={"/admin"}>Admin</Link>
         </Button>
 
         <Tabs position="relative" variant="solid-rounded">
