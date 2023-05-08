@@ -41,11 +41,21 @@ import { MdShoppingBasket } from "react-icons/md";
 import { BiHomeCircle } from "react-icons/bi";
 import { IoStorefrontSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import Navbar2 from "../../Navbar2/Navbar2";
+import { useDispatch, useSelector } from "react-redux";
+import { LOGOUT } from "../../Redux/auth/auth.type";
 
 const Navbar = () => {
+  const dispatch = useDispatch()
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const logoutUser=()=>{}
-  const Name="Ritik"
+  const logoutUser = () => {
+    dispatch({type:LOGOUT})
+  };
+  const Name = "Ritik";
+  const store = useSelector((state)=>
+    state.authReducer 
+  )
+  console.log(store)
   return (
     <div>
       <Box
@@ -54,7 +64,13 @@ const Navbar = () => {
         h={"20px"}
         position="fixed"
       ></Box>
+
       <Box w={"100%"} position="fixed" top={0} zIndex={"10"}>
+        <Box bg="#4f3267" py="3px" w="100%" color="white">
+          <p className="blink-text" f>
+            Introducing Infinite Stone PoP! Plan your purchase here
+          </p>
+        </Box>
         <Flex
           boxShadow="lg"
           p="2"
@@ -65,7 +81,7 @@ const Navbar = () => {
         >
           <IconButton
             bg={"#F6F4ff"}
-            // icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
             aria-label={"Open Menu"}
             display={{ md: "none" }}
             onClick={isOpen ? onClose : onOpen}
@@ -185,7 +201,7 @@ const Navbar = () => {
                         bgGradient="linear(to-l, rgb(222, 87, 229), rgb(136, 99, 251))"
                         aria-label="Search database"
                         color={"white"}
-                        // icon={<SearchIcon />}
+                        icon={<SearchIcon />}
                         h={"2.4rem"}
                         w={"50px"}
                         roundedLeft={"sm"}
@@ -220,7 +236,7 @@ const Navbar = () => {
               />
 
               <Popover>
-              <PopoverTrigger>
+                <PopoverTrigger>
                   <IconButton
                     fontSize={{ base: "5px", sm: "13px", md: "15px" }}
                     bg={"#F6F4ff"}
@@ -245,8 +261,21 @@ const Navbar = () => {
                       textAlign="center"
                     >
                       Access acount & manage your orders
+                      <Text  display={ !store.isAuth ? "none" : "block" }> Welcome {store.email}</Text>
                     </PopoverBody>
-                    <Button bgGradient="linear(to-l, rgb(222, 87, 229), rgb(136, 99, 251))" _hover={{bgGradient:"linear(to-l, rgb(222, 87, 229), rgb(136, 99, 251))"}} onClick={logoutUser}>Logout</Button><PopoverBody
+                    
+                    <Button
+                    display={ !store.isAuth ? "none" : "block" }
+                      bgGradient="linear(to-l, rgb(222, 87, 229), rgb(136, 99, 251))"
+                      _hover={{
+                        bgGradient:
+                          "linear(to-l, rgb(222, 87, 229), rgb(136, 99, 251))",
+                      }}
+                      onClick={logoutUser}
+                    >
+                      Logout
+                    </Button>
+                    <PopoverBody
                       border="0"
                       display="flex"
                       alignItems="center"
@@ -254,17 +283,15 @@ const Navbar = () => {
                       pb={4}
                     >
                       <Link to="/signup">
-                      {" "}
-                      <Button bg="#DE57E5">Signup</Button>
-                    </Link>
-                    <Link to="/login">
-                      <Button borderColor="#DE57E5" variant="outline">
-                        Login
-                      </Button>
-                    </Link>
-                      
+                        {" "}
+                        <Button bg="#DE57E5" display={store.isAuth ? "none" : "block" }>Signup</Button>
+                      </Link>
+                      <Link to="/login">
+                        <Button borderColor="#DE57E5" variant="outline" display={store.isAuth ? "none" : "block" }>
+                          Login
+                        </Button>
+                      </Link>
                     </PopoverBody>
-                    
                   </PopoverContent>
                 </Portal>
               </Popover>
@@ -285,7 +312,7 @@ const Navbar = () => {
             </HStack>
           </HStack>
         </Flex>
-        
+        <Navbar2 />
       </Box>
     </div>
   );
