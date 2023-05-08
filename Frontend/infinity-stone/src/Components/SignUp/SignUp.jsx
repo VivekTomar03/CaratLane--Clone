@@ -10,27 +10,54 @@ import {
   Input,
   InputGroup,
   InputRightElement,
+  Select,
   Stack,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
 // import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, Navigate, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
-  const [ResData, setResData] = useState({
-    firstName: "",
-    lastName: "",
-    Email: "",
-    Password: "",
-  });
   const [showPassword, setShowPassword] = useState(false);
-  const handleInput = () => {
-    console.log("clickek");
+  const [ResData, setResData] = useState({
+    name: "",
+    email: "",
+    gender:"",
+    password: "",
+  });
+  const navigate = useNavigate()
+  let name, value;
+  const handleInput = (e) => {
+    name = e.target.name;
+    value = e.target.value;
+
+    setResData({ ...ResData, [name]: value });
   };
-  const sendUserData = () => {
-    console.log("userSend");
+  const sendUserData = async () => {
+    // console.log(ResData)
+
+
+    if(ResData.name !== "" && ResData.email !== "" && ResData.gender !== "" && ResData.password !== ""){
+     let res =  await fetch(`https://red-worried-dove.cyclic.app/users/register`,{
+        method: "POST",
+        body: JSON.stringify(ResData),
+        headers:{
+          "content-type": "application/json"
+        }
+      })
+      let data = await res.json()
+      console.log(data)
+      if(data.msg === "Registered Successfully"){
+        navigate("/login")
+      }else if(data.msg === "User already exist"){
+        alert("user already exists !!! Please login to continue")
+        // setResData("")
+      }
+    }else{
+      return alert("Please fill all details")
+    }
   };
   return (
     <Flex
@@ -57,19 +84,19 @@ const SignUp = () => {
           <Stack id="form" spacing={4}>
             <HStack>
               <Box>
-                <FormControl id="firstName" isRequired>
-                  <FormLabel>First Name</FormLabel>
+                <FormControl id="name" isRequired>
+                  <FormLabel>Name</FormLabel>
                   <Input
-                    value={ResData.firstName}
+                    value={ResData.name}
                     required
                     type="text"
-                    id="FirstName"
-                    name="firstName"
+                    id="name"
+                    name="name"
                     onChange={handleInput}
                   />
                 </FormControl>
               </Box>
-              <Box>
+              {/* <Box>
                 <FormControl id="lastName">
                   <FormLabel>Last Name</FormLabel>
                   <Input
@@ -81,26 +108,34 @@ const SignUp = () => {
                     onChange={handleInput}
                   />
                 </FormControl>
-              </Box>
+              </Box> */}
             </HStack>
             <FormControl id="email" isRequired>
               <FormLabel>Email address</FormLabel>
               <Input
                 type="email"
-                value={ResData.Email}
-                id="Email"
+                value={ResData.email}
+                id="email"
                 required
-                name="Email"
+                name="email"
                 onChange={handleInput}
               />
+            </FormControl>
+            <FormControl id="gender" isRequired>
+              <FormLabel>Gender</FormLabel>
+              <Select onChange={handleInput} name="gender" >
+                <option >Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </Select>
             </FormControl>
             <FormControl id="password" isRequired>
               <FormLabel>Password</FormLabel>
               <InputGroup>
                 <Input
-                  id="Password"
-                  value={ResData.Password}
-                  name="Password"
+                  id="password"
+                  value={ResData.password}
+                  name="password"
                   required
                   onChange={handleInput}
                   type={showPassword ? "text" : "password"}
@@ -122,7 +157,7 @@ const SignUp = () => {
                 <Text align={"center"}>
                   Already have an account?
                   <NavLink to="/login">
-                    <Link style={{color:"blue"}}> Sign In</Link>
+                    <Link style={{ color: "blue" }}> Sign In</Link>
                   </NavLink>
                 </Text>
               </Stack>

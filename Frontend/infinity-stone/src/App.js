@@ -8,19 +8,25 @@ import DownSec from './Components/DownSec';
 import Home from './Pages/Home';
 import Footer from './Components/Footer/Footer';
 import SignUp from './Components/SignUp/SignUp';
+import Login from './Components/Login/Login';
 
 
 function App() {
   return (
     <div className="App">
     <Navbar />
-    <SignUp />
+ 
+    <div style={{marginTop:"150px", marginBottom:"10px"}}>
+    {/* <SignUp /> */}
+        <Login />
     {/* <Slider /> */}
     {/* <Topsec /> */}
     {/* <Midsec /> */}
     {/* <DownSec /> */}
-    {/* <Home /> */}
+    <Home />
     {/* <Footer /> */}
+    </div>
+
     </div>
   );
 }

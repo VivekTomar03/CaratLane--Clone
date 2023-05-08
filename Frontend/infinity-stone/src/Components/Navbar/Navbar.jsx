@@ -42,11 +42,20 @@ import { BiHomeCircle } from "react-icons/bi";
 import { IoStorefrontSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import Navbar2 from "../../Navbar2/Navbar2";
+import { useDispatch, useSelector } from "react-redux";
+import { LOGOUT } from "../../Redux/auth/auth.type";
 
 const Navbar = () => {
+  const dispatch = useDispatch()
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const logoutUser = () => {};
+  const logoutUser = () => {
+    dispatch({type:LOGOUT})
+  };
   const Name = "Ritik";
+  const store = useSelector((state)=>
+    state.authReducer 
+  )
+  console.log(store)
   return (
     <div>
       <Box
@@ -72,7 +81,7 @@ const Navbar = () => {
         >
           <IconButton
             bg={"#F6F4ff"}
-            // icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
             aria-label={"Open Menu"}
             display={{ md: "none" }}
             onClick={isOpen ? onClose : onOpen}
@@ -192,7 +201,7 @@ const Navbar = () => {
                         bgGradient="linear(to-l, rgb(222, 87, 229), rgb(136, 99, 251))"
                         aria-label="Search database"
                         color={"white"}
-                        // icon={<SearchIcon />}
+                        icon={<SearchIcon />}
                         h={"2.4rem"}
                         w={"50px"}
                         roundedLeft={"sm"}
@@ -252,8 +261,11 @@ const Navbar = () => {
                       textAlign="center"
                     >
                       Access acount & manage your orders
+                      <Text  display={ !store.isAuth ? "none" : "block" }> Welcome {store.email}</Text>
                     </PopoverBody>
+                    
                     <Button
+                    display={ !store.isAuth ? "none" : "block" }
                       bgGradient="linear(to-l, rgb(222, 87, 229), rgb(136, 99, 251))"
                       _hover={{
                         bgGradient:
@@ -272,10 +284,10 @@ const Navbar = () => {
                     >
                       <Link to="/signup">
                         {" "}
-                        <Button bg="#DE57E5">Signup</Button>
+                        <Button bg="#DE57E5" display={store.isAuth ? "none" : "block" }>Signup</Button>
                       </Link>
                       <Link to="/login">
-                        <Button borderColor="#DE57E5" variant="outline">
+                        <Button borderColor="#DE57E5" variant="outline" display={store.isAuth ? "none" : "block" }>
                           Login
                         </Button>
                       </Link>
@@ -300,7 +312,7 @@ const Navbar = () => {
             </HStack>
           </HStack>
         </Flex>
-        <Navbar2 />k
+        <Navbar2 />
       </Box>
     </div>
   );
