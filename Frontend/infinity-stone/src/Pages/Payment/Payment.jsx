@@ -32,7 +32,7 @@ const initialState = {
 };
 
 const Payment = () => {
-    const [quantity1, setquantity] = useState(1);
+  const [quantity1, setquantity] = useState(1);
   const [isButLoading, setIsButLoading] = useState(false);
   const [data, setdata] = useState(initialState);
   let dispatch = useDispatch();
@@ -46,27 +46,29 @@ const Payment = () => {
       isError: store.cartReducer.isError,
     };
   }, shallowEqual);
+  const {token} = useSelector((state) => state.authReducer)
+
   useEffect(() => {
-    dispatch(getCartProducts());
+    dispatch(getCartProducts(token));
   }, []);
 
-  let totalprice;
+  let totalprice = 0;
   for (var i = 0; i < carts.length; i++) {
-    if (quantity1[i] === undefined) {
-      totalprice = totalprice + Number(carts[i].price);
-    } else {
-      totalprice += +carts[i].price * Number(quantity1[i]);
-      console.log(quantity1[i]);
+    
+      totalprice = totalprice + ( carts[i].quantity *carts[i].price);
+   
+     
     }
-    console.log(carts[i].price, quantity1[i]);
+    // console.log(carts[i].price, quantity1[i]);
+  
+
+  let totalOriginPrice = 0;
+  for (var i = 0; i < carts.length; i++) {
+    totalOriginPrice = totalOriginPrice + ( carts[i].quantity *carts[i].originalprice);
+     
   }
-//   if (carts.length == 0) {
-//     totalprice = 0;
-//   } else {
-//     totalprice =carts && carts.reduce((acc, el) => {
-//       return acc + Number(el.price);
-//     }, 0);
-//   }
+
+  let totalSavePrice = totalOriginPrice - totalprice;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -109,9 +111,8 @@ const Payment = () => {
       setTimeout(() => {
         setIsButLoading(false);
 
-        
         setdata(initialState);
-        navigate("/paymentmethod");
+        navigate("/payment");
       }, 2000);
     }
 
@@ -253,7 +254,7 @@ const Payment = () => {
           </div>
 
           <div id={styles.review_order}>
-            <button onClick={handleSubmit} className={styles.bookbtn}>
+            <button  onClick={handleSubmit} className={styles.bookbtn}>
               {!isButLoading && `  Continue to Payment Method `}
               {isButLoading && (
                 <Spinner
@@ -271,10 +272,12 @@ const Payment = () => {
           <div id={styles.third}>
             <div className={styles.Order_summmary_div}>
               <p>ORDER SUMMARY</p>
-              <p>Subtotal : {totalprice}</p>
-              <p>Shipping Economy Ground : $ 5.00</p>
-              <p>Sales Tax : $ 0.65</p>
-              <p>Estimated Total:$ {(totalprice + 5 + 0.65)}</p>
+              <p>Subtotal : ₹ {totalOriginPrice}</p>
+              <p>Card Discount : ₹ {totalSavePrice}</p>
+              <p>Shipping Charges : FREE</p>
+              <p style={{ fontWeight: "bold", fontSize: "18px" }}>
+                Total Price : ₹ {totalprice}
+              </p>
             </div>
           </div>
           <div className={styles.fourth}>
@@ -285,7 +288,8 @@ const Payment = () => {
               style={{
                 fontWeight: "normal",
                 textDecoration: "underline",
-              }}>
+              }}
+            >
               {" "}
               1-877-289-2376
             </p>
@@ -293,14 +297,16 @@ const Payment = () => {
               textAlign={"Center"}
               as={"h6"}
               size={"sm"}
-              padding={"20px"}>
+              padding={"20px"}
+            >
               Phone hours 8AM EST - 12:00AM EST Chat 9AM EST - 12:00AM EST
             </Heading>
             <Heading
               textAlign={"Center"}
               as={"h6"}
               size={"sm"}
-              paddiing={"20px"}>
+              paddiing={"20px"}
+            >
               <Heading textAlign={"Center"} as={"h6"} size={"xs"}>
                 Paying with PayPal? In-Store Returns will be refunded as
                 Merchandise Credit.

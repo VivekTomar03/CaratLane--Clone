@@ -18,6 +18,7 @@ import { useSelector } from 'react-redux'
 
 import EarRings from '../Pages/products pages/EarRings'
 import SingleProducteEar from '../Pages/products pages/SingleProductEar'
+import CheckoutPage from '../Pages/CheckOutPage/CheckoutPage'
 
 
 const AllRoutes = () => {
@@ -31,9 +32,9 @@ const AllRoutes = () => {
             <Route path='/singalproductear/:id' element={<SingleProducteEar/>}></Route>
             <Route path='/cart' element={<Cart/>}></Route>
             <Route path='/login' element={<Login/>}></Route>
-            <Route path='/payment' element={<PrivateRoutes><Payment/></PrivateRoutes>}></Route>
+            <Route path='/checkout' element={<Payment/>}></Route>
             <Route path='/signup' element={<SignUp/>}></Route>
-            <Route path='/checkout' element={<h1>checkout path here </h1>}></Route>   
+            <Route path='/payment' element={<CheckoutPage/>}></Route>   
            
             <Route path='/admin' element={<PrivateRoutes><AdminMain/></PrivateRoutes>}></Route>
             <Route path='/admin/managerings' element={<PrivateRoutes><RingsMange/></PrivateRoutes>}></Route>
