@@ -6,7 +6,7 @@ import Checkout from "../../Components/Checkout/Checkout";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 // import Cartmap from "../../CartMap/Cartmap";
-
+import axios from "axios";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 
 import {
@@ -24,41 +24,50 @@ const CheckoutPage = () => {
       isError: store.cartReducer.isError,
     };
   }, shallowEqual);
+  const { token } = useSelector((state) => state.authReducer);
   console.log(carts);
   let dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getCartProducts());
+    dispatch(getCartProducts(token));
   }, []);
 
   let totalprice = 0;
   for (var i = 0; i < carts.length; i++) {
-    if (quantity1[i] === undefined) {
-      totalprice = totalprice + Number(carts[i].price);
-    } else {
-      totalprice += +carts[i].price * Number(quantity1[i]);
-      console.log(quantity1[i]);
-    }
-    console.log(carts[i].price, quantity1[i]);
+    totalprice = totalprice + carts[i].quantity * carts[i].price;
   }
+  // console.log(carts[i].price, quantity1[i]);
 
   let totalOriginPrice = 0;
   for (var i = 0; i < carts.length; i++) {
-    if (quantity1[i] === undefined) {
-      totalOriginPrice = totalOriginPrice + Number(carts[i].originalprice);
-    } else {
-      totalOriginPrice += +carts[i].originalprice * Number(quantity1[i]);
-      console.log(quantity1[i]);
-    }
-    console.log(carts[i].originalprice, quantity1[i]);
+    totalOriginPrice =
+      totalOriginPrice + carts[i].quantity * carts[i].originalprice;
   }
 
   let totalSavePrice = totalOriginPrice - totalprice;
 
-  function HandleCartDelete(id) {
-    dispatch(deleteCartdata(id)).then(() => {
-      dispatch(getCartProducts());
+  // function HandleCartDelete(id) {
+  //   dispatch(deleteCartdata(id,token)).then(() => {
+  //     dispatch(getCartProducts(token));
+  //   });
+  // }
+
+  const id = carts.map((el) => {
+    return el._id;
+  });
+  console.log("id",id[0]);
+  const handleEmptyCart = () => {
+    console.log("hiii")
+    axios(`https://red-worried-dove.cyclic.app/cart/update/${id[0]}`, {
+      method: "patch",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      data: [],
+    }).then((res) => {
+console.log("res",res)
+      // dispatch(getCartProducts(token));
     });
-  }
+  };
   return (
     <div className="main">
       {/* left */}
@@ -93,20 +102,13 @@ const CheckoutPage = () => {
             </div>
           </div>
 
-          <button className="priceBtn">123456</button>
+          <button className="priceBtn" onClick={() => handleEmptyCart()} >₹ {totalprice}</button>
         </div>
       </div>
 
       {/* right */}
       <div className="right">
         <div>
-          {/* {carts.length > 0 && carts.map((el)=>{
-                return(
-                    <Checkout key={el.id}
-                    {...el}/>
-                )
-            })} */}
-
           <div className="mainDiv" style={{ width: "100%" }}>
             <h2
               style={{
@@ -116,7 +118,12 @@ const CheckoutPage = () => {
               }}>
               Order Summary
             </h2>
-            <div
+            {carts.length > 0 &&
+              carts.map((el) => {
+                return <Checkout key={el.id} {...el} />;
+              })}
+
+            {/* <div
               style={{
                 display: "flex",
                 justifyContent: "space-between",
@@ -143,25 +150,57 @@ const CheckoutPage = () => {
                   ₹ 42251
                 </p>
               </div>
-            </div>
+            </div> */}
           </div>
 
-          <div style={{margin:"32px 0px 20px 20px", boxShadow:"rgba(0, 0, 0, 0.16) 0px 1px 4px", width:"100%",}}>
-            <div style={{display:"flex", width:"100%",justifyContent:"space-between",padding:"5px 20px"}}>
+          <div
+            style={{
+              margin: "32px 0px 20px 20px",
+              boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
+              width: "95%",
+            }}>
+            <div
+              style={{
+                display: "flex",
+                width: "100%",
+                justifyContent: "space-between",
+                padding: "5px 20px",
+              }}>
               <p>SUBTOTAL</p>
               <p>{totalprice}</p>
             </div>
-            <div style={{display:"flex", width:"100%",justifyContent:"space-between",padding:"5px 20px"}}>
+            <div
+              style={{
+                display: "flex",
+                width: "100%",
+                justifyContent: "space-between",
+                padding: "5px 20px",
+              }}>
               <p>CARD DISCOUNT</p>
               <p>- ₹ {totalSavePrice}</p>
             </div>
-            <div style={{display:"flex", width:"100%",  justifyContent:"space-between",padding:"5px 20px"}}>
+            <div
+              style={{
+                display: "flex",
+                width: "100%",
+                justifyContent: "space-between",
+                padding: "5px 20px",
+              }}>
               <p>SHIPPING CHARGES (Standard)</p>
-              <p style={{fontWeight:"bold"}}>FREE</p>
+              <p style={{ fontWeight: "bold" }}>FREE</p>
             </div>
-            <div style={{display:"flex", width:"100%",  justifyContent:"space-between",padding:"5px 20px"}}>
-                <p style={{fontWeight:"bold"}}>TOTAL PRICE</p>
-                <p style={{fontWeight:"bold"}}> ₹ 32145</p>
+            <div
+              style={{
+                display: "flex",
+                width: "100%",
+                justifyContent: "space-between",
+                padding: "5px 20px",
+              }}>
+              <p style={{ fontWeight: "bold" }}>TOTAL PRICE</p>
+              <p style={{ fontWeight: "bold" }} >
+                {" "}
+                ₹ {totalprice}
+              </p>
             </div>
           </div>
         </div>
