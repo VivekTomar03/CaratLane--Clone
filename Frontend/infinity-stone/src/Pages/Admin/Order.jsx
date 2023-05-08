@@ -6,7 +6,7 @@ import Userchart from '../../Components/Userchart';
 const data = {
     labels:['Sunday','Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
     datasets: [
-      {
+      { 
         label: 'Users %',
         data: [
             Math.floor(Math.random() * 1000 + 500),

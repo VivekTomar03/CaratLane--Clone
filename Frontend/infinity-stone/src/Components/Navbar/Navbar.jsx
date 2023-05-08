@@ -30,6 +30,7 @@ import {
   PopoverHeader,
   PopoverBody,
   PopoverFooter,
+  Center,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, SearchIcon } from "@chakra-ui/icons";
 import { AiOutlineGold, AiOutlineHome, AiFillHeart } from "react-icons/ai";
@@ -67,9 +68,9 @@ const Navbar = () => {
 
       <Box w={"100%"} position="fixed" top={0} zIndex={"10"}>
         <Box bg="#4f3267" py="3px" w="100%" color="white">
-          <p className="blink-text" f>
+          <Center className="blink-text" >
             Introducing Infinite Stone PoP! Plan your purchase here
-          </p>
+          </Center>
         </Box>
         <Flex
           boxShadow="lg"
@@ -261,11 +262,11 @@ const Navbar = () => {
                       textAlign="center"
                     >
                       Access acount & manage your orders
-                      <Text  display={ !store.isAuth ? "none" : "block" }> Welcome {store.email}</Text>
+                      <Text  display={ !store?.isAuth ? "none" : "block" }> Welcome {store?.email}</Text>
                     </PopoverBody>
                     
                     <Button
-                    display={ !store.isAuth ? "none" : "block" }
+                    display={ !store?.isAuth ? "none" : "block" }
                       bgGradient="linear(to-l, rgb(222, 87, 229), rgb(136, 99, 251))"
                       _hover={{
                         bgGradient:
@@ -284,10 +285,10 @@ const Navbar = () => {
                     >
                       <Link to="/signup">
                         {" "}
-                        <Button bg="#DE57E5" display={store.isAuth ? "none" : "block" }>Signup</Button>
+                        <Button bg="#DE57E5" display={store?.isAuth ? "none" : "block" }>Signup</Button>
                       </Link>
                       <Link to="/login">
-                        <Button borderColor="#DE57E5" variant="outline" display={store.isAuth ? "none" : "block" }>
+                        <Button borderColor="#DE57E5" variant="outline" display={store?.isAuth ? "none" : "block" }>
                           Login
                         </Button>
                       </Link>

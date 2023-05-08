@@ -25,8 +25,8 @@ dispatch(loginRequestAction())
 try {
     const res = await axios.post(`${BASE_URL}/users/login`,userData);
   console.log(res)
-    if(res.data.msg==="Login Successfull"){
-        dispatch(loginSuccessAction({token:res.data.token,email:userData.email}));
+    if(res.data.msg==="Login Successfull" || "Welcome Admin"){
+        dispatch(loginSuccessAction({token:res.data.token,email:userData.email, admin:res.data.admin}));
         return { "status": res.data.status, "msg": res.data.message };
     }else{
         dispatch(loginFailureAction());

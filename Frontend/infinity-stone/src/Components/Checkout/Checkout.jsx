@@ -16,7 +16,7 @@ const Checkout = ({imageurl,title,Size,price,originalprice}) => {
             <div>
                 <p>₹ 37968</p>
                 <p>₹ 42251</p>
-            </div>
+            </div> 
         </div>
         
     </div>

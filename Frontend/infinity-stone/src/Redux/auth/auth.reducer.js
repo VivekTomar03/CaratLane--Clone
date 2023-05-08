@@ -12,9 +12,12 @@ const initialstate = {
   email: "",
   isLoading: false,
   isError: false,
+  admin:false,
+  
 };
 
 export const reducer = (state = initialstate, { type, payload }) => {
+  console.log(payload , "recuser payload");
   switch (type) {
     case USER_LOGIN_REQUEST:
       return { ...state, isLoading: true };
@@ -26,6 +29,7 @@ export const reducer = (state = initialstate, { type, payload }) => {
         name: payload.name,
         email: payload.email,
         isAuth: true,
+        admin:payload.admin
       };
     case USER_LOGIN_FAILURE:
       return { ...state, isLoading: false, isError: false };
