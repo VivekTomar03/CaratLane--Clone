@@ -28,6 +28,7 @@ import {
     FaGoodreadsG,
     FaBars
   } from "react-icons/fa";
+import { Link } from "react-router-dom";
   
   const Navbar2 = () => {
     
@@ -48,7 +49,7 @@ import {
                 </div> */}
               </li>
               <li className="dropdowns">
-                <h1> RINGS</h1>
+                <h1><Link to={"/rings"}>RINGS</Link></h1>
   
                 <div className="submenu">
                   <div className="sub-left">
@@ -211,7 +212,7 @@ import {
                 </div>
               </li>
               <li className="dropdowns">
-                EARRINGS
+                <Link to={"earings"}>EARRINGS</Link>
                 <div className="submenu">
                   <div className="sub-left">
                     <div className="sub-col">

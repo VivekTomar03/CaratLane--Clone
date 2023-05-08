@@ -22,15 +22,20 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const AllUsers = ({ setsuspendacc, suspendacc }) => {
   const [data, setdata] = useState([]);
   const [singeluser, setsingeluser] = useState({});
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+ const {token} = useSelector((state) => state.authReducer)
   const getUsers = () => {
     axios
-      .get("https://red-worried-dove.cyclic.app/users")
+      .get("https://red-worried-dove.cyclic.app/users" , {
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      })
       .then((res) => {
         // console.log(res.data);
         setdata(res.data);
@@ -51,7 +56,7 @@ const AllUsers = ({ setsuspendacc, suspendacc }) => {
         data: singeluser,
         headers: {
           "Content-Type": "application/json",
-          // token will come here
+          Authorization:`Bearer ${token}`
         },
       }
     )
@@ -65,7 +70,11 @@ const AllUsers = ({ setsuspendacc, suspendacc }) => {
 
   const handleDelete = (id, el) => [
     axios
-      .delete(`https://red-worried-dove.cyclic.app/users/delete/${id}`)
+      .delete(`https://red-worried-dove.cyclic.app/users/delete/${id}`,{
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      })
       .then((res) => {
         console.log(res);
         getUsers();

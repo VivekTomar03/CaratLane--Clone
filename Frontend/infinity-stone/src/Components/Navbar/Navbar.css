@@ -1,6 +1,7 @@
 .blink-text {
     animation: blinker 1.5s linear infinite;
     font-size: small;
+   
   }
   @keyframes blinker {
     50% {
