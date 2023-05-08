@@ -94,7 +94,7 @@ const AllUsers = ({ setsuspendacc, suspendacc }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {data &&
+            { data.length>0? data &&
               data.reverse().map((el, i) => {
                 return (
                   <Tr key={el.id}>
@@ -156,7 +156,7 @@ const AllUsers = ({ setsuspendacc, suspendacc }) => {
                     </Td>
                   </Tr>
                 );
-              })}
+              }):null}
           </Tbody>
         </Table>
       </TableContainer>
