@@ -1,4 +1,5 @@
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import { useToast } from '@chakra-ui/react'
 import {
   Box,
   Button,
@@ -27,6 +28,7 @@ const SignUp = () => {
     gender:"",
     password: "",
   });
+  const toast = useToast()
   const navigate = useNavigate()
   let name, value;
   const handleInput = (e) => {
@@ -50,13 +52,34 @@ const SignUp = () => {
       let data = await res.json()
       console.log(data)
       if(data.msg === "Registered Successfully"){
+        toast({
+          title: 'Account created.',
+          description: "We've created your account for you.",
+          status: 'success',
+          duration: 2000,
+          isClosable: true,
+        })
         navigate("/login")
       }else if(data.msg === "User already exist"){
-        alert("user already exists !!! Please login to continue")
+        // alert("user already exists !!! Please login to continue")
         // setResData("")
+        toast({
+          title: data.msg,
+          description: "user already exists !!! Please login to continue",
+          status: 'error',
+          duration: 2000,
+          isClosable: true,
+        })
       }
     }else{
-      return alert("Please fill all details")
+       toast({
+        title: "Oops !!",
+        description: "fill all details",
+        status: 'error',
+        duration: 2000,
+        isClosable: true,
+      })
+      return
     }
   };
   return (

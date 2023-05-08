@@ -28,10 +28,16 @@ import {
     FaGoodreadsG,
     FaBars
   } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
   
   const Navbar2 = () => {
-    
+    const navigate = useNavigate()
+    const handleEarings =()=>{
+      navigate("/earings")
+    }
+    const handelRings =()=>{
+      navigate("/rings")
+    }
     return (
       <div
         className="navbar"
@@ -42,14 +48,14 @@ import { Link } from "react-router-dom";
   
           <div className="nav-menu">
             <ul className="nav_right">
-              <li className="dropdowns">
+              <li className="dropdowns" style={{fontSize: "13px"}} >
                 NEW ARRIVALS
                 {/* <div className="submenu">
                   <div className="subCat"></div>
                 </div> */}
               </li>
-              <li className="dropdowns">
-                <h1><Link to={"/rings"}>RINGS</Link></h1>
+              <li className="dropdowns" style={{fontSize: "13px"}} onClick={handelRings}>
+                RINGS
   
                 <div className="submenu">
                   <div className="sub-left">
@@ -211,8 +217,8 @@ import { Link } from "react-router-dom";
                   />
                 </div>
               </li>
-              <li className="dropdowns">
-                <Link to={"earings"}>EARRINGS</Link>
+              <li className="dropdowns" style={{fontSize: "13px"}} onClick={handleEarings}>
+                EARRINGS
                 <div className="submenu">
                   <div className="sub-left">
                     <div className="sub-col">
@@ -373,7 +379,7 @@ import { Link } from "react-router-dom";
                   />
                 </div>
               </li>
-              <li className="dropdowns">
+              <li className="dropdowns" style={{fontSize: "13px"}}>
                 BRACELETS & BANGLES
                 <div className="submenu">
                   <div className="sub-left">
@@ -535,7 +541,7 @@ import { Link } from "react-router-dom";
                   />
                 </div>
               </li>
-              <li className="dropdowns">
+              <li className="dropdowns" style={{fontSize: "13px"}}>
                 SOLITAIRES
                 <div className="submenu">
                   <div className="sub-left">
@@ -697,7 +703,7 @@ import { Link } from "react-router-dom";
                   />
                 </div>
               </li>
-              <li className="dropdowns">
+              <li className="dropdowns" style={{fontSize: "13px"}}>
                 MANGALSUTRA
                 <div className="submenu">
                   <div className="sub-left">
@@ -860,19 +866,19 @@ import { Link } from "react-router-dom";
                 </div>
               </li>
   
-              <li className="dropdowns">
+              <li className="dropdowns" style={{fontSize: "13px"}}>
                 OTHER JEWELLERY
                 {/* <div className="submenu">
                   <div className="subCat"></div>
                 </div> */}
               </li>
-              <li className="dropdowns">
+              <li className="dropdowns" style={{fontSize: "13px"}}>
                 GIFTING
                 {/* <div className="submenu">
                   <div className="subCat"></div>
                 </div> */}
               </li>
-              <li className="dropdowns">
+              <li className="dropdowns" style={{fontSize: "13px"}}>
                 BEST SELLERS
                 {/* <div className="submenu">
                   <div className="subCat"></div>
