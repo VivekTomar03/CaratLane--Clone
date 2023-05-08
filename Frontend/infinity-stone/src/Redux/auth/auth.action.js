@@ -28,13 +28,13 @@ try {
     console.log(res, "res from login")
     if(res.data.token){
 
-        dispatch(loginSuccessAction({token:res.data.token,email:userData.email, admin:res.data.admin, name:res.data.user.name}));
-        return { "status": res.status, "msg": res.data.msg };
+        dispatch(loginSuccessAction({token:res.data?.token,email:userData.email, admin:res?.data?.admin, name:res.data?.user?.name}));
+        return { "status": res.status, "msg": res.data?.msg };
 
     }
     else{
       dispatch(loginFailureAction());
-      return { "status": res.status, "msg": res.data.msg };
+      return { "status": res.status, "msg": res.data?.msg };
     }
 } catch (error) {
     console.log(error);
