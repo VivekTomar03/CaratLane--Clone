@@ -27,6 +27,7 @@ export const getCartProducts = () => (dispatch) => {
   return axios
     .get("https://red-worried-dove.cyclic.app/cart")
     .then((res) => {
+      
       dispatch(getCartProductsSuccessAction(res.data));
     })
     .catch((err) => {
