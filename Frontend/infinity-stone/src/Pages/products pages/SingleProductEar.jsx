@@ -1,7 +1,7 @@
 import {
     Box,
     Button,
-    Checkbox,
+    Checkbox,  
     Flex,
     Image,
     Input,
@@ -53,7 +53,7 @@ const slides=[
   ]
 
 
-const SingleProduct = () => {
+const SingleProducteEar = () => {
 
     const [data,setData]=useState([]);
     const [load,setLoad]=useState(false);
@@ -240,5 +240,5 @@ const SingleProduct = () => {
   
 }
 
-export default SingleProduct
+export default SingleProducteEar
 

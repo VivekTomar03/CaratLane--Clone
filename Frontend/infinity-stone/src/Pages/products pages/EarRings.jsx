@@ -4,14 +4,15 @@ import { Flex, Spacer,Select,SimpleGrid,Spinner } from '@chakra-ui/react'
 import { Link } from '@chakra-ui/react'
 import { useState ,useEffect} from 'react'
 import Sidebar from './SideBar'
-import ProductsCard from './ProductCard'
+// import ProductsCard from './ProductCard'
+import EarCard from "./EarCard"
 import { useSelector,useDispatch } from 'react-redux'
 import { useLocation, useSearchParams } from "react-router-dom";
+   
+import { getProductsornaments2 } from '../../Redux/ProductReducer/action'
 
-import { getProductsornaments } from '../../Redux/ProductReducer/action'
 
-
-const Ring = () => {
+const EarRings = () => {
   const dispatch =useDispatch()
   const {products,isLoading}=useSelector((store)=>store.productsReducer)
   let [searchParams,setSearchParams] = useSearchParams();
@@ -37,7 +38,7 @@ const Ring = () => {
   useEffect(()=>{ 
  
   
-dispatch(getProductsornaments(obj))
+dispatch(getProductsornaments2(obj))
   },[location.search,page,sort])
 
    
@@ -110,7 +111,7 @@ dispatch(getProductsornaments(obj))
  <Box  m="30px"  bg="white" w={["60%","70%","80%","90%"]} borderRadius={"20px"}>
     {isLoading?<Spinner/>:<SimpleGrid columns={{base:1,md:2,lg:3,xl:3}} spacing={7}>
         {products.map((el)=>
-      <ProductsCard key={el._id} data={el} />)}
+      <EarCard key={el._id} data={el} />)}
         </SimpleGrid>}
         </Box>
 {/* </div> */}
@@ -119,13 +120,11 @@ dispatch(getProductsornaments(obj))
 
   </Flex>
   <br />
- 
-<Box marginLeft={"70px"}>
+  <Box marginLeft={"70px"}>
 <Button disabled={page===1} bg='violet' mr="10px" w={["10px","20px","30px","80px"]} fontSize={["5px","6px","8px","12px"]} h={["25px","27px","30px","40px"]} onClick={()=>setPage(page-1)} >Previous</Button>
 <Button  w={["10px","20px","30px","80px"]} fontSize={["5px","6px","8px","12px"]} h={["25px","27px","30px","40px"]}>{page}</Button>
 <Button  bg="violet" ml="10px" w={["10px","20px","30px","80px"]} fontSize={["5px","6px","8px","12px"]} h={["25px","27px","30px","40px"]} onClick={()=>setPage(page+1)}>Next</Button> 
 </Box>
-
 <br />
 <br />
 </div>      
@@ -133,4 +132,4 @@ dispatch(getProductsornaments(obj))
   )
 }
 
-export default Ring
+export default EarRings

@@ -7,12 +7,14 @@ import SingleProduct from '../Pages/products pages/SingleProduct'
 import Cart from '../Pages/Cartpage/Cart'
 import Payment from '../Pages/Payment/Payment'
 import Login from '../Components/Login/Login'
-import SignUp from '../Components/SignUp/SignUp'
+import SignUp from '../Components/SignUp/SignUp' 
 import AdminMain from '../Pages/Admin/AdminMain'
 import RingsMange from '../Pages/Admin/RingsMange'
 import EaringManage from '../Pages/Admin/EaringManage'
 import Order from '../Pages/Admin/Order'
 import UserPage from '../Pages/Admin/UserPage'
+import EarRings from '../Pages/products pages/EarRings'
+import SingleProducteEar from '../Pages/products pages/SingleProductEar'
 
 const AllRoutes = () => {
   return (
@@ -20,9 +22,9 @@ const AllRoutes = () => {
       <Routes>
             <Route path='/' element={<Home/>}></Route>
             <Route path='/rings' element={<Ring/>}></Route>
-            <Route path='/earings' element={<h1>Earings</h1>}></Route>
-            <Route path='/singalproduct/:id' element={<SingleProduct/>}></Route>
-            <Route path='/singalproductearrings/:id' element={<h1>Earings</h1>}></Route>
+            <Route path='/earings' element={<EarRings/>}></Route>
+            <Route path='/singleproduct/:id' element={<SingleProduct/>}></Route>
+            <Route path='/singalproductear/:id' element={<SingleProducteEar/>}></Route>
             <Route path='/cart' element={<Cart/>}></Route>
             <Route path='/login' element={<Login/>}></Route>
             <Route path='/payment' element={<Payment/>}></Route>
