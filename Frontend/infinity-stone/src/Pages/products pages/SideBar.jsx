@@ -274,7 +274,7 @@ setStatus9(!status9)
 
 
 <Box style={{alignItems:"center"}}>
- <Text fontSize={["12px","13px","15px","16px"]} textAlign="left" paddingLeft={["5px","7px","9px","15px"]} paddingTop="20px" color="#4E5163" onClick={handelClick6}> <Link to="#"><b>Ring size</b> {status6?"↑":"↓"}</Link></Text>
+ <Text fontSize={["12px","13px","15px","16px"]} textAlign="left" paddingLeft={["5px","7px","9px","15px"]} paddingTop="20px" color="#4E5163" onClick={handelClick6}> <Link to="#"><b>Germ Stone</b> {status6?"↑":"↓"}</Link></Text>
 <br />
 {status6?
 <CheckboxGroup>
