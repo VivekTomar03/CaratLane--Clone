@@ -74,7 +74,7 @@ import {
           shadow="lg"
           position="relative">
         
-  <NavLink to={`/SingleProduct/${data.id}`} >
+  <NavLink to={`/singleproduct/${data._id}`} >
           <Image
             src={data.imageurl}
             alt={`Picture of ${data.title}`}
