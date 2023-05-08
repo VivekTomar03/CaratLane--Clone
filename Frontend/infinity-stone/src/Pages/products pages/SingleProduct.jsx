@@ -43,7 +43,7 @@ const slides=[
     {url:"https://cdn.caratlane.com/media/catalog/product/cache/6/image/480x480/9df78eab33525d08d6e5fb8d27136e95/J/R/JR04252-YGP900_11_listfront.jpg",title:"img2"},
 
   ]
-  const slides2=[
+  const slides2=[  
     {url:"https://cdn.caratlane.com/media/catalog/product/cache/6/image/480x480/9df78eab33525d08d6e5fb8d27136e95/J/R/JR03647-YGP600_11_listfront.jpg",title:"img1"},
     {url:"https://cdn.caratlane.com/media/catalog/product/cache/6/image/480x480/9df78eab33525d08d6e5fb8d27136e95/J/R/JR07752-1YP600_11_listfront.jpg",title:"img2"},
 
@@ -99,16 +99,7 @@ const SingleProduct = () => {
 
             </Box>
             <div className='ssld1'><Imageslider slides={slides} slides2={slides2} slides1={slides1}/></div>
-            {/* <Flex mt={10}>
-              <Image
-                src="https://i.ibb.co/stBL1WJ/Screenshot-20230122-010858.png"
-                w={"15%"}
-              />
-              <Image
-                src="https://i.ibb.co/kydgvgW/Screenshot-20230122-010853.png"
-                w={"15%"}
-              />
-            </Flex> */}
+
           </Box>
           <Box w="60%" pl={5} pt="10px">
             <Box>
