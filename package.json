@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "@chakra-ui/icons": "^2.0.19",
-    "react-slick": "^0.29.0",
-    "swiper": "^9.2.4"
-  }
-}

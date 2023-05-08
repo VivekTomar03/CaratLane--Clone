@@ -7,18 +7,33 @@ import {
   Image,
   Heading,
   Center,
+  SimpleGrid,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import Chart from "../../Components/Chart";
 
 import Chart2 from "../../Components/Chart2";
+import SimpleSidebar from "./sidebar";
+import Typewriter from 'typewriter-effect';
 const AdminMain = () => {
   return (
-    <Box w={"100%"} bg={"#8BF5FA"} mt={"100px"} className="Main">
-      <Center m={5}>
+    <Box bg={"#8BF5FA"}  mt={"100px"} className="Main">
+       <Flex  gap={-10}>
+       
+         <Box  display={{base:"none" , md:"block", lg:"block"}} > <SimpleSidebar/></Box>
+       
+         <Box m={"auto"}>
+         <Center m={5}>
         <Heading color="tomato" fontSize="4xl" as={"b"}>
           {" "}
-          WelCome To Admin Portal
+         
+          <Typewriter
+  options={{
+    strings: ['Welcome To Admin Portal'],
+    autoStart: true,
+    loop: true,
+  }}
+/>
         </Heading>
       </Center>
       <Grid
@@ -31,9 +46,9 @@ const AdminMain = () => {
           xl: "repeat(2,1fr)",
         }}
       >
-        <Chart />
+       <Chart />
 
-        <Chart2 />
+       <Chart2 />
       </Grid>
 
       <Box className="RightPart">
@@ -44,6 +59,9 @@ const AdminMain = () => {
           xl: "repeat(3,1fr)",
         }} gap={10}>
           <Card
+            data-aos="flip-left"
+            data-aos-easing="ease-out-cubic"
+            data-aos-duration="1000"
             color={"white"}
             bg={"#150E56"}
             padding="20px"
@@ -66,6 +84,9 @@ const AdminMain = () => {
           </Card>
 
           <Card
+          data-aos="flip-right"
+          data-aos-easing="ease-out-cubic"
+          data-aos-duration="2000"
             color={"white"}
             bg={"#57C5B6"}
             padding="20px"
@@ -88,6 +109,9 @@ const AdminMain = () => {
           </Card>
 
           <Card
+          data-aos="flip-left"
+          data-aos-easing="ease-out-cubic"
+          data-aos-duration="2000"
             color={"white"}
             bg={"#2D5C7F"}
             padding="20px"
@@ -109,6 +133,9 @@ const AdminMain = () => {
           </Card>
 
           <Card
+          data-aos="flip-right"
+          data-aos-easing="ease-out-cubic"
+          data-aos-duration="2000"
             color={"white"}
             bg={"orange"}
             padding="20px"
@@ -131,7 +158,12 @@ const AdminMain = () => {
             </Center>
           </Card>
 
-          <Card color={"white"} bg={"#FF004D"} padding="20px">
+          <Card 
+           data-aos="flip-right"
+           data-aos-easing="ease-out-cubic"
+           data-aos-duration="2000"
+          color={"white"} bg={"#FF004D"} padding="20px">
+            
             <Flex justifyContent={"space-around"}>
               <Text fontWeight={"bold"} fontSize={"25px"} mt={5}>
                 {" "}
@@ -151,6 +183,8 @@ const AdminMain = () => {
         </Grid>
       </Box>
 
+         </Box>
+       </Flex>
       
     </Box>
   );
