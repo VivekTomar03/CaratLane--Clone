@@ -1,0 +1,29 @@
+#emptyCart {
+    border: 0px solid red;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+}
+
+#emptyCart>img {
+    border: 0px solid red;
+    width: 60%;
+}
+
+#emptyCart>p {
+    border: 0px solid red;
+    margin-top: -10px;
+    font-size: large;
+}
+
+#emptyCart>button {
+    margin-top: 20px;
+    padding: 10px;
+    width: 100%;
+    font-size: larger;
+    border-radius: 3px;
+    background: linear-gradient(to right, #d158e8, #9062f9);
+    border: none;
+}
