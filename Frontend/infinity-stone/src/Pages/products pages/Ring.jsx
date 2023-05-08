@@ -1,24 +1,60 @@
 import React from 'react'
-import { Image,Box,Button,Text,Heading,Stack,Card,CardBody,ButtonGroup,Divider,CardFooter } from '@chakra-ui/react'
-import { Flex, Spacer,Select } from '@chakra-ui/react'
+import { Image,Box,Button,Text } from '@chakra-ui/react'
+import { Flex, Spacer,Select,SimpleGrid,Spinner } from '@chakra-ui/react'
 import { Link } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useState ,useEffect} from 'react'
 import Sidebar from './SideBar'
-// import ProductsCard from './ProductCard'
+import ProductsCard from './ProductCard'
+import { useSelector,useDispatch } from 'react-redux'
+import { useLocation, useSearchParams } from "react-router-dom";
+
+import { getProductsornaments } from '../../Redux/ProductReducer/action'
 
 
 const Ring = () => {
+  const dispatch =useDispatch()
+  const {products,isLoading}=useSelector((store)=>store.productsReducer)
+  let [searchParams,setSearchParams] = useSearchParams();
+  const initialSort=searchParams.get("sort")
+  const [sort,setSort]=useState(initialSort||"")
+    const location=useLocation()
+    const [page,setPage]=useState(1)
 
+
+    let obj={
+      params:{
+       
+          price:searchParams.getAll("price"),
+          size:searchParams.getAll("size"),
+          type:searchParams.get("sort") && "price",
+          sort:searchParams.get("sort"),
+          page:page,
+          limit:9,
+      }
+  }
+ 
+
+  useEffect(()=>{ 
+ 
+  
+dispatch(getProductsornaments(obj))
+  },[location.search,page,sort])
 
    
-    
+  const handelCh=(e)=>{
+    let obj1={
+      sort
+  }
+    setSearchParams(obj1)
+    setSort(e.target.value)
+  }
 
   return (
     <div>
 
      {/* <Box boxSize='sm'> */}
-  <Image src='https://cdn.caratlane.com/media/static/images/V4/2023/CL/04-APR/AppBanner/Earring/01/Desktop_1920x560_toplisting.jpg' alt='Dan Abramov' width={["100%"]} />
-
+  <Image src='https://banner.caratlane.com/live-images/10c2cf82f2ad425b960f2587933652a7.jpg' alt='Dan Abramov' width={["100%"]} />
+ 
 <Box boxSize='sm' bg="pink" h={["110px"]} w={"100%"}>
  <Box w={"95%"}  margin={"auto"} >
  <Flex>
@@ -41,10 +77,10 @@ const Ring = () => {
  <Spacer /> */}
      <Button w='75px' h='40px' bg="white"  _hover={{bg:"blue",color:"white"}} fontSize={["7px","9px","11px","13px"]}  marginLeft={["7px","10px","15px","20px"]} borderRadius={"10px"} > <Link>New In</Link></Button>
      <Spacer />
-     <Select placeholder='Select the type' w={{  sm:"7%", md: "20%", lg: "20%" ,xl:"20%"}} fontSize={["7px","9px","11px","13px"]} bg="white" ml="10px" >
+     <Select placeholder='Select the type' w={{  sm:"7%", md: "20%", lg: "20%" ,xl:"20%"}} fontSize={["7px","9px","11px","13px"]} bg="white" ml="10px" onChange={handelCh} >
   <option value='Discount'>Discount</option>
-  <option value='asc'>Price:High to Low</option>
-  <option value='dsc'>Price:Low to High</option>
+  <option value='desc'>Price:High to Low</option>
+  <option value='asc'>Price:Low to High</option>
   <option value='Latest'>Latest</option>
   <option value='Featured'>Featured</option>
 </Select>
@@ -60,15 +96,36 @@ const Ring = () => {
 </Box>
 <div>
   <Flex>
-  <Box boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px" m="30px"  bg="white" w={{  sm:"130px", md: "250px", lg: "280px" ,xl:"300px"}} borderRadius={"20px"}>
+  <Box boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px" m="30px"  bg="white" w={["15%","20%","28%","32%"]} borderRadius={"20px"}>
     <Sidebar/>
   </Box>
 
 
 
 {/* Products Detail */}
-{/* <ProductsCard/> */}
+
+<br />
+ 
+ {/* <div className="mediaquery"> */}
+ <Box  m="30px"  bg="white" w={["60%","70%","80%","90%"]} borderRadius={"20px"}>
+    {isLoading?<Spinner/>:<SimpleGrid columns={{base:1,md:2,lg:3,xl:3}} spacing={7}>
+        {products.map((el)=>
+      <ProductsCard key={el._id} data={el} />)}
+        </SimpleGrid>}
+        </Box>
+{/* </div> */}
+
+<br />
+
   </Flex>
+  <br />
+  <div>
+<Button disabled={page===1} bg='violet' mr="10px" w={["10px","20px","30px","80px"]} fontSize={["5px","6px","8px","12px"]} h={["25px","27px","30px","40px"]} onClick={()=>setPage(page-1)} >Previous</Button>
+<Button  w={["10px","20px","30px","80px"]} fontSize={["5px","6px","8px","12px"]} h={["25px","27px","30px","40px"]}>{page}</Button>
+<Button  bg="violet" ml="10px" w={["10px","20px","30px","80px"]} fontSize={["5px","6px","8px","12px"]} h={["25px","27px","30px","40px"]} onClick={()=>setPage(page+1)}>Next</Button> 
+</div>
+<br />
+<br />
 </div>      
     </div>
   )

@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { Image,Box,Button,Text,Heading,Stack,Card,CardBody,ButtonGroup,Divider,CardFooter, Input } from '@chakra-ui/react'
 import { Flex, Spacer,Select } from '@chakra-ui/react'
@@ -9,12 +10,9 @@ import { useEffect } from 'react';
 import { Checkbox,  FormLabel, CheckboxGroup } from '@chakra-ui/react'
 import { Radio, RadioGroup } from '@chakra-ui/react'
 
-
-const sty= {height:"16px",width:"15px",marginLeft:"-30px"}
-const sty11= {height:"16px",width:"15px",marginLeft:"-69px"}
-const sty1={fontSize:"16px",textAlign:"left",paddingLeft:"15px",paddingTop:"20px",color:"#4E5163"}
-
 const Sidebar = () => {
+
+
   const [status1,setStatus1]=useState(false)
   const [status2,setStatus2]=useState(false)   
 const [status3,setStatus3]=useState(false)
@@ -26,62 +24,53 @@ const [status8,setStatus8]=useState(false)
 const [status9,setStatus9]=useState(false)
 
 const [searchParams, setSearchParams] = useSearchParams();
-const initialparam=searchParams.getAll("brand")
-const initialcategory=searchParams.getAll("category")
-const initialname=searchParams.getAll("name")
-const initialOrder=searchParams.get("order")
-const [brand,setBrand]=useState(initialparam||[])
-const [category,setCategory]=useState(initialcategory||[])
-const [name,setName]=useState(initialname||[])
-const [order,setOrder]=useState(initialOrder||"")
+
+const initialprice=searchParams.getAll("price")
+const initialsize=searchParams.getAll("size")
+const [price,setPrice]=useState(initialprice||[])
+const [name,setName]=useState("")
+
+const [size,setSize]=useState(initialsize||[])
 
 
-const handelChange1=(e)=>{
-let newarr=[...brand]
-const value=e.target.value
-if(newarr.includes(value)){
-    newarr=newarr.filter((el)=>el!==value)
-}else{
-    newarr.push(value)
-}
-setBrand(newarr)
-
-}
 
 
 const handelChange2=(e)=>{
-let newarr=[...name]
-const value=e.target.value
-if(newarr.includes(value)){
+  let newarr=[...price]
+  const value=e.target.value
+  if(newarr.includes(value)){
     newarr=newarr.filter((el)=>el!==value)
 }else{
-    newarr.push(value)
+  newarr.push(value)
 }
-setName(newarr)
-
-}
-
-
-
-
-const handelCh=(e)=>{
-setOrder(e.target.value)
+setPrice(newarr)
 }
 
-const handelCh1=(e)=>{
-setCategory(e.target.value)
+
+const handelChange3=(e)=>{
+  let newarr=[...size]
+  const value=e.target.value
+  if(newarr.includes(value)){
+    newarr=newarr.filter((el)=>el!==value)
+}else{
+  newarr.push(value)
 }
+setSize(newarr)
+}
+
+
 
 
 useEffect(()=>{
-let obj={
-    brand,category,name
-}
-order && (obj.order=order)
-setSearchParams(obj)
-}, [brand,order,category,name])
+  let obj={
+      price,size
+  }
+ 
+  setSearchParams(obj)
+}, [price,size])
 
-   
+
+    
   const handelClick1=()=>{
 setStatus1(!status1)
 }
@@ -126,20 +115,20 @@ setStatus9(!status9)
   <Text fontSize={["10px","12px","15px","17px"]} fontFamily="inherit" textAlign="center" paddingTop="10px" paddingBottom="10px">Filter By</Text></Box>
 
 <Box style={{alignItems:"center"}}>
- <Text fontSize={["12px","13px","15px","16px"]} textAlign="left" paddingLeft={["5px","7px","9px","15px"]} paddingTop="20px" color="#4E5163" onClick={handelClick1}> <Link to="#"><b>Price</b> {status1?"⬆":"⬇"}</Link></Text>
+ <Text fontSize={["12px","13px","15px","16px"]} textAlign="left" paddingLeft={["5px","7px","9px","15px"]} paddingTop="20px" color="#4E5163" onClick={handelClick1}> <Link to="#"><b>Price</b> {status1?"↑":"↓"}</Link></Text>
 <br />
 {status1?
 <CheckboxGroup>
-<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"10%"} onChange={handelChange2} checked={name.includes("10%")} ><Text fontSize={["9px","12px","14px","15px"]} >Under ₹5,000 (64)</Text></Checkbox><br />
-<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"20%"} onChange={handelChange2} checked={name.includes("10%")} ><Text fontSize={["9px","12px","14px","15px"]} >.₹ 5,001  - ₹10,000</Text></Checkbox><br />
-<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"30%"} onChange={handelChange2} checked={name.includes("10%")} ><Text fontSize={["9px","12px","14px","15px"]} >₹10,001  - ₹15,000</Text></Checkbox><br />
-<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"40%"} onChange={handelChange2} checked={name.includes("10%")} ><Text fontSize={["9px","12px","14px","15px"]} >₹15,001  - ₹20,000</Text></Checkbox><br />
-<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"50%"} onChange={handelChange2} checked={name.includes("10%")} ><Text fontSize={["9px","12px","14px","15px"]} >₹20,001  - ₹30,000</Text></Checkbox><br />
-<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"60%"} onChange={handelChange2} checked={name.includes("10%")} ><Text fontSize={["9px","12px","14px","15px"]} >₹30,001  - ₹40,000</Text></Checkbox><br />
-<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"70%"} onChange={handelChange2} checked={name.includes("10%")} ><Text fontSize={["9px","12px","14px","15px"]} >₹40,001  - ₹50,000</Text></Checkbox><br />
-<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"80%"} onChange={handelChange2} checked={name.includes("10%")} ><Text fontSize={["9px","12px","14px","15px"]} >₹50,001  - ₹75,000</Text></Checkbox><br />
-<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"90%"} onChange={handelChange2} checked={name.includes("10%")} ><Text fontSize={["9px","12px","14px","15px"]} >₹75,001  - ₹99,000 </Text></Checkbox><br />
-<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"100%"} onChange={handelChange2} checked={name.includes("10%")} ><Text fontSize={["9px","12px","14px","15px"]} >Above ₹99,000 (64)</Text></Checkbox><br />
+<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"5000"} onChange={handelChange2} checked={price.includes("5000")} ><Text fontSize={["9px","12px","14px","15px"]} >Under ₹5,000 (64)</Text></Checkbox><br />
+<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"10000"} onChange={handelChange2} checked={price.includes("10000")} ><Text fontSize={["9px","12px","14px","15px"]} >.₹ 5,001  - ₹10,000</Text></Checkbox><br />
+<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"15000"} onChange={handelChange2} checked={price.includes("15000")} ><Text fontSize={["9px","12px","14px","15px"]} >₹10,001  - ₹15,000</Text></Checkbox><br />
+<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"20000"} onChange={handelChange2} checked={price.includes("20000")} ><Text fontSize={["9px","12px","14px","15px"]} >₹15,001  - ₹20,000</Text></Checkbox><br />
+<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"30000"} onChange={handelChange2} checked={price.includes("30000")} ><Text fontSize={["9px","12px","14px","15px"]} >₹20,001  - ₹30,000</Text></Checkbox><br />
+<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"40000"} onChange={handelChange2} checked={price.includes("40000")} ><Text fontSize={["9px","12px","14px","15px"]} >₹30,001  - ₹40,000</Text></Checkbox><br />
+<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"50000"} onChange={handelChange2} checked={price.includes("50000")} ><Text fontSize={["9px","12px","14px","15px"]} >₹40,001  - ₹50,000</Text></Checkbox><br />
+<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"75000"} onChange={handelChange2} checked={price.includes("75000")} ><Text fontSize={["9px","12px","14px","15px"]} >₹50,001  - ₹75,000</Text></Checkbox><br />
+<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"99000"} onChange={handelChange2} checked={price.includes("99000")} ><Text fontSize={["9px","12px","14px","15px"]} >₹75,001  - ₹99,000 </Text></Checkbox><br />
+<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"99001"} onChange={handelChange2} checked={price.includes("99001")} ><Text fontSize={["9px","12px","14px","15px"]} >Above ₹99,000 (64)</Text></Checkbox><br />
 
 
 
@@ -152,10 +141,13 @@ setStatus9(!status9)
 <hr />
 
 
+
+
+
 {/* Category */}
 
 <Box style={{alignItems:"center"}}>
- <Text fontSize={["12px","13px","15px","16px"]} textAlign="left" paddingLeft={["5px","7px","9px","15px"]} paddingTop="20px" color="#4E5163" onClick={handelClick2}> <Link to="#"><b>Product Type</b> {status3?"⬆":"⬇"}</Link></Text>
+ <Text fontSize={["12px","13px","15px","16px"]} textAlign="left" paddingLeft={["5px","7px","9px","15px"]} paddingTop="20px" color="#4E5163" onClick={handelClick2}> <Link to="#"><b>Product Type</b> {status2?"↑":"↓"}</Link></Text>
 <br />
 {status2?
 <CheckboxGroup>
@@ -184,7 +176,7 @@ setStatus9(!status9)
 
 
 <Box style={{alignItems:"center"}}>
- <Text fontSize={["12px","13px","15px","16px"]} textAlign="left" paddingLeft={["5px","7px","9px","15px"]} paddingTop="20px" color="#4E5163" onClick={handelClick3}> <Link to="#"><b>Metal</b> {status3?"⬆":"⬇"}</Link></Text>
+ <Text fontSize={["12px","13px","15px","16px"]} textAlign="left" paddingLeft={["5px","7px","9px","15px"]} paddingTop="20px" color="#4E5163" onClick={handelClick3}> <Link to="#"><b>Metal</b> {status3?"↑":"↓"}</Link></Text>
 <br />
 {status3?
 <CheckboxGroup>
@@ -216,17 +208,17 @@ setStatus9(!status9)
 
 
 <Box style={{alignItems:"center"}}>
- <Text fontSize={["12px","13px","15px","16px"]} textAlign="left" paddingLeft={["5px","7px","9px","15px"]} paddingTop="20px" color="#4E5163" onClick={handelClick4}> <Link to="#"><b>Ring size</b> {status4?"⬆":"⬇"}</Link></Text>
+ <Text fontSize={["12px","13px","15px","16px"]} textAlign="left" paddingLeft={["5px","7px","9px","15px"]} paddingTop="20px" color="#4E5163" onClick={handelClick4}> <Link to="#"><b>Ring size</b> {status4?"↑":"↓"}</Link></Text>
 <br />
 {status4?
 <CheckboxGroup>
-<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"10%"} onChange={handelChange2} checked={name.includes("10%")} ><Text fontSize={["9px","12px","14px","15px"]} >18 KT Yellow(725)</Text></Checkbox><br />
-<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"20%"} onChange={handelChange2} checked={name.includes("10%")} ><Text fontSize={["9px","12px","14px","15px"]} >18 KT White(591)</Text></Checkbox><br />
-<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"30%"} onChange={handelChange2} checked={name.includes("10%")} ><Text fontSize={["9px","12px","14px","15px"]} >18 KT Rose(201)</Text></Checkbox><br />
-<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"40%"} onChange={handelChange2} checked={name.includes("10%")} ><Text fontSize={["9px","12px","14px","15px"]} >18 KT Two Tone(78)</Text></Checkbox><br />
-<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"50%"} onChange={handelChange2} checked={name.includes("10%")} ><Text fontSize={["9px","12px","14px","15px"]} >18 KT Three Tone(10)</Text></Checkbox><br />
-<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"60%"} onChange={handelChange2} checked={name.includes("10%")} ><Text fontSize={["9px","12px","14px","15px"]} >14 KT Yellow(1400)</Text></Checkbox><br />
-<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"70%"} onChange={handelChange2} checked={name.includes("10%")} ><Text fontSize={["9px","12px","14px","15px"]} >14 KT Two Tone(69)</Text></Checkbox><br />
+<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"5"} onChange={handelChange3} checked={name.includes("5")} ><Text fontSize={["9px","12px","14px","15px"]} >5</Text></Checkbox><br />
+<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"6"} onChange={handelChange3} checked={name.includes("6")} ><Text fontSize={["9px","12px","14px","15px"]} >6</Text></Checkbox><br />
+<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"7"} onChange={handelChange3} checked={name.includes("7")} ><Text fontSize={["9px","12px","14px","15px"]} >7</Text></Checkbox><br />
+<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"8"} onChange={handelChange3} checked={name.includes("8")} ><Text fontSize={["9px","12px","14px","15px"]} >8</Text></Checkbox><br />
+<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"9"} onChange={handelChange3} checked={name.includes("9")} ><Text fontSize={["9px","12px","14px","15px"]} >9</Text></Checkbox><br />
+<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"10"} onChange={handelChange3} checked={name.includes("10")} ><Text fontSize={["9px","12px","14px","15px"]} >10</Text></Checkbox><br />
+<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"11"} onChange={handelChange3} checked={name.includes("11")} ><Text fontSize={["9px","12px","14px","15px"]} >11</Text></Checkbox><br />
 
 
 
@@ -250,7 +242,7 @@ setStatus9(!status9)
 
 
 <Box style={{alignItems:"center"}}>
- <Text fontSize={["12px","13px","15px","16px"]} textAlign="left" paddingLeft={["5px","7px","9px","15px"]} paddingTop="20px" color="#4E5163" onClick={handelClick5}> <Link to="#"><b>Bangle size</b> {status5?"⬆":"⬇"}</Link></Text>
+ <Text fontSize={["12px","13px","15px","16px"]} textAlign="left" paddingLeft={["5px","7px","9px","15px"]} paddingTop="20px" color="#4E5163" onClick={handelClick5}> <Link to="#"><b>Bangle size</b> {status5?"↑":"↓"}</Link></Text>
 <br />
 {status5?
 <CheckboxGroup>
@@ -282,7 +274,7 @@ setStatus9(!status9)
 
 
 <Box style={{alignItems:"center"}}>
- <Text fontSize={["12px","13px","15px","16px"]} textAlign="left" paddingLeft={["5px","7px","9px","15px"]} paddingTop="20px" color="#4E5163" onClick={handelClick6}> <Link to="#"><b>Ring size</b> {status6?"⬆":"⬇"}</Link></Text>
+ <Text fontSize={["12px","13px","15px","16px"]} textAlign="left" paddingLeft={["5px","7px","9px","15px"]} paddingTop="20px" color="#4E5163" onClick={handelClick6}> <Link to="#"><b>Ring size</b> {status6?"↑":"↓"}</Link></Text>
 <br />
 {status6?
 <CheckboxGroup>
@@ -307,40 +299,6 @@ setStatus9(!status9)
 
 </Box>
 
-{/* 
-Gemstone */}
-
-
-<hr />
-
-
-
-
-<Box style={{alignItems:"center"}}>
- <Text fontSize={["12px","13px","15px","16px"]} textAlign="left" paddingLeft={["5px","7px","9px","15px"]} paddingTop="20px" color="#4E5163" onClick={handelClick7}> <Link to="#"><b>Gemstone</b> {status7?"⬆":"⬇"}</Link></Text>
-
-{status7?
-<CheckboxGroup>
-<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"10%"} onChange={handelChange2} checked={name.includes("10%")} ><Text fontSize={["9px","12px","14px","15px"]} >18 KT Yellow(725)</Text></Checkbox><br />
-<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"20%"} onChange={handelChange2} checked={name.includes("10%")} ><Text fontSize={["9px","12px","14px","15px"]} >18 KT White(591)</Text></Checkbox><br />
-<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"30%"} onChange={handelChange2} checked={name.includes("10%")} ><Text fontSize={["9px","12px","14px","15px"]} >18 KT Rose(201)</Text></Checkbox><br />
-<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"40%"} onChange={handelChange2} checked={name.includes("10%")} ><Text fontSize={["9px","12px","14px","15px"]} >18 KT Two Tone(78)</Text></Checkbox><br />
-<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"50%"} onChange={handelChange2} checked={name.includes("10%")} ><Text fontSize={["9px","12px","14px","15px"]} >18 KT Three Tone(10)</Text></Checkbox><br />
-<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"60%"} onChange={handelChange2} checked={name.includes("10%")} ><Text fontSize={["9px","12px","14px","15px"]} >14 KT Yellow(1400)</Text></Checkbox><br />
-<Checkbox  size='md' marginLeft={["5px","2px","1px","0px"]} value={"70%"} onChange={handelChange2} checked={name.includes("10%")} ><Text fontSize={["9px","12px","14px","15px"]} >14 KT Two Tone(69)</Text></Checkbox><br />
-
-
-
-
-
-
-{/* height={["7px","13px","15px","16px"]} width={["5px","12px","14px","15px"]} */}
-</CheckboxGroup>:""}
-
-
-
-
-</Box>
 
     </Box>
   )
