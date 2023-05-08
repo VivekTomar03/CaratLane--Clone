@@ -31,7 +31,7 @@ import { useSelector,useDispatch } from 'react-redux'
 import Imageslider from "./Imageslider";
 
 const getdata=((id)=>{
-  return fetch(`https://red-worried-dove.cyclic.app/rings/${id}`).then((res)=>res.json());
+  return fetch(`https://red-worried-dove.cyclic.app/earrings/${id}`).then((res)=>res.json());
 });
 
 

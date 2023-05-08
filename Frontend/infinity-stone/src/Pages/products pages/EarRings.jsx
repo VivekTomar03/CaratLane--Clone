@@ -9,7 +9,9 @@ import EarCard from "./EarCard"
 import { useSelector,useDispatch } from 'react-redux'
 import { useLocation, useSearchParams } from "react-router-dom";
    
-import { getProductsornaments2 } from '../../Redux/ProductReducer/action'
+// import {getProductsornaments2 } from '../../Redux/ProductReducer/action'
+// import {getProductsornaments2} from "../../Redux/ProductReducer/action"
+import { getproductsornaments2 } from '../../Redux/ProductReducer/action'
 
 
 const EarRings = () => {
@@ -38,7 +40,7 @@ const EarRings = () => {
   useEffect(()=>{ 
  
   
-dispatch(getProductsornaments2(obj))
+dispatch(getproductsornaments2(obj))
   },[location.search,page,sort])
 
    
@@ -110,7 +112,7 @@ dispatch(getProductsornaments2(obj))
  {/* <div className="mediaquery"> */}
  <Box  m="30px"  bg="white" w={["60%","70%","80%","90%"]} borderRadius={"20px"}>
     {isLoading?<Spinner/>:<SimpleGrid columns={{base:1,md:2,lg:3,xl:3}} spacing={7}>
-        {products.map((el)=>
+        {products?.map((el)=>
       <EarCard key={el._id} data={el} />)}
         </SimpleGrid>}
         </Box>
@@ -120,7 +122,7 @@ dispatch(getProductsornaments2(obj))
 
   </Flex>
   <br />
-  <Box marginLeft={"70px"}>
+  <Box marginLeft={["100px","200px","300px","600px"]}>
 <Button disabled={page===1} bg='violet' mr="10px" w={["10px","20px","30px","80px"]} fontSize={["5px","6px","8px","12px"]} h={["25px","27px","30px","40px"]} onClick={()=>setPage(page-1)} >Previous</Button>
 <Button  w={["10px","20px","30px","80px"]} fontSize={["5px","6px","8px","12px"]} h={["25px","27px","30px","40px"]}>{page}</Button>
 <Button  bg="violet" ml="10px" w={["10px","20px","30px","80px"]} fontSize={["5px","6px","8px","12px"]} h={["25px","27px","30px","40px"]} onClick={()=>setPage(page+1)}>Next</Button> 
