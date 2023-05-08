@@ -11,13 +11,13 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import Chart from "../../Components/Chart";
-
+import {Link} from "react-router-dom"
 import Chart2 from "../../Components/Chart2";
 import SimpleSidebar from "./sidebar";
 import Typewriter from 'typewriter-effect';
 const AdminMain = () => {
   return (
-    <Box bg={"#8BF5FA"}  mt={"100px"} className="Main">
+    <Box bg={"#8BF5FA"}  mt={"170px"} className="Main">
        <Flex  gap={-10}>
        
          <Box  display={{base:"none" , md:"block", lg:"block"}} > <SimpleSidebar/></Box>
@@ -58,6 +58,7 @@ const AdminMain = () => {
           md: "repeat(2,1fr)",
           xl: "repeat(3,1fr)",
         }} gap={10}>
+          <Link to={"/admin/users"}>
           <Card
             data-aos="flip-left"
             data-aos-easing="ease-out-cubic"
@@ -83,7 +84,10 @@ const AdminMain = () => {
             </Center>
           </Card>
 
-          <Card
+          </Link>
+          
+           <Link to={"/admin/managerings"}>
+           <Card
           data-aos="flip-right"
           data-aos-easing="ease-out-cubic"
           data-aos-duration="2000"
@@ -108,7 +112,10 @@ const AdminMain = () => {
             </Center>
           </Card>
 
-          <Card
+           </Link>
+         
+           <Link to={"/admin/manageearrings"}>
+           <Card
           data-aos="flip-left"
           data-aos-easing="ease-out-cubic"
           data-aos-duration="2000"
@@ -131,7 +138,9 @@ const AdminMain = () => {
               Manage Earings{" "}
             </Text>
           </Card>
+           </Link>
 
+          <Link to={"/admin/order"}>
           <Card
           data-aos="flip-right"
           data-aos-easing="ease-out-cubic"
@@ -157,6 +166,7 @@ const AdminMain = () => {
               </Text>
             </Center>
           </Card>
+          </Link>
 
           <Card 
            data-aos="flip-right"

@@ -26,7 +26,7 @@ import {
 // import { IconType } from 'react-icons';
 // import { ReactText } from 'react';
  import stone from  "./InfiStone.png"
-
+import {Link as RouterLink} from "react-router-dom"
 const LinkItems= [
   { name: 'Home', icon: FiHome },
   { name: 'Admins', icon: FiTrendingUp },
@@ -38,7 +38,7 @@ const LinkItems= [
 export default function SimpleSidebar({ children }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <Box w={"100%"}  bg={useColorModeValue('gray.100', 'gray.900')}>
+    <Box  w={"100%"}  bg={useColorModeValue('gray.100', 'gray.900')}>
       <SidebarContent
         onClose={() => onClose}
         display={{ base: 'none', md: 'block' }}
@@ -77,7 +77,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
       h="full"
       {...rest}>
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-       <Image  data-aos="zoom-in" src={stone}/>
+       <RouterLink to={"/"}><Image  data-aos="zoom-in" src={stone}/></RouterLink>
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (

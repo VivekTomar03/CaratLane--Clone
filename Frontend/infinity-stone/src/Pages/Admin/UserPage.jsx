@@ -6,6 +6,7 @@ import AllUsers from "./AllUsers";
 import { useState } from "react";
 import SuspendAccount from "./SuspendAccount";
 import ReviewAccount from "./ReviewAccount";
+import { Link } from "react-router-dom";
 const data = {
   labels: [
     "Sunday",
@@ -55,7 +56,7 @@ const UserPage = () => {
           _hover={{ variant: "outline", colorScheme: "yellow" }}
           ml={"80%"}
         >
-          Admin
+        <Link to={"/admin"}>Aadmin</Link>
         </Button>
         <Tabs position="relative" variant="solid-rounded">
           <Center>
