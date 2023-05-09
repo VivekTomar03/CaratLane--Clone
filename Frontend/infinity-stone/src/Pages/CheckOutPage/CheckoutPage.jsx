@@ -51,22 +51,23 @@ const CheckoutPage = () => {
   //   });
   // }
 
-  const id = carts.map((el) => {
-    return el._id;
-  });
-  console.log("id",id[0]);
+  // const id = carts.map((el) => {
+  //   return el._id;
+  // });
+  // console.log("id",id[0]);
   const handleEmptyCart = () => {
-    console.log("hiii")
-    axios(`https://red-worried-dove.cyclic.app/cart/update/${id[0]}`, {
-      method: "patch",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      data: [],
-    }).then((res) => {
-console.log("res",res)
-      // dispatch(getCartProducts(token));
-    });
+     navigate("/success")
+//     console.log("hiii")
+//     axios(`https://red-worried-dove.cyclic.app/cart/update/${id[0]}`, {
+//       method: "patch",
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//       },
+//       data: [],
+//     }).then((res) => {
+// console.log("res",res)
+//       // dispatch(getCartProducts(token));
+//     });
   };
   return (
     <div className="main">

@@ -43,7 +43,7 @@
 
 .sizeQue {
     display: flex;
-    width: 50%;
+    width: 70%;
     border: 0px solid pink;
     justify-content: space-between;
     /* margin-top: -25px; */
