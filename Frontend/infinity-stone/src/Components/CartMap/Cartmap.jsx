@@ -5,6 +5,7 @@ import cart from "../../ImageData/cart.png";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getCartProducts } from "../../Redux/CartReducer/Action";
+import { Button } from "@chakra-ui/react";
 const Cartmap = ({
   imageurl,
   price,
@@ -41,7 +42,8 @@ const Cartmap = ({
         <p >JR07228-1YP900</p>
         <div className="sizeQue">
           <h5>Size: {size}</h5>
-          <h5>Quantity : <span onClick={()=>hanldequantity(-1)}>-</span> {quantity} <span  onClick={()=>hanldequantity(+1)}>+</span></h5>
+          <h5>Qty : <Button isDisabled={quantity===1}  _hover={{bg:"red", color:"white"}} color={"white"} bg={"red"} h={5}  onClick={()=>hanldequantity(-1)}>-</Button> {quantity} 
+          <Button isDisabled={quantity===5} ml={1} _hover={{bg:"green", color:"white"}} color={"white"} bg={"green"} h={5} onClick={()=>hanldequantity(+1)}>+</Button></h5>
         </div>
         <div>
           <p id="delivery">Check Delivery Date</p>
