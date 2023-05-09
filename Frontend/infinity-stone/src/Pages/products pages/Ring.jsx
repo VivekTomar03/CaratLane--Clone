@@ -148,6 +148,7 @@ const Ring = () => {
             </Select>
           </Flex>
         </Box>
+
       </Box>
       <br />
       <Box
@@ -238,6 +239,7 @@ const Ring = () => {
         <br />
         <br />
       </div>
+
     </div>
   );
 };

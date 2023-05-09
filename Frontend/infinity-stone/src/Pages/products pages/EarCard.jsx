@@ -47,17 +47,7 @@ import {
   
   function EarCard({data}) {
     // const [dat1,setData1]=useState([])
-    let arr1=JSON.parse(localStorage.getItem("items1"))||[]
-    console.log(arr1)
-     
-  
-    const handelChangeClick=()=>{
-      
-  arr1.push(data)
-  
-  
-   localStorage.setItem('items1', JSON.stringify(arr1));
-    }
+   
   
 
     return (

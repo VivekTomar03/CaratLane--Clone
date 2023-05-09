@@ -25,11 +25,17 @@ import { useSelector, useDispatch } from "react-redux";
 import Imageslider from "./Imageslider";
 import axios from "axios";
 
-const getdata = (id) => {
-  return fetch(`https://red-worried-dove.cyclic.app/rings/${id}`).then((res) =>
-    res.json()
-  );
-};
+
+const getdata=((id)=>{
+  return fetch(`https://red-worried-dove.cyclic.app/earrings/${id}`).then((res)=>res.json());
+});
+
+// const getdata = (id) => {
+//   return fetch(`https://red-worried-dove.cyclic.app/rings/${id}`).then((res) =>
+//     res.json()
+//   );
+// };
+
 
 const slides = [
   {
@@ -71,7 +77,7 @@ const SingleProducteEar = () => {
   const { token } = useSelector((store) => store.authReducer);
 
   const fetchdataurl = () => {
-    setLoad(true);
+    setLoad(true); 
     getdata(param.id)
       .then((data) => setData(data))
       .catch((err) => setErr(true))
@@ -92,20 +98,7 @@ const SingleProducteEar = () => {
         alert("added")
      }) 
      .catch((err) => console.log(err))
-    // fetch("https://red-worried-dove.cyclic.app/cart/add", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-type": "application/json",
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    //   body: JSON.stringify({title, price, originalprice, size, image, imageurl}),
-    // })
-    //   .then((res) => res.json())
-    //   .then((res) => {
-    //     console.log(res)
-    //     alert("added")
-    //   })
-    //   .catch((err) => console.log(err));
+
      
   };
 
