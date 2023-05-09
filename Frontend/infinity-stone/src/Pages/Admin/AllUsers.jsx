@@ -93,13 +93,13 @@ const AllUsers = ({ setsuspendacc, suspendacc }) => {
           <TableCaption>All Register User Data</TableCaption>
           <Thead>
             <Tr flexDirection={"column"}>
-              <Th>S.No</Th>
-              <Th>Name</Th>
-              <Th>Email</Th>
-              <Th>Password</Th>
-              <Th>Gender</Th>
-              <Th>Edit User</Th>
-              <Th>Delete User</Th>
+              <Th color={"white"}>S.No</Th>
+              <Th  color={"white"}>Name</Th>
+              <Th  color={"white"}>Email</Th>
+              <Th  color={"white"}>Password</Th>
+              <Th  color={"white"}>Gender</Th>
+              <Th  color={"white"}>Edit User</Th>
+              <Th  color={"white"}>Delete User</Th>
             </Tr>
           </Thead>
           <Tbody>

@@ -24,6 +24,7 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 const initstate = {
   imageurl: "",
   image: "",
@@ -39,12 +40,16 @@ const AllRings = ({ setsuspendacc, suspendacc }) => {
   const [data, setdata] = useState([]);
   const [showform, setshowform] = useState(false);
   const [page, setpage] = useState(1);
+  const {token} = useSelector((state) => state.authReducer)
+  const [allpage , setallpage] = useState(1)
+  let array = new Array(allpage).fill(0)
   const getRingsdata = () => {
     axios
       .get(`https://red-worried-dove.cyclic.app/rings?limit=10&page=${page}`)
       .then((res) => {
-        // console.log(res.data);
-        setdata(res.data);
+        console.log(res);
+        setallpage(res.data[1])
+        setdata(res.data[0].reverse());
       })
       .catch((err) => console.log(err));
   };
@@ -64,7 +69,7 @@ const AllRings = ({ setsuspendacc, suspendacc }) => {
         data: singeluser,
         headers: {
           "Content-Type": "application/json",
-          // token will come here
+          Authorization:`Bearer ${token}`
         },
       }
     )
@@ -78,7 +83,12 @@ const AllRings = ({ setsuspendacc, suspendacc }) => {
 
   const handleDelete = (id, el) => [
     axios
-      .delete(`https://red-worried-dove.cyclic.app/rings/delete/${id}`)
+      .delete(`https://red-worried-dove.cyclic.app/rings/delete/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization:`Bearer ${token}`
+        }
+      })
       .then((res) => {
         console.log(res);
         getRingsdata();
@@ -89,8 +99,14 @@ const AllRings = ({ setsuspendacc, suspendacc }) => {
 
   const handlesubmit1 = (e) => {
     e.preventDefault();
-    axios
-      .post("https://red-worried-dove.cyclic.app/rings/add", formdata)
+    axios("https://red-worried-dove.cyclic.app/rings/add", {
+        method: "post",
+        data: formdata,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization:`Bearer ${token}`
+        },
+      })
       .then((res) => {
         console.log(res);
         getRingsdata();
@@ -107,7 +123,7 @@ const AllRings = ({ setsuspendacc, suspendacc }) => {
 
   useEffect(() => {
     getRingsdata();
-  }, []);
+  }, [page]);
   return (
     <Box>
       <Button
@@ -214,19 +230,19 @@ const AllRings = ({ setsuspendacc, suspendacc }) => {
             <TableCaption>All Rings Products Data</TableCaption>
             <Thead>
               <Tr flexDirection={"column"}>
-                <Th>S.No</Th>
-                <Th>Title</Th>
-                <Th>Price</Th>
-                <Th>Discount Price</Th>
-                <Th>Image</Th>
-                <Th>Size</Th>
-                <Th>Edit User</Th>
-                <Th>Delete User</Th>
+                <Th  color={"white"}>S.No</Th>
+                <Th  color={"white"}>Title</Th>
+                <Th color={"white"}>Price</Th>
+                <Th  color={"white"}>Discount Price</Th>
+                <Th  color={"white"}>Image</Th>
+                <Th  color={"white"}>Size</Th>
+                <Th  color={"white"}>Edit User</Th>
+                <Th  color={"white"}>Delete User</Th>
               </Tr>
             </Thead>
             <Tbody>
               {data &&
-                data.reverse().map((el, i) => {
+                data.map((el, i) => {
                   return (
                     <Tr key={el._id}>
                       <Td>{i + 1}</Td>
@@ -299,8 +315,21 @@ const AllRings = ({ setsuspendacc, suspendacc }) => {
           </Table>
         </TableContainer>
       )}
-      <Box display={showform ? "none" : "block"}>
-        <Button
+      <Box  ml={"38%"} display={showform ? "none" : "block"}>
+         {
+             array && array.map((el,i) => (
+              <Button  bg="red.500"
+              py={2}
+              px={4}
+              ml={3}
+              rounded="md"
+              fontWeight="semibold"
+              color="white"
+              _hover={{ bg: "teal.600" }}
+              _focus={{ boxShadow: "outline" }} onClick={() => setpage(i+1)}>{i+1}</Button>
+             ))
+         }
+        {/* <Button
           bg="red.500"
           py={2}
           px={4}
@@ -331,7 +360,9 @@ const AllRings = ({ setsuspendacc, suspendacc }) => {
           onClick={() => setpage(page + 1)}
         >
           Next
-        </Button>
+        </Button> */}
+
+         
       </Box>
       <Box className="usereditdata Modal">
         <Modal isOpen={isOpen} onClose={onClose}>

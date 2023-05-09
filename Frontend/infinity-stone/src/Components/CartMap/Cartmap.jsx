@@ -2,6 +2,9 @@ import "./Cartmap.css";
 import React from "react";
 import rightCart from "../../ImageData/rightCart.png";
 import cart from "../../ImageData/cart.png";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { getCartProducts } from "../../Redux/CartReducer/Action";
 const Cartmap = ({
   imageurl,
   price,
@@ -9,9 +12,25 @@ const Cartmap = ({
   title,
   size,
   HandleCartDelete,
-  id,
+  _id,
   quantity,
 }) => {
+  const {token} = useSelector((state) => state.authReducer)
+  const dispatch = useDispatch()
+  const hanldequantity = (val) => {
+    
+
+
+    axios(`https://red-worried-dove.cyclic.app/cart/update/${_id}`, {
+      method:"patch", 
+      headers:{
+        Authorization:`Bearer ${token}`
+      },
+      data:{quantity:quantity+val}
+    }).then(() => {
+      dispatch(getCartProducts(token));
+    })
+  }
   return (
     <div className="details">
       <div className="imgDiv">
@@ -22,7 +41,7 @@ const Cartmap = ({
         <p >JR07228-1YP900</p>
         <div className="sizeQue">
           <h5>Size: {size}</h5>
-          <h5>Quantity : {quantity}</h5>
+          <h5>Quantity : <span onClick={()=>hanldequantity(-1)}>-</span> {quantity} <span  onClick={()=>hanldequantity(+1)}>+</span></h5>
         </div>
         <div>
           <p id="delivery">Check Delivery Date</p>
@@ -43,7 +62,7 @@ const Cartmap = ({
         </div>
       </div>
       <div className="btnDiv">
-        <button onClick={() => HandleCartDelete(id)}>Remove</button>
+        <button onClick={() => HandleCartDelete(_id)}>Remove</button>
         <button style={{ border: "1px solid #9062f9" }}>
           Move to Wishlist
         </button>

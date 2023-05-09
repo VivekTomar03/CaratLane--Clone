@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 // import Cartmap from "../../CartMap/Cartmap";
 import EmptyCart from "../../Components/EmptyCart/EmptyCard";
@@ -12,7 +12,7 @@ import {
 import Cartmap from "../../Components/CartMap/Cartmap";
 import cart from "../../ImageData/cart.png";
 const Cart = () => {
-  const [quantity1, setquantity] = useState(1);
+  // const [quantity1, setquantity] = useState(1); 
   const navigate = useNavigate();
   const { carts, isLoading, isError } = useSelector((store) => {
     return {
@@ -21,39 +21,34 @@ const Cart = () => {
       isError: store.cartReducer.isError,
     };
   }, shallowEqual);
+  const { token } = useSelector((state) => state.authReducer);
   console.log(carts);
   let dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getCartProducts());
+    dispatch(getCartProducts(token));
   }, []);
 
   let totalprice = 0;
   for (var i = 0; i < carts.length; i++) {
-    if (quantity1[i] === undefined) {
-      totalprice = totalprice + Number(carts[i].price);
-    } else {
-      totalprice += +carts[i].price * Number(quantity1[i]);
-      console.log(quantity1[i]);
+    
+      totalprice = totalprice + ( carts[i].quantity *carts[i].price);
+   
+     
     }
-    console.log(carts[i].price, quantity1[i]);
-  }
+    // console.log(carts[i].price, quantity1[i]);
+  
 
   let totalOriginPrice = 0;
   for (var i = 0; i < carts.length; i++) {
-    if (quantity1[i] === undefined) {
-      totalOriginPrice = totalOriginPrice + Number(carts[i].originalprice);
-    } else {
-      totalOriginPrice += +carts[i].originalprice * Number(quantity1[i]);
-      console.log(quantity1[i]);
-    }
-    console.log(carts[i].originalprice, quantity1[i]);
+    totalOriginPrice = totalOriginPrice + ( carts[i].quantity *carts[i].originalprice);
+     
   }
 
   let totalSavePrice = totalOriginPrice - totalprice;
 
   function HandleCartDelete(id) {
-    dispatch(deleteCartdata(id)).then(() => {
-      dispatch(getCartProducts());
+    dispatch(deleteCartdata(id, token)).then(() => {
+      dispatch(getCartProducts(token));
     });
   }
 
@@ -63,7 +58,7 @@ const Cart = () => {
         <EmptyCart />
       ) : (
         <div id="mainCart">
-          <div id="cart" style={{ border: "1px solid red" }}>
+          <div id="cart" style={{ padding: "5px", margin: "25px" }}>
             <div id="cartimg">
               <img src={cart} />
             </div>
@@ -77,19 +72,19 @@ const Cart = () => {
               carts.map((el) => {
                 return (
                   <Cartmap
-                    setquantity={setquantity}
-                    key={el.id}
+                    // setquantity={setquantity}
+                    key={el._id}
                     {...el}
-                    HandleCartDelete={HandleCartDelete}
+                    HandleCartDelete={() => HandleCartDelete(el._id)}
                   />
                 );
               })}
 
             {/* left */}
           </div>
-          <div id="bill">
+          <div id="bill" style={{ marginTop: "35px" }}>
             <div>
-              <img style={{ height: "130px", width: "100%"}} src={rightCart} />
+              <img style={{ height: "150px", width: "100%" }} src={rightCart} />
             </div>
             <h3>Order Summary</h3>
             <div className="billDetails">
@@ -120,8 +115,9 @@ const Cart = () => {
                   border: "none",
                   background: "linear-gradient(to right, #d158e8, #9062f9)",
                   marginTop: "10px",
-                }}>
-                Checkeout Securely
+                }}
+              >
+                <Link to={"/checkout"}> Checkeout Securely</Link>
               </button>
             </div>
           </div>
