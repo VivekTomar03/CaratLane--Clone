@@ -22,7 +22,7 @@ import {
   import { FiLayers,FiFolderPlus } from "react-icons/fi";
   import { Link } from "react-router-dom";
 
-
+import axios from "axios"
 import React from 'react'
 import { useState,useEffect } from 'react'
 import { useParams } from 'react-router-dom';
@@ -67,15 +67,20 @@ const SingleProduct = () => {
     })
 
     const handelChangeClick=()=>{
-      fetch("https://red-worried-dove.cyclic.app/cart/add",{
-        method:"POST",
+      const {title, price, originalprice, size, image, imageurl} = data
+      console.log(data);
+      axios.post("https://red-worried-dove.cyclic.app/cart/add" , {title, price, originalprice, size, image, imageurl} ,{
+       
         headers:{
-            "Content-type":"application/json",
-            "Authorization":`Bearer ${token}`
+           Authorization: `Bearer ${token}`
         },
-        body:JSON.stringify(data)
-    }).then(res=>res.json()).then(res=>console.log(res) ).catch((err)=>console.log(err))
-// alert("Product added to Cart")
+       
+      }).then((res) => {
+        console.log(res);
+         alert("added")
+      }) 
+      .catch((err) => console.log(err))
+ 
     }
   
     // console.log(data)

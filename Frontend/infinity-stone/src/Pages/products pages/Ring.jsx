@@ -120,7 +120,7 @@ dispatch(getProductsornaments(obj))
   </Flex>
   <br />
  
-<Box marginLeft={"70px"}>
+<Box marginLeft={["100px","200px","300px","600px"]}>
 <Button disabled={page===1} bg='violet' mr="10px" w={["10px","20px","30px","80px"]} fontSize={["5px","6px","8px","12px"]} h={["25px","27px","30px","40px"]} onClick={()=>setPage(page-1)} >Previous</Button>
 <Button  w={["10px","20px","30px","80px"]} fontSize={["5px","6px","8px","12px"]} h={["25px","27px","30px","40px"]}>{page}</Button>
 <Button  bg="violet" ml="10px" w={["10px","20px","30px","80px"]} fontSize={["5px","6px","8px","12px"]} h={["25px","27px","30px","40px"]} onClick={()=>setPage(page+1)}>Next</Button> 
