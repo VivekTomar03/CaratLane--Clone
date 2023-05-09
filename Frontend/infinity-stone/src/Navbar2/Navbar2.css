@@ -62,8 +62,9 @@ li {
   display: none;
   width: 1360px;
   height: 65vh;
-  border: 1px solid rgba(61, 61, 61, 0.199);
-  background-color: #f7f0ee;
+  margin-top: 10px;
+  /* border: 1px solid rgba(61, 61, 61, 0.199); */
+  background-color: #ffffff;
   left: 50%;
   transform: translateX(-50%);
   justify-content: space-between;
@@ -72,7 +73,7 @@ li {
   display: flex;
   justify-content: space-evenly;
   margin: auto;
-  background-color: #f7f0ee;
+  background-color: #ffffff;
   width: 65%;
 }
 .sub-col {

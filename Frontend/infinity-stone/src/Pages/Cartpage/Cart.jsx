@@ -14,7 +14,10 @@ import cart from "../../ImageData/cart.png";
 import { Spinner, useToast } from "@chakra-ui/react";
 const Cart = () => {
   // const [quantity1, setquantity] = useState(1);
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
+  const toast = useToast();
+  const [isButLoading, setIsButLoading] = useState(false);
+
   
   const { carts, isLoading, isError } = useSelector((store) => {
     return {
@@ -30,6 +33,13 @@ const Cart = () => {
     dispatch(getCartProducts(token));
   }, []);
 
+  function checkoutFn(){
+    setIsButLoading(true)
+    setTimeout(()=>{
+      navigate('/checkout')
+    },1000)
+  }
+
   let totalprice = 0;
   for (var i = 0; i < carts.length; i++) {
     totalprice = totalprice + carts[i].quantity * carts[i].price;
@@ -44,15 +54,18 @@ const Cart = () => {
 
   let totalSavePrice = totalOriginPrice - totalprice;
 
-  let totalQuantity=0;
-  for (var i = 0; i < carts.length; i++) {
-    totalQuantity =
-    totalQuantity + carts[i].quantity  
-  }
+  
 
   function HandleCartDelete(id) {
     dispatch(deleteCartdata(id, token)).then(() => {
       dispatch(getCartProducts(token));
+      toast({
+        title: 'Product Deleted Successfully.',
+        status: 'success',
+        duration: 2000,
+        isClosable: true,
+        position:"top"
+      })
     });
   }
 
@@ -68,8 +81,8 @@ const Cart = () => {
             </div>
             <div className="total">
               <h4 style={{ fontWeight: "bold", margin: "10px" }}>
-                Totol <span>({totalQuantity} Item)</span> :{" "}
-                <span>₹ {totalprice}</span>
+                Total <span>({carts.length} Item)</span> 
+                
               </h4>
             </div>
             {carts.length > 0 &&
@@ -90,7 +103,7 @@ const Cart = () => {
             <div>
               <img style={{ height: "150px", width: "100%" }} src={rightCart} />
             </div>
-            <h3>Order Summary</h3>
+            <h3 style={{fontWeight:"bold", margin:"10px 0px 10px 7px", fontSize:"18px"}}>Order Summary</h3>
             <div className="billDetails">
               <div className="subtotalBill">
                 <p>Subtotal</p>
@@ -111,9 +124,16 @@ const Cart = () => {
             </div>
             <div>
               <button
-                className="CheckeoutBtn" 
-               >
-                <Link to={"/checkout"}> Checkeout Securely</Link>
+                className="CheckeoutBtn" onClick={checkoutFn}
+               > {!isButLoading && ` Checkout Securely `}
+               {isButLoading && (
+                 <Spinner
+                   thickness="4px"
+                   speed="0.55s"
+                   color="#17274a"
+                   size="md"
+                 />
+               )}
               </button>
             </div>
           </div>

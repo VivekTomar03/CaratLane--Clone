@@ -16,7 +16,7 @@ import {
 
 const CheckoutPage = () => {
   const toast = useToast();
-  const [quantity1, setquantity] = useState(1);
+  // const [quantity1, setquantity] = useState(1);
   const navigate = useNavigate();
   const { carts, isLoading, isError } = useSelector((store) => {
     return {
@@ -46,29 +46,9 @@ const CheckoutPage = () => {
 
   let totalSavePrice = totalOriginPrice - totalprice;
 
-  // function HandleCartDelete(id) {
-  //   dispatch(deleteCartdata(id,token)).then(() => {
-  //     dispatch(getCartProducts(token));
-  //   });
-  // }
-
-  // const id = carts.map((el) => {
-  //   return el._id;
-  // });
-  // console.log("id",id[0]);
   const handleEmptyCart = () => {
-     navigate("/success")
-//     console.log("hiii")
-//     axios(`https://red-worried-dove.cyclic.app/cart/update/${id[0]}`, {
-//       method: "patch",
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//       },
-//       data: [],
-//     }).then((res) => {
-// console.log("res",res)
-//       // dispatch(getCartProducts(token));
-//     });
+
+    navigate("/success");
   };
   return (
     <div className="main">
@@ -83,28 +63,30 @@ const CheckoutPage = () => {
         <div className="leftBottomDiv">
           <div>
             <div>
-              <input className="inp" type="radio" />
-              <p className="inp_p">Credit Card</p>
+              <input className="inp"  name="fav" id="credit" type="radio" />
+              <label for="credit" className="inp_p">Credit Card</label>
             </div>
             <div>
-              <input className="inp" type="radio" />
-              <p className="inp_p">Debit Card</p>
+              <input className="inp" id="debit"  name="fav" type="radio" />
+              <label for="debit" className="inp_p">Debit Card</label>
             </div>
             <div>
-              <input className="inp" type="radio" />
-              <p className="inp_p">UPI</p>
+              <input className="inp" id="upi"  name="fav" type="radio" />
+              <label for="upi" className="inp_p">UPI</label>
             </div>
             <div>
-              <input className="inp" type="radio" />
-              <p className="inp_p">Netbanking</p>
+              <input className="inp" id="netbanking"  name="fav" type="radio" />
+              <label for="netbanking" className="inp_p">Netbanking</label>
             </div>
             <div>
-              <input className="inp" type="radio" />
-              <p className="inp_p">Offline Payment</p>
+              <input className="inp" id="offline"   name="fav" type="radio" />
+              <label for="offline" className="inp_p">Offline Payment</label>
             </div>
           </div>
 
-          <button className="priceBtn" onClick={() => handleEmptyCart()} >₹ {totalprice}</button>
+          <button className="priceBtn" onClick={() => handleEmptyCart()}>
+            ₹ {totalprice}
+          </button>
         </div>
       </div>
 
@@ -115,8 +97,9 @@ const CheckoutPage = () => {
             <h2
               style={{
                 fontSize: "20px",
-                fontWeight: "bold",
+                fontWeight: "1000px",
                 margin: "32px 0px 20px 32px",
+                
               }}>
               Order Summary
             </h2>
@@ -124,35 +107,6 @@ const CheckoutPage = () => {
               carts.map((el) => {
                 return <Checkout key={el.id} {...el} />;
               })}
-
-            {/* <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                width: "100%",
-                margin: "0 20px",
-                boxShadow:"rgba(0, 0, 0, 0.16) 0px 1px 4px",
-              }}>
-              <div style={{ width: "20%" }}>
-                <img src="https://cdn1.caratlane.com/media/catalog/product/cache/6/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/J/R/JR07228-1YP900_1_lar.jpg" />
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-evenly",
-                }}>
-                <p>Graceful Twines Diamond Ring| Size: 12</p>
-                <p>SKU: JR07228-1YP900</p>
-                <p>Expected Delivery - 23rd May</p>
-              </div>
-              <div style={{ margin: "60px 10px 10px 0px" }}>
-                <p style={{ fontWeight: "bold" }}>₹ 37968</p>
-                <p style={{ fontWeight: "bold", textAlign: "line-through" }}>
-                  ₹ 42251
-                </p>
-              </div>
-            </div> */}
           </div>
 
           <div
@@ -199,10 +153,7 @@ const CheckoutPage = () => {
                 padding: "5px 20px",
               }}>
               <p style={{ fontWeight: "bold" }}>TOTAL PRICE</p>
-              <p style={{ fontWeight: "bold" }} >
-                {" "}
-                ₹ {totalprice} 
-              </p>
+              <p style={{ fontWeight: "bold" }} > ₹ {totalprice}</p>
             </div>
           </div>
         </div>
