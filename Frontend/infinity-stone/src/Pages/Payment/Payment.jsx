@@ -120,11 +120,11 @@ const Payment = () => {
   };
 
   return (
-    <div>
-      <Heading marginTop={"20px"} as="h2" size="lg" textAlign={"center"}>
+    <div >
+      <Heading marginTop={155} as="h2" size="lg" textAlign={"center"}>
         Shipping Address
       </Heading>
-      <Divider />
+      
 
       <div id={styles.main}>
         <div id={styles.one}>
