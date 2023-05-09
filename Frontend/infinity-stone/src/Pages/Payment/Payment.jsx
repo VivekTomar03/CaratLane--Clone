@@ -208,30 +208,7 @@ const Payment = () => {
                   </FormControl>
                 </div>
                 <div id={styles.city}>
-                  {/* <FormControl>
-                                        <FormLabel>State</FormLabel>
-
-                                        <Select
-                                            id={styles.input}
-                                            placeholder="State"
-                                            size="lg">
-                                            <option value="Select">
-                                                Uttar Pradesh
-                                            </option>
-                                            <option value="Select">
-                                                Delhi
-                                            </option>
-                                            <option value="Select">
-                                                Mumbai
-                                            </option>
-                                            <option value="Select">
-                                                Rajesthan
-                                            </option>
-                                            <option value="Select">
-                                                Jaipur
-                                            </option>
-                                        </Select>
-                                    </FormControl> */}
+                  
                 </div>
               </VStack>
             </div>
@@ -261,7 +238,7 @@ const Payment = () => {
                   thickness="4px"
                   speed="0.55s"
                   color="#17274a"
-                  size="m"
+                  size="md"
                 />
               )}
             </button>

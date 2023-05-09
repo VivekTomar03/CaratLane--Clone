@@ -11,9 +11,11 @@ import {
 } from "../../Redux/CartReducer/Action";
 import Cartmap from "../../Components/CartMap/Cartmap";
 import cart from "../../ImageData/cart.png";
+import { Spinner, useToast } from "@chakra-ui/react";
 const Cart = () => {
-  // const [quantity1, setquantity] = useState(1); 
+  // const [quantity1, setquantity] = useState(1);
   const navigate = useNavigate();
+  
   const { carts, isLoading, isError } = useSelector((store) => {
     return {
       carts: store.cartReducer.carts,
@@ -30,21 +32,23 @@ const Cart = () => {
 
   let totalprice = 0;
   for (var i = 0; i < carts.length; i++) {
-    
-      totalprice = totalprice + ( carts[i].quantity *carts[i].price);
-   
-     
-    }
-    // console.log(carts[i].price, quantity1[i]);
-  
+    totalprice = totalprice + carts[i].quantity * carts[i].price;
+  }
+  // console.log(carts[i].price, quantity1[i]);
 
   let totalOriginPrice = 0;
   for (var i = 0; i < carts.length; i++) {
-    totalOriginPrice = totalOriginPrice + ( carts[i].quantity *carts[i].originalprice);
-     
+    totalOriginPrice =
+      totalOriginPrice + carts[i].quantity * carts[i].originalprice;
   }
 
   let totalSavePrice = totalOriginPrice - totalprice;
+
+  let totalQuantity=0;
+  for (var i = 0; i < carts.length; i++) {
+    totalQuantity =
+    totalQuantity + carts[i].quantity  
+  }
 
   function HandleCartDelete(id) {
     dispatch(deleteCartdata(id, token)).then(() => {
@@ -63,8 +67,8 @@ const Cart = () => {
               <img src={cart} />
             </div>
             <div className="total">
-              <h4>
-                Totol <span>{carts.length} Item</span> :{" "}
+              <h4 style={{ fontWeight: "bold", margin: "10px" }}>
+                Totol <span>({totalQuantity} Item)</span> :{" "}
                 <span>₹ {totalprice}</span>
               </h4>
             </div>
@@ -107,16 +111,8 @@ const Cart = () => {
             </div>
             <div>
               <button
-                style={{
-                  width: "100%",
-                  margin: "auto",
-                  padding: "10px",
-                  borderRadius: "5px",
-                  border: "none",
-                  background: "linear-gradient(to right, #d158e8, #9062f9)",
-                  marginTop: "10px",
-                }}
-              >
+                className="CheckeoutBtn" 
+               >
                 <Link to={"/checkout"}> Checkeout Securely</Link>
               </button>
             </div>

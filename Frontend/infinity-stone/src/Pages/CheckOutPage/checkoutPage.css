@@ -42,3 +42,8 @@
     border-radius: 3px;
     background: linear-gradient(to right, #d158e8, #9062f9);
 }
+.priceBtn:hover{
+    border: 2px solid black;
+    border-radius: 5px;
+    background: linear-gradient(to right, #9062f9 , #d158e8);
+}
