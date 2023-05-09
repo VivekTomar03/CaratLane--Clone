@@ -3,18 +3,19 @@ import checkout from "../../ImageData/checkout.png";
 import "../CheckOutPage/checkoutPage.css";
 import Checkout from "../../Components/Checkout/Checkout";
 
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 // import Cartmap from "../../CartMap/Cartmap";
 import axios from "axios";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-
+import { useToast } from "@chakra-ui/react";
 import {
   deleteCartdata,
   getCartProducts,
 } from "../../Redux/CartReducer/Action";
 
 const CheckoutPage = () => {
+  const toast = useToast();
   const [quantity1, setquantity] = useState(1);
   const navigate = useNavigate();
   const { carts, isLoading, isError } = useSelector((store) => {
@@ -199,7 +200,7 @@ console.log("res",res)
               <p style={{ fontWeight: "bold" }}>TOTAL PRICE</p>
               <p style={{ fontWeight: "bold" }} >
                 {" "}
-                ₹ {totalprice}
+                ₹ {totalprice} 
               </p>
             </div>
           </div>

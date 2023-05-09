@@ -9,12 +9,13 @@
 } */
 .details {
     /* border: 1px solid grey; */
-
+    margin:10px;
     display: flex;
     justify-content: space-around;
     padding: 10px;
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    
 }
 
 .imgDiv {
@@ -43,10 +44,16 @@
 
 .sizeQue {
     display: flex;
-    width: 50%;
+    width: 70%;
     border: 0px solid pink;
     justify-content: space-between;
+    cursor: pointer;
     /* margin-top: -25px; */
+}
+.sizeQue>h5>span{
+    border: 1px solid gray;
+   padding: 0px 3px 0px 3px;
+   background: rgb(244, 240, 240);
 }
 
 .btnDiv {
