@@ -12,6 +12,7 @@ A Full Stack , Collaborative project built by a team of 5 executed in 5 days.
 ## Demo  🎥
 
 - Deployed Link:- [Enjoy the Experience](https://infinity-stone.vercel.app/)
+- Backend:- [Infinity Stone Server](https://red-worried-dove.cyclic.app/)
 
 ## Tech Stack 💻
 
