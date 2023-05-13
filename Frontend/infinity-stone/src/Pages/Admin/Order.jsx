@@ -1,12 +1,13 @@
-import { Box, Center } from '@chakra-ui/react';
+import { Box, Button, Center } from '@chakra-ui/react';
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 
 import React from 'react';
 import Userchart from '../../Components/Userchart';
+import { Link } from 'react-router-dom';
 const data = {
     labels:['Sunday','Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
     datasets: [
-      {
+      { 
         label: 'Users %',
         data: [
             Math.floor(Math.random() * 1000 + 500),
@@ -24,6 +25,7 @@ const data = {
   }
   
 const Order = () => {
+  
   return (
     <Box bg={"#8BF5FA"} mt={"100px"} className="Main">
        <Center >
@@ -31,6 +33,11 @@ const Order = () => {
       </Center>
       
       <Box  mt={"20px"}>
+      <Button m={2}  colorScheme='teal' variant='solid' _hover={{ variant:"outline", colorScheme:'yellow'}} ml={"80%"}>
+      <Link to={"/admin"}>Admin</Link>
+
+      </Button>
+
         <Tabs position="relative" variant="solid-rounded">
           <Center>
             <TabList w={"100%"}>

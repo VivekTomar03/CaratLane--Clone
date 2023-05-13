@@ -6,7 +6,7 @@ import {
   SimpleGrid,
   Text,
   Link,
-  chakra,
+  chakra,    
   VisuallyHidden,
   useColorModeValue,
   Image,
@@ -26,6 +26,8 @@ import { IoIosCall } from "react-icons/io";
 import { RiMessageFill } from "react-icons/ri";
 import { FaWhatsapp } from "react-icons/fa";
 import { SiAmericanexpress } from "react-icons/si";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const SocialButton = ({ children, label, href }) => {
   return (
@@ -46,6 +48,17 @@ const SocialButton = ({ children, label, href }) => {
 };
 
 export default function Footer() {
+  const store = useSelector((state)=>
+  state.authReducer 
+)
+console.log(store, "store footer")
+const navigate = useNavigate()
+  const handleAdmin = () =>{
+    console.log("hey");
+       if(store.admin){
+          navigate("/admin")
+       }
+  }
   return (
     <Box
       width="100%" 
@@ -91,13 +104,22 @@ export default function Footer() {
               GOLD RATE
             </Link>
             <Link
-              href={"#"} 
+             
               fontSize={"11px"}
               color="#87769D"
               lineHeight={"20px"}
             >
               DIGITAL GOLD
             </Link>
+            <Text
+             
+              fontSize={"11px"}
+              color="#87769D"
+              lineHeight={"20px"}
+               onClick={handleAdmin}
+            >
+               Admin
+            </Text>
           </Stack>
 
           <Stack align={"flex-start"}>

@@ -1,3 +1,4 @@
+
 import {
   DELETE_CART_SUCCESS,
   GET_CART_FAILURE,
@@ -5,6 +6,7 @@ import {
   GET_CART_SUCCESS,
 } from "./ActionType";
 import axios from "axios";
+
 
 export const getCartProductsRequestAction = () => {
   return { type: GET_CART_REQUEST };
@@ -22,11 +24,17 @@ export const DeleteCartSuccess = () => {
   return { type: DELETE_CART_SUCCESS };
 };
 
-export const getCartProducts = () => (dispatch) => {
+export const getCartProducts = (token) => (dispatch) => {
+ 
   dispatch(getCartProductsRequestAction());
   return axios
-    .get("https://red-worried-dove.cyclic.app/cart")
+    .get("https://red-worried-dove.cyclic.app/cart", {
+      headers:{
+        Authorization:`Bearer ${token}`
+      }
+    })
     .then((res) => {
+      console.log(res, "card data")
       dispatch(getCartProductsSuccessAction(res.data));
     })
     .catch((err) => {
@@ -34,10 +42,14 @@ export const getCartProducts = () => (dispatch) => {
     });
 };
 
-export const deleteCartdata = (id) => (dispatch) => {
+export const deleteCartdata = (id,token) => (dispatch) => {
   dispatch(getCartProductsRequestAction());
   return axios
-    .delete(`https://red-worried-dove.cyclic.app/cart/${id}`)
+    .delete(`https://red-worried-dove.cyclic.app/cart/delete/${id}`, {
+      headers:{
+        Authorization:`Bearer ${token}`
+      }
+    })
     .then((res) => {
       dispatch(DeleteCartSuccess());
     })

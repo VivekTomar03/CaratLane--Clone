@@ -29,23 +29,41 @@
 .subtotalBill {
     display: flex;
     justify-content: space-between;
+    margin: 5px 0px 5px 0px;
 }
 
 .savedBill {
     display: flex;
     justify-content: space-between;
+    margin: 5px 0px 5px 0px;
 }
 
 .deliveryBill {
     display: flex;
     justify-content: space-between;
+    margin: 5px 0px 5px 0px;
 }
 
 .totalBill {
     display: flex;
     justify-content: space-between;
+    margin: 5px 0px 5px 0px;
 }
+.CheckeoutBtn{
+    width: 100%;
+    margin: auto;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background: linear-gradient(to right, #d158e8, #9062f9);
+    margin-top: 10px;
+}
+.CheckeoutBtn:hover{
+    border: 2px solid black;
+    border-radius: 5px;
+    background: linear-gradient(to right,  #9062f9, #d158e8)
 
+}
 /* #bill{
     border: 1px solid black;
 } */

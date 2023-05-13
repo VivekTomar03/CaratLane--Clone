@@ -8,13 +8,14 @@
 }
 
 #emptyCart>img {
+    margin-top: 20px;
     border: 0px solid red;
     width: 60%;
 }
 
 #emptyCart>p {
     border: 0px solid red;
-    margin-top: -10px;
+    margin-top: 10px;
     font-size: large;
 }
 
@@ -26,4 +27,12 @@
     border-radius: 3px;
     background: linear-gradient(to right, #d158e8, #9062f9);
     border: none;
+    margin-bottom: 20px;
 }
+
+#emptyCart>button:hover{
+    background: linear-gradient(to right,  #9062f9, #d158e8);
+    border: 1px solid black;
+    border-radius: 5px;
+}
+

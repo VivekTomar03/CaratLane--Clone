@@ -30,6 +30,7 @@ import {
   PopoverHeader,
   PopoverBody,
   PopoverFooter,
+  Center,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, SearchIcon } from "@chakra-ui/icons";
 import { AiOutlineGold, AiOutlineHome, AiFillHeart } from "react-icons/ai";
@@ -41,31 +42,43 @@ import { MdShoppingBasket } from "react-icons/md";
 import { BiHomeCircle } from "react-icons/bi";
 import { IoStorefrontSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import Navbar2 from "../../Navbar2/Navbar2";
+import { useDispatch, useSelector } from "react-redux";
+import { LOGOUT } from "../../Redux/auth/auth.type";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const logoutUser=()=>{}
-  const Name="Ritik"
+  const logoutUser = () => {
+    dispatch({ type: LOGOUT });
+  };
+  const Name = "Ritik";
+  const store = useSelector((state) => state.authReducer);
+  console.log(store);
   return (
     <div>
       <Box
         boxShadow={"lg"}
         bg={useColorModeValue("#1A365D", "#1A365D")}
         h={"20px"}
-        position="fixed"
-      ></Box>
+        position="fixed"></Box>
+
       <Box w={"100%"} position="fixed" top={0} zIndex={"10"}>
+        <Box bg="#4f3267" py="3px" w="100%" color="white">
+          <Center className="blink-text">
+            Introducing Infinite Stone PoP! Plan your purchase here
+          </Center>
+        </Box>
         <Flex
           boxShadow="lg"
           p="2"
           alignItems={"canter"}
           gap={"10px"}
-          bg={useColorModeValue("#F6F4ff", "#F6F4ff")}
-          justifyContent="space-around"
-        >
+          bg={useColorModeValue("#ffffff", "#ffffff")}
+          justifyContent="space-around">
           <IconButton
-            bg={"#F6F4ff"}
-            // icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+            bg={"#ffffff"}
+            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
             aria-label={"Open Menu"}
             display={{ md: "none" }}
             onClick={isOpen ? onClose : onOpen}
@@ -79,8 +92,7 @@ const Navbar = () => {
               w="100%"
               h="50px"
               justifyContent="space-around"
-              alignItems={"center"}
-            >
+              alignItems={"center"}>
               <Link to="/">
                 <Box>
                   <Image
@@ -93,7 +105,7 @@ const Navbar = () => {
               <Box display={{ sm: "none", md: "flex" }} alignItems={"center"}>
                 <IconButton
                   fontSize={{ base: "5px", sm: "none", md: "20px" }}
-                  bg={"#F6F4ff"}
+                  bg={"#ffffff"}
                   icon={<AiOutlineHome />}
                   color="#4f3267"
                   _hover={{ color: "#231535" }}
@@ -103,8 +115,7 @@ const Navbar = () => {
                   fontSize={{ sm: "8px", md: "11px" }}
                   marginTop={"7px"}
                   color="#4f3267"
-                  _hover={{ color: "#000000", textDecoration: "underline" }}
-                >
+                  _hover={{ color: "#000000", textDecoration: "underline" }}>
                   FREE TRY AT HOME
                 </Text>
               </Box>
@@ -112,7 +123,7 @@ const Navbar = () => {
               <Box display={{ sm: "none", md: "flex" }} alignItems={"center"}>
                 <IconButton
                   fontSize={{ base: "5px", sm: "none", md: "20px" }}
-                  bg={"#F6F4ff"}
+                  bg={"#ffffff"}
                   icon={<IoStorefrontOutline />}
                   color="#4f3267"
                   _hover={{ color: "#231535" }}
@@ -122,8 +133,7 @@ const Navbar = () => {
                   fontSize={{ base: "8px", md: "11px" }}
                   marginTop={"7px"}
                   color="#4f3267"
-                  _hover={{ color: "#000000", textDecoration: "underline" }}
-                >
+                  _hover={{ color: "#000000", textDecoration: "underline" }}>
                   FIND STORE
                 </Text>
               </Box>
@@ -131,7 +141,7 @@ const Navbar = () => {
               <Box display={{ sm: "none", md: "flex" }} alignItems={"center"}>
                 <IconButton
                   fontSize={{ base: "5px", sm: "none", md: "20px" }}
-                  bg={"#F6F4ff"}
+                  bg={"#ffffff"}
                   color="#4f3267"
                   _hover={{ color: "#231535" }}
                   icon={<BsHandbag />}
@@ -141,8 +151,7 @@ const Navbar = () => {
                   fontSize={{ base: "8px", sm: "none", md: "11px" }}
                   marginTop={"7px"}
                   color="#4f3267"
-                  _hover={{ color: "#000000", textDecoration: "underline" }}
-                >
+                  _hover={{ color: "#000000", textDecoration: "underline" }}>
                   PLAN OF PURCHASE
                 </Text>
               </Box>
@@ -150,7 +159,7 @@ const Navbar = () => {
               <Box display={{ sm: "none", md: "flex" }} alignItems={"center"}>
                 <IconButton
                   fontSize={{ base: "10px", sm: "none", md: "25px" }}
-                  bg={"#F6F4ff"}
+                  bg={"#ffffff"}
                   icon={<AiOutlineGold />}
                   color="#4f3267"
                   _hover={{ color: "#231535" }}
@@ -159,8 +168,7 @@ const Navbar = () => {
                   fontFamily={"sans-serif"}
                   fontSize={{ base: "8px", sm: "none", md: "11px" }}
                   color="#4f3267"
-                  _hover={{ color: "#000000", textDecoration: "underline" }}
-                >
+                  _hover={{ color: "#000000", textDecoration: "underline" }}>
                   BUY DIGITAL GOLD
                 </Text>
               </Box>
@@ -175,7 +183,7 @@ const Navbar = () => {
                       _placeholder={{ color: "black" }}
                       bg={"white"}
                       rounded="md"
-                      w={{ md: "190px" }}
+                      w={{ md: "230px" }}
                       fontSize={"11px"}
                       lineHeight={"18px"}
                       color={"black"}
@@ -185,8 +193,8 @@ const Navbar = () => {
                         bgGradient="linear(to-l, rgb(222, 87, 229), rgb(136, 99, 251))"
                         aria-label="Search database"
                         color={"white"}
-                        // icon={<SearchIcon />}
-                        h={"2.4rem"}
+                        icon={<SearchIcon />}
+                        h={"2.5rem"}
                         w={"50px"}
                         roundedLeft={"sm"}
                       />
@@ -198,7 +206,7 @@ const Navbar = () => {
               <Box display={{ sm: "none", md: "flex" }} alignItems={"center"}>
                 <IconButton
                   fontSize={{ base: "5px", md: "20px" }}
-                  bg={"#F6F4ff"}
+                  bg={"#ffffff"}
                   icon={<MdLocationPin />}
                   _hover={{ color: "#231535" }}
                 />
@@ -206,8 +214,7 @@ const Navbar = () => {
                   fontFamily={"sans-serif"}
                   fontSize={{ base: "5px", md: "11px" }}
                   color="#4f3267"
-                  _hover={{ color: "#000000", textDecoration: "underline" }}
-                >
+                  _hover={{ color: "#000000", textDecoration: "underline" }}>
                   PIN CODE
                 </Text>
               </Box>
@@ -220,10 +227,10 @@ const Navbar = () => {
               />
 
               <Popover>
-              <PopoverTrigger>
+                <PopoverTrigger>
                   <IconButton
                     fontSize={{ base: "5px", sm: "13px", md: "15px" }}
-                    bg={"#F6F4ff"}
+                    bg={"#ffffff"}
                     icon={<FaUser />}
                     _hover={{ color: "#231535" }}
                   />
@@ -234,42 +241,60 @@ const Navbar = () => {
                     <PopoverHeader
                       fontFamily={"sans-serif"}
                       fontSize={"17px"}
-                      textAlign="center"
-                    >
+                      textAlign="center">
                       Your Account
                     </PopoverHeader>
                     <PopoverCloseButton />
                     <PopoverBody
                       fontFamily={"sans-serif"}
                       fontSize={"13px"}
-                      textAlign="center"
-                    >
+                      textAlign="center">
                       Access acount & manage your orders
+                      <Text display={!store?.isAuth ? "none" : "block"}>
+                        {" "}
+                        Welcome {store?.email}
+                      </Text>
                     </PopoverBody>
-                    <Button bgGradient="linear(to-l, rgb(222, 87, 229), rgb(136, 99, 251))" _hover={{bgGradient:"linear(to-l, rgb(222, 87, 229), rgb(136, 99, 251))"}} onClick={logoutUser}>Logout</Button><PopoverBody
+
+                    <Button
+                      display={!store?.isAuth ? "none" : "block"}
+                      bgGradient="linear(to-l, rgb(222, 87, 229), rgb(136, 99, 251))"
+                      _hover={{
+                        bgGradient:
+                          "linear(to-l, rgb(222, 87, 229), rgb(136, 99, 251))",
+                      }}
+                      onClick={logoutUser}>
+                      Logout
+                    </Button>
+                    <PopoverBody
                       border="0"
                       display="flex"
                       alignItems="center"
                       justifyContent="space-around"
-                      pb={4}
-                    >
+                      pb={4}>
                       <Link to="/signup">
-                      {" "}
-                      <Button bg="#DE57E5">Signup</Button>
-                    </Link>
-                    <Link to="/login">
-                      <Button borderColor="#DE57E5" variant="outline">
-                        Login
-                      </Button>
-                    </Link>
-                      
+                        {" "}
+                        <Button
+                          bg="#DE57E5"
+                          display={store?.isAuth ? "none" : "block"}>
+                          Signup
+                        </Button>
+                      </Link>
+                      <Link to="/login">
+                        <Button
+                          borderColor="#DE57E5"
+                          variant="outline"
+                          display={store?.isAuth ? "none" : "block"}>
+                          Login
+                        </Button>
+                      </Link>
                     </PopoverBody>
-                    
                   </PopoverContent>
                 </Portal>
               </Popover>
 
               <IconButton
+               bg={"#ffffff"}
                 fontSize={{ base: "5px", sm: "13px", md: "15px" }}
                 icon={<AiFillHeart />}
                 _hover={{ color: "#231535" }}
@@ -277,7 +302,7 @@ const Navbar = () => {
               <Link to="/cart">
                 <IconButton
                   fontSize={{ base: "5px", sm: "13px", md: "15px" }}
-                  bg={"#F6F4ff"}
+                  bg={"#ffffff"}
                   icon={<MdShoppingBasket />}
                   _hover={{ color: "#231535" }}
                 />
@@ -285,7 +310,7 @@ const Navbar = () => {
             </HStack>
           </HStack>
         </Flex>
-        
+        <Navbar2 />
       </Box>
     </div>
   );

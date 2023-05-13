@@ -22,15 +22,20 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const AllUsers = ({ setsuspendacc, suspendacc }) => {
   const [data, setdata] = useState([]);
   const [singeluser, setsingeluser] = useState({});
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+ const {token} = useSelector((state) => state.authReducer)
   const getUsers = () => {
     axios
-      .get("https://mock-server-json-x067.onrender.com/users")
+      .get("https://red-worried-dove.cyclic.app/users" , {
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      })
       .then((res) => {
         // console.log(res.data);
         setdata(res.data);
@@ -44,14 +49,17 @@ const AllUsers = ({ setsuspendacc, suspendacc }) => {
   };
   const handlesubmit = (e) => {
     e.preventDefault();
-    axios(`https://mock-server-json-x067.onrender.com/users/${singeluser.id}`, {
-      method: "patch",
-      data: singeluser,
-      headers: {
-        "Content-Type": "application/json",
-        // token will come here
-      },
-    })
+    axios(
+      `https://red-worried-dove.cyclic.app/users/update/${singeluser._id}`,
+      {
+        method: "patch",
+        data: singeluser,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization:`Bearer ${token}`
+        },
+      }
+    )
       .then((res) => {
         console.log(res);
         getUsers();
@@ -62,7 +70,11 @@ const AllUsers = ({ setsuspendacc, suspendacc }) => {
 
   const handleDelete = (id, el) => [
     axios
-      .delete(`https://mock-server-json-x067.onrender.com/users/${id}`)
+      .delete(`https://red-worried-dove.cyclic.app/users/delete/${id}`,{
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      })
       .then((res) => {
         console.log(res);
         getUsers();
@@ -81,25 +93,25 @@ const AllUsers = ({ setsuspendacc, suspendacc }) => {
           <TableCaption>All Register User Data</TableCaption>
           <Thead>
             <Tr flexDirection={"column"}>
-              <Th>S.No</Th>
-              <Th>Name</Th>
-              <Th>Email</Th>
-              <Th>Password</Th>
-              <Th>Gender</Th>
-              <Th>Edit User</Th>
-              <Th>Delete User</Th>
+              <Th color={"white"}>S.No</Th>
+              <Th  color={"white"}>Name</Th>
+              <Th  color={"white"}>Email</Th>
+              <Th  color={"white"}>Password</Th>
+              <Th  color={"white"}>Gender</Th>
+              <Th  color={"white"}>Edit User</Th>
+              <Th  color={"white"}>Delete User</Th>
             </Tr>
           </Thead>
           <Tbody>
-            {data &&
+            { data.length>0? data &&
               data.reverse().map((el, i) => {
                 return (
                   <Tr key={el.id}>
                     <Td>{i + 1}</Td>
                     <Td>{el.name}</Td>
                     <Td>{el.email}</Td>
-                    <Td>{el.password}</Td>
-                    <Td>{"MAle"}</Td>
+                    <Td>{"12345"}</Td>
+                    <Td>{el.gender}</Td>
                     <Td>
                       <Button
                         onClick={() => {
@@ -120,6 +132,9 @@ const AllUsers = ({ setsuspendacc, suspendacc }) => {
                         _focus={{
                           bg: "blue.500",
                         }}
+                        data-aos="fade-right"
+                        data-aos-easing="linear"
+                        data-aos-duration="1500"
                       >
                         Edit
                       </Button>
@@ -140,14 +155,17 @@ const AllUsers = ({ setsuspendacc, suspendacc }) => {
                         _focus={{
                           bg: "red.200",
                         }}
-                        onClick={() => handleDelete(el.id, el)}
+                        onClick={() => handleDelete(el._id, el)}
+                        data-aos="fade-left"
+                        data-aos-easing="linear"
+                        data-aos-duration="1500"
                       >
                         Delete
                       </Button>
                     </Td>
                   </Tr>
                 );
-              })}
+              }):null}
           </Tbody>
         </Table>
       </TableContainer>
