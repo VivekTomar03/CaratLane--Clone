@@ -7,7 +7,7 @@
 ![mongoose](https://img.shields.io/badge/Mongoose-000000?style=for-the-badge)
 ![bcrypt](https://img.shields.io/badge/Bcrypt-000000?style=for-the-badge)
 
-Deployed link: [https://wide-eyed-pinafore-duck.cyclic.app](https://red-worried-dove.cyclic.app/)
+Deployed link: https://red-worried-dove.cyclic.app/
 
 ## Routes:
 
