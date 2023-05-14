@@ -85,7 +85,7 @@ https://red-worried-dove.cyclic.app/rings/search/?q=duo
 }
 ```
 
-## /rings
+## /earrings 
 
 ### Routes:
 
