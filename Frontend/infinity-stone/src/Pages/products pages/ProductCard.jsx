@@ -63,6 +63,7 @@ import {
     return (
   
         <Box
+        p={"50px"}
         bg={useColorModeValue('white', 'gray.800')}
     //  padding={"5px"}
           w={["90%","90%","95%","100%"]}
@@ -84,7 +85,7 @@ import {
 
   
   
-  <Stack direction={'row'} align={'center'}>
+  <Stack direction={'row'} align={'center'} w={"100%"}>
             <Text fontWeight={700} fontSize={["10px","13px","15px","18px"]} color={"purple.500"} marginLeft={"5px"}>
             ₹{data.price}
             </Text>
@@ -97,18 +98,18 @@ import {
             </Link>
           </Stack>
   
-  <Text fontWeight={700} fontSize={["10px","13px","15px","18px"]} color={"purple.500"}  marginLeft={["-40px","-50px","-60px", "-66px"]}>Check delivery date ↬</Text>
+  <Text  fontWeight={700} fontSize={["10px","13px","15px","12px"]} color={"purple.500"}  >Check delivery date ↬</Text>
   
-<Text fontSize={["6px","9px","12px","14px"]} color={"gray.500"} marginLeft={"-65px"}>{data.title}</Text>
+<Text fontSize={["6px","9px","10px","10px"]} color={"gray.500"} >{data.title}</Text>
   
   
-<Stack direction={'row'} align={'center'}>
-  <Button fontSize={["6px","8px","10px","12px"]} border={"solid 1px purple"} color={"purple"}>
-  🏠 Book Try at Home
+<Stack direction={'row'} align={'center'} w={"100%"}>
+  <Button paddingLeft={30} paddingRight={30} fontSize={["6px","8px","10px","12px"]} border={"solid 1px purple"} color={"purple"}>
+   Try at Home
   </Button>
 
-  <Button fontSize={["6px","8px","10px","12px"]} border={"solid 1px lightgreen"} color={"lightgreen"}>
-  ☎ Live Video Call
+  <Button paddingLeft={25} paddingRight={25} fontSize={["6px","8px","10px","12px"]} border={"solid 1px lightgreen"} color={"lightgreen"}>
+   Video Call
   </Button>
 </Stack>
     

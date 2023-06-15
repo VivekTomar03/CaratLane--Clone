@@ -6,7 +6,7 @@ import axios from "axios";
 export const getproductsornaments2=(obj)=>(dispatch)=>{
     dispatch({type:REQUEST_STATE})
 
-    axios.get(" https://red-worried-dove.cyclic.app/earrings",obj).then((res)=>{
+    axios.get("https://cartlane.onrender.com/earrings",obj).then((res)=>{
 
     // axios.get("https://red-worried-dove.cyclic.app/earrings",obj).then((res)=>{
 
@@ -18,7 +18,7 @@ dispatch({type:SUCCESS_STATE,payload:res.data[0]})
 
 export const getProductsornaments=(obj)=>(dispatch)=>{
     dispatch({type:REQUEST_STATE})
-    axios.get("https://red-worried-dove.cyclic.app/rings",obj).then((res)=>{
+    axios.get("https://cartlane.onrender.com/rings",obj).then((res)=>{
         console.log(res)
 dispatch({type:SUCCESS_STATE,payload:res.data[0]})
 

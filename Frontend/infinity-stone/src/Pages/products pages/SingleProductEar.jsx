@@ -27,7 +27,7 @@ import axios from "axios";
 
 
 const getdata=((id)=>{
-  return fetch(`https://red-worried-dove.cyclic.app/earrings/${id}`).then((res)=>res.json());
+  return fetch(`https://cartlane.onrender.com/earrings/${id}`).then((res)=>res.json());
 });
 
 // const getdata = (id) => {
@@ -70,6 +70,7 @@ const slides2 = [
 ];
 
 const SingleProducteEar = () => {
+  const toast = useToast()
   const [data, setData] = useState([]);
   const [load, setLoad] = useState(false);
   const [err, setErr] = useState(false);
@@ -87,7 +88,7 @@ const SingleProducteEar = () => {
   const handelChangeClick = () => {
     const {title, price, originalprice, size, image, imageurl} = data
      console.log(data);
-     axios.post("https://red-worried-dove.cyclic.app/cart/add" , {title, price, originalprice, size, image, imageurl} ,{
+     axios.post("https://cartlane.onrender.com/cart/add" , {title, price, originalprice, size, image, imageurl} ,{
       
        headers:{
           Authorization: `Bearer ${token}`
@@ -95,7 +96,13 @@ const SingleProducteEar = () => {
       
      }).then((res) => {
        console.log(res);
-        alert("added")
+       toast({
+        title: 'Account created.',
+        description: "Your Item Added To The Cart",
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      })
      }) 
      .catch((err) => console.log(err))
 

@@ -58,7 +58,8 @@ const Ring = () => {
               w={["30px", "40px", "50px", "70px"]}
               h="10"
               fontSize={["7px", "9px", "11px", "13px"]}
-              marginTop={"12px"}>
+              marginTop={"12px"}
+            >
               Rings
             </Box>
             {/* <Spacer /> */}
@@ -66,7 +67,8 @@ const Ring = () => {
               w={["30px", "40px", "50px", "70px"]}
               h="10"
               fontSize={["7px", "9px", "11px", "13px"]}
-              marginTop={"12px"}>
+              marginTop={"12px"}
+            >
               {" "}
               <Link>Clear All</Link>
             </Box>
@@ -81,7 +83,8 @@ const Ring = () => {
               _hover={{ bg: "blue", color: "white" }}
               fontSize={["7px", "9px", "11px", "13px"]}
               marginLeft={"10px"}
-              borderRadius={"10px"}>
+              borderRadius={"10px"}
+            >
               All
             </Button>
 
@@ -92,7 +95,8 @@ const Ring = () => {
               _hover={{ bg: "blue", color: "white" }}
               fontSize={["7px", "9px", "11px", "13px"]}
               marginLeft={["7px", "10px", "15px", "20px"]}
-              borderRadius={"10px"}>
+              borderRadius={"10px"}
+            >
               {" "}
               <Link>Try at Home</Link>
             </Button>
@@ -104,7 +108,8 @@ const Ring = () => {
               _hover={{ bg: "blue", color: "white" }}
               fontSize={["7px", "9px", "11px", "13px"]}
               marginLeft={["7px", "10px", "15px", "20px"]}
-              borderRadius={"10px"}>
+              borderRadius={"10px"}
+            >
               Designs in Store
             </Button>
 
@@ -115,7 +120,8 @@ const Ring = () => {
               _hover={{ bg: "blue", color: "white" }}
               fontSize={["7px", "9px", "11px", "13px"]}
               marginLeft={["7px", "10px", "15px", "20px"]}
-              borderRadius={"10px"}>
+              borderRadius={"10px"}
+            >
               {" "}
               <Link>Fast Delivery</Link>
             </Button>
@@ -128,7 +134,8 @@ const Ring = () => {
               _hover={{ bg: "blue", color: "white" }}
               fontSize={["7px", "9px", "11px", "13px"]}
               marginLeft={["7px", "10px", "15px", "20px"]}
-              borderRadius={"10px"}>
+              borderRadius={"10px"}
+            >
               {" "}
               <Link>New In</Link>
             </Button>
@@ -139,7 +146,8 @@ const Ring = () => {
               fontSize={["7px", "9px", "11px", "13px"]}
               bg="white"
               ml="10px"
-              onChange={handelCh}>
+              onChange={handelCh}
+            >
               <option value="Discount">Discount</option>
               <option value="desc">Price:Low to High</option>
               <option value="asc">Price:High to low</option>
@@ -148,14 +156,14 @@ const Ring = () => {
             </Select>
           </Flex>
         </Box>
-
       </Box>
       <br />
       <Box
         textAlign={"left"}
         w={"95%"}
         margin={"auto"}
-        fontSize={["7px", "9px", "11px", "16px"]}>
+        fontSize={["7px", "9px", "11px", "16px"]}
+      >
         <h2>
           <b>Earrings</b> 2259 Designs
         </h2>
@@ -167,7 +175,8 @@ const Ring = () => {
             m="30px"
             bg="white"
             w={["15%", "20%", "28%", "32%"]}
-            borderRadius={"20px"}>
+            borderRadius={"20px"}
+          >
             <Sidebar />
           </Box>
 
@@ -180,22 +189,25 @@ const Ring = () => {
             m="30px"
             bg="white"
             w={["60%", "70%", "80%", "90%"]}
-            borderRadius={"20px"}>
+            borderRadius={"20px"}
+          >
             {isLoading ? (
               <Center>
-                  <Spinner
-                    thickness="8px"
-                    speed="0.65s"
-                    emptyColor="gray.200"
-                    color="blue.500"
-                    size="xl"
-                    mt={200}
-                  />
+                <Spinner
+                  thickness="8px"
+                  speed="0.65s"
+                  emptyColor="gray.200"
+                  color="blue.500"
+                  size="xl"
+                  mt={200}
+                />
               </Center>
             ) : (
               <SimpleGrid
+                w={"100%"}
                 columns={{ base: 1, md: 2, lg: 3, xl: 3 }}
-                spacing={7}>
+                spacing={7}
+              >
                 {products.map((el) => (
                   <ProductsCard key={el._id} data={el} />
                 ))}
@@ -208,7 +220,7 @@ const Ring = () => {
         </Flex>
         <br />
 
-        <Box marginLeft={"70px"}>
+        <Center >
           <Button
             disabled={page === 1}
             bg="violet"
@@ -216,13 +228,17 @@ const Ring = () => {
             w={["10px", "20px", "30px", "80px"]}
             fontSize={["5px", "6px", "8px", "12px"]}
             h={["25px", "27px", "30px", "40px"]}
-            onClick={() => setPage(page - 1)}>
+            onClick={() => setPage(page - 1)}
+          >
             Previous
           </Button>
           <Button
+          isDisabled
             w={["10px", "20px", "30px", "80px"]}
             fontSize={["5px", "6px", "8px", "12px"]}
-            h={["25px", "27px", "30px", "40px"]}>
+            h={["25px", "27px", "30px", "40px"]}
+            fontWeight={"bold"}
+          >
             {page}
           </Button>
           <Button
@@ -231,15 +247,15 @@ const Ring = () => {
             w={["10px", "20px", "30px", "80px"]}
             fontSize={["5px", "6px", "8px", "12px"]}
             h={["25px", "27px", "30px", "40px"]}
-            onClick={() => setPage(page + 1)}>
+            onClick={() => setPage(page + 1)}
+          >
             Next
           </Button>
-        </Box>
+        </Center>
 
         <br />
         <br />
       </div>
-
     </div>
   );
 };

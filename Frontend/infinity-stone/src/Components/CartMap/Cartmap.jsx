@@ -18,7 +18,7 @@ const Cartmap = ({
   const { token } = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
   const hanldequantity = (val) => {
-    axios(`https://red-worried-dove.cyclic.app/cart/update/${_id}`, {
+    axios(`https://cartlane.onrender.com/cart/update/${_id}`, {
       method: "patch",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -30,8 +30,8 @@ const Cartmap = ({
   };
   return (
     <div className="details">
-      <div className="imgDiv">
-        <img src={imageurl} alt="" />
+      <div   className="imgDiv">
+        <img  src={imageurl} alt="h" />
       </div>
       <div className="detailsDiv">
         <h3 style={{ fontWeight: "bold" }}>{title}</h3>
@@ -39,7 +39,7 @@ const Cartmap = ({
         <div className="sizeQue">
           <h5>Size: {size}</h5>
           <h5>
-            Quantity :  <span  onClick={() => hanldequantity(-1)}>
+            Qty :  <span  onClick={() => hanldequantity(-1)}>
              <button disabled={quantity==1}>-</button> 
             </span>{" "}
             {quantity} <span onClick={() => hanldequantity(+1)}><button>+</button></span>

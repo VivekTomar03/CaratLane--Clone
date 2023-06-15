@@ -31,7 +31,7 @@ const AllUsers = ({ setsuspendacc, suspendacc }) => {
  const {token} = useSelector((state) => state.authReducer)
   const getUsers = () => {
     axios
-      .get("https://red-worried-dove.cyclic.app/users" , {
+      .get("https://cartlane.onrender.com/users" , {
         headers:{
           Authorization:`Bearer ${token}`
         }
@@ -50,7 +50,7 @@ const AllUsers = ({ setsuspendacc, suspendacc }) => {
   const handlesubmit = (e) => {
     e.preventDefault();
     axios(
-      `https://red-worried-dove.cyclic.app/users/update/${singeluser._id}`,
+      `https://cartlane.onrender.com/users/update/${singeluser._id}`,
       {
         method: "patch",
         data: singeluser,
@@ -70,7 +70,7 @@ const AllUsers = ({ setsuspendacc, suspendacc }) => {
 
   const handleDelete = (id, el) => [
     axios
-      .delete(`https://red-worried-dove.cyclic.app/users/delete/${id}`,{
+      .delete(`https://cartlane.onrender.com/users/delete/${id}`,{
         headers:{
           Authorization:`Bearer ${token}`
         }

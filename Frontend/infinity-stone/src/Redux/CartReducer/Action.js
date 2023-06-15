@@ -28,7 +28,7 @@ export const getCartProducts = (token) => (dispatch) => {
  
   dispatch(getCartProductsRequestAction());
   return axios
-    .get("https://red-worried-dove.cyclic.app/cart", {
+    .get("https://cartlane.onrender.com/cart", {
       headers:{
         Authorization:`Bearer ${token}`
       }
@@ -45,7 +45,7 @@ export const getCartProducts = (token) => (dispatch) => {
 export const deleteCartdata = (id,token) => (dispatch) => {
   dispatch(getCartProductsRequestAction());
   return axios
-    .delete(`https://red-worried-dove.cyclic.app/cart/delete/${id}`, {
+    .delete(`https://cartlane.onrender.com/cart/delete/${id}`, {
       headers:{
         Authorization:`Bearer ${token}`
       }

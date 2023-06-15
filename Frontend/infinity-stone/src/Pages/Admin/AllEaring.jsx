@@ -41,15 +41,15 @@ const AllEaring = ({ setsuspendacc, suspendacc }) => {
   const [showform, setshowform] = useState(false);
   const [formdata, setformdata] = useState(initstate);
   const [page, setpage] = useState(1);
-  const {token} = useSelector((state) => state.authReducer)
-  const [allpage , setallpage] = useState(1)
-  let array = new Array(allpage).fill(0)
+  const { token } = useSelector((state) => state.authReducer);
+  const [allpage, setallpage] = useState(1);
+  let array = new Array(allpage).fill(0);
   const getRingsdata = () => {
     axios
-      .get(`https://red-worried-dove.cyclic.app/earrings?limit=10&page=${page}`)
+      .get(`https://cartlane.onrender.com/earrings?limit=6&page=${page}`)
       .then((res) => {
         console.log(res);
-        setallpage(res.data[1])
+        setallpage(res.data[1]);
         setdata(res.data[0]);
       })
       .catch((err) => console.log(err));
@@ -62,17 +62,14 @@ const AllEaring = ({ setsuspendacc, suspendacc }) => {
   };
   const handlesubmit = (e) => {
     e.preventDefault();
-    axios(
-      `https://red-worried-dove.cyclic.app/earrings/update/${singeluser._id}`,
-      {
-        method: "patch",
-        data: singeluser,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization:`Bearer ${token}`
-        },
-      }
-    )
+    axios(`https://cartlane.onrender.com/earrings/update/${singeluser._id}`, {
+      method: "patch",
+      data: singeluser,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((res) => {
         console.log(res);
         getRingsdata();
@@ -83,10 +80,10 @@ const AllEaring = ({ setsuspendacc, suspendacc }) => {
 
   const handleDelete = (id, el) => [
     axios
-      .delete(`https://red-worried-dove.cyclic.app/earrings/delete/${id}`,{
+      .delete(`https://cartlane.onrender.com/earrings/delete/${id}`, {
         headers: {
           "Content-Type": "application/json",
-          Authorization:`Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((res) => {
@@ -99,14 +96,14 @@ const AllEaring = ({ setsuspendacc, suspendacc }) => {
 
   const handlesubmit1 = (e) => {
     e.preventDefault();
-    axios("https://red-worried-dove.cyclic.app/earrings/add",  {
-        method: "post",
-        data: formdata,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization:`Bearer ${token}`
-        },
-      })
+    axios("https://cartlane.onrender.com/earrings/add", {
+      method: "post",
+      data: formdata,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((res) => {
         console.log(res);
         getRingsdata();
@@ -227,14 +224,14 @@ const AllEaring = ({ setsuspendacc, suspendacc }) => {
             <TableCaption>All Earings Products Data</TableCaption>
             <Thead>
               <Tr flexDirection={"column"}>
-                <Th  color={"white"}>S.No</Th>
-                <Th  color={"white"}>Title</Th>
-                <Th  color={"white"}>Price</Th>
-                <Th  color={"white"}>Discount Price</Th>
-                <Th  color={"white"}>Image</Th>
-                <Th  color={"white"}>Size</Th>
-                <Th  color={"white"}>Edit User</Th>
-                <Th  color={"white"}>Delete User</Th>
+                <Th color={"white"}>S.No</Th>
+                <Th color={"white"}>Title</Th>
+                <Th color={"white"}>Price</Th>
+                <Th color={"white"}>Discount Price</Th>
+                <Th color={"white"}>Image</Th>
+                <Th color={"white"}>Size</Th>
+                <Th color={"white"}>Edit User</Th>
+                <Th color={"white"}>Delete User</Th>
               </Tr>
             </Thead>
             <Tbody>
@@ -314,9 +311,10 @@ const AllEaring = ({ setsuspendacc, suspendacc }) => {
       )}
 
       <Box ml={"18%"} display={showform ? "none" : "block"}>
-      {
-             array && array.map((el,i) => (
-              <Button  bg="red.500"
+        {array &&
+          array.map((el, i) => (
+            <Button
+              bg="red.500"
               py={2}
               px={4}
               ml={3}
@@ -324,9 +322,12 @@ const AllEaring = ({ setsuspendacc, suspendacc }) => {
               fontWeight="semibold"
               color="white"
               _hover={{ bg: "teal.600" }}
-              _focus={{ boxShadow: "outline" }} onClick={() => setpage(i+1)}>{i+1}</Button>
-             ))
-         }
+              _focus={{ boxShadow: "outline" }}
+              onClick={() => setpage(i + 1)}
+            >
+              {i + 1}
+            </Button>
+          ))}
         {/* <Button
           bg="red.500"
           py={2}

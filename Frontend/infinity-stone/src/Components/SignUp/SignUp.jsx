@@ -42,7 +42,7 @@ const SignUp = () => {
 
 
     if(ResData.name !== "" && ResData.email !== "" && ResData.gender !== "" && ResData.password !== ""){
-     let res =  await fetch(`https://red-worried-dove.cyclic.app/users/register`,{
+     let res =  await fetch(`https://cartlane.onrender.com/users/register`,{
         method: "POST",
         body: JSON.stringify(ResData),
         headers:{

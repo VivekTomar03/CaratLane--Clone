@@ -5,7 +5,7 @@ import {
   USER_LOGIN_SUCCESS,
 } from "./auth.type";
 
-const BASE_URL = "https://red-worried-dove.cyclic.app"
+const BASE_URL = "https://cartlane.onrender.com"
 const loginRequestAction = () => {
   return { type: USER_LOGIN_REQUEST };
 };

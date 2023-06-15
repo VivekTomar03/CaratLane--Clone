@@ -45,9 +45,9 @@ const AllRings = ({ setsuspendacc, suspendacc }) => {
   let array = new Array(allpage).fill(0)
   const getRingsdata = () => {
     axios
-      .get(`https://red-worried-dove.cyclic.app/rings?limit=10&page=${page}`)
+      .get(`https://cartlane.onrender.com/rings?limit=6&page=${page}`)
       .then((res) => {
-        console.log(res);
+        console.log(res.data, "this rigs data tofay");
         setallpage(res.data[1])
         setdata(res.data[0].reverse());
       })
@@ -63,7 +63,7 @@ const AllRings = ({ setsuspendacc, suspendacc }) => {
     e.preventDefault();
     console.log(singeluser);
     axios(
-      `https://red-worried-dove.cyclic.app/rings/update/${singeluser._id}`,
+      `https://cartlane.onrender.com/rings/update/${singeluser._id}`,
       {
         method: "patch",
         data: singeluser,
@@ -83,7 +83,7 @@ const AllRings = ({ setsuspendacc, suspendacc }) => {
 
   const handleDelete = (id, el) => [
     axios
-      .delete(`https://red-worried-dove.cyclic.app/rings/delete/${id}`, {
+      .delete(`https://cartlane.onrender.com/rings/delete/${id}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization:`Bearer ${token}`
@@ -99,7 +99,7 @@ const AllRings = ({ setsuspendacc, suspendacc }) => {
 
   const handlesubmit1 = (e) => {
     e.preventDefault();
-    axios("https://red-worried-dove.cyclic.app/rings/add", {
+    axios("https://cartlane.onrender.com/rings/add", {
         method: "post",
         data: formdata,
         headers: {
